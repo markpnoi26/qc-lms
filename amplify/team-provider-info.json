@@ -1,0 +1,15 @@
+{
+    "qclms": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-qclms-qclms-234129-authRole",
+            "UnauthRoleArn": "arn:aws:iam::060944233762:role/amplify-qclms-qclms-234129-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::060944233762:role/amplify-qclms-qclms-234129-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "amplify-qclms-qclms-234129-deployment",
+            "UnauthRoleName": "amplify-qclms-qclms-234129-unauthRole",
+            "StackName": "amplify-qclms-qclms-234129",
+            "StackId": "arn:aws:cloudformation:us-west-2:060944233762:stack/amplify-qclms-qclms-234129/b9a090c0-bf53-11ea-9e3a-0a79dfa95450",
+            "AmplifyAppId": "d1h49wzwu6iv9f"
+        }
+    }
+}
