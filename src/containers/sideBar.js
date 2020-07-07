@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {Link} from 'react-router-dom'
 
 export default class SideBar extends React.Component {
     constructor() {
@@ -14,9 +14,15 @@ export default class SideBar extends React.Component {
             <div>
                 Side Bar Holder
                 <ul>
-                    <li> QC Record </li>
-                    <li> Retain </li>
-                    <li> Stability </li>
+                    <li> 
+                        <Link to="/"> QC Files </Link>
+                    </li>
+                    <li> 
+                        <Link to="/retain"> Retain </Link>
+                    </li>
+                    <li> 
+                        <Link to="/stability"> Stability </Link>
+                    </li>
                 </ul>
             </div>
         )
