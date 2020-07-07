@@ -15,7 +15,10 @@ export default class SideBar extends React.Component {
                 <h1>Side Bar</h1>
                 <ul>
                     <li> 
-                        <Link to="/"> QC Files </Link>
+                        <Link to="/"> Home </Link>
+                    </li>
+                    <li> 
+                        <Link to="/records"> QC Files </Link>
                     </li>
                     <li> 
                         <Link to="/retain"> Retain </Link>
