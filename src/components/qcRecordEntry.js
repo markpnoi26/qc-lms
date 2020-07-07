@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-export default class QcEntry extends React.Component {
+export default class QcRecordEntry extends React.Component {
     constructor() {
         super()
         this.state={}
