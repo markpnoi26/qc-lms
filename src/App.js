@@ -1,12 +1,13 @@
 import React from 'react';
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 
-
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      
+    <div>
+      <AmplifySignOut />
+      QC-LMS
     </div>
   );
 }
 
-export default App;
+export default withAuthenticator(App);
