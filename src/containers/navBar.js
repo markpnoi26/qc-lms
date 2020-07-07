@@ -1,4 +1,5 @@
 import React from 'react'
+import {Col} from 'react-bootstrap'
 import { AmplifySignOut } from '@aws-amplify/ui-react';
 
 export default class NavBar extends React.Component {
@@ -10,15 +11,17 @@ export default class NavBar extends React.Component {
     }
 
     render() {
-        const navBarStyle={
-            "border":"2px solid"
-        }
         
         return (
-            <div style={navBarStyle}>
-                This is the Navigation bar which contains the logout button
-                <AmplifySignOut />
-            </div>
+            <React.Fragment>
+                <Col xs={10}>
+                    This is the Navigation bar which contains the logout button
+                </Col>
+                <Col>
+                    <AmplifySignOut />
+                </Col>
+            </React.Fragment>
+            
         )
     }
 }

@@ -10,12 +10,14 @@ export default class SideBar extends React.Component {
     }
 
     render() {
-        const sideBarStyle={
-            "border":"2px solid"
-        }
         return (
-            <div style={sideBarStyle}>
+            <div>
                 Side Bar Holder
+                <ul>
+                    <li> QC Record </li>
+                    <li> Retain </li>
+                    <li> Stability </li>
+                </ul>
             </div>
         )
     }
