@@ -1,4 +1,5 @@
 import React from 'react'
+import {Container} from 'react-bootstrap'
 
 export default class MainWindow extends React.Component {
     constructor() {
@@ -10,14 +11,11 @@ export default class MainWindow extends React.Component {
 
     render() {
 
-        const mainWindowStyle={
-            "border":"2px solid"
-        }
-        
         return (
-            <div className="main-window" style={mainWindowStyle}>
-                This is the main window
-            </div>
+            <Container >
+                This is now the main window which will respond to the different switch api calls
+            </Container>
+                
         )
     }
 }
