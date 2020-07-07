@@ -12,7 +12,7 @@ export default class SideBar extends React.Component {
     render() {
         return (
             <div>
-                Side Bar Holder
+                <h1>Side Bar</h1>
                 <ul>
                     <li> 
                         <Link to="/"> QC Files </Link>

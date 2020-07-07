@@ -19,7 +19,7 @@ export default class MainWindow extends React.Component {
 
         return (
             <Container >
-                This is now the main window which will respond to the different switch api calls
+                <h1>This is now the main window Container</h1>
                 <Switch>
                     <Route exact path="/" component={QCRecordWindow} />
                     <Route path="/retain" component={RetainWindow} />
