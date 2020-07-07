@@ -10,6 +10,11 @@
             "StackName": "amplify-qclms-qclms-234129",
             "StackId": "arn:aws:cloudformation:us-west-2:060944233762:stack/amplify-qclms-qclms-234129/b9a090c0-bf53-11ea-9e3a-0a79dfa95450",
             "AmplifyAppId": "d1h49wzwu6iv9f"
+        },
+        "categories": {
+            "auth": {
+                "qclms2460aaf3": {}
+            }
         }
     }
 }
