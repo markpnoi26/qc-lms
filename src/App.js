@@ -10,21 +10,21 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router>
         <Container fluid >
           <Row>
             <TopBar />
           </Row>
-          <Row>
-            <Col>
-              <SideBar />
-            </Col>
-            <Col xs={10}>
-              <MainWindow />
-            </Col>
-          </Row>
+          <Router>
+            <Row>
+              <Col>
+                <SideBar />
+              </Col>
+              <Col xs={10}>
+                <MainWindow />
+              </Col>
+            </Row>
+          </Router>
         </Container>
-      </Router>
     );
   }
 
