@@ -1,4 +1,5 @@
 import React from 'react';
+import {BrowserRouter as Router} from 'react-router-dom'
 import {Container, Row, Col} from 'react-bootstrap'
 import NavBar from './containers/navBar'
 import SideBar from './containers/sideBar'
@@ -9,7 +10,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <Container fluid >
+      <Router>
+        <Container fluid >
           <Row>
             <NavBar />
           </Row>
@@ -21,7 +23,8 @@ class App extends React.Component {
               <MainWindow />
             </Col>
           </Row>
-      </Container>
+        </Container>
+      </Router>
     );
   }
 
