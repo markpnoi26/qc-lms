@@ -1,0 +1,41 @@
+{
+    "paths": [
+        {
+            "name": "/qcfiles",
+            "lambdaFunction": "qclms059dcc62",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ]
+            }
+        }
+    ],
+    "resourceName": "qcfilesAPI",
+    "apiName": "qcfilesAPI",
+    "functionArns": [
+        {
+            "lambdaFunction": "qclms059dcc62"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 0,
+        "authRoleName": "amplify-qclms-qclms-234129-authRole",
+        "unAuthRoleName": "amplify-qclms-qclms-234129-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "qclms059dcc62",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

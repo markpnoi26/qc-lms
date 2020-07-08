@@ -1,0 +1,5 @@
+{
+    "tableName": "qcfiles",
+    "partitionKeyName": "num",
+    "partitionKeyType": "S"
+}
