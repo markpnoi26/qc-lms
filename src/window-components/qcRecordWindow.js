@@ -1,4 +1,5 @@
 import React from 'react'
+// import { API } from 'aws-amplify'
 
 export default class QCRecordWindow extends React.Component {
 
@@ -50,10 +51,29 @@ export default class QCRecordWindow extends React.Component {
         }
     }
 
+
+    handleGetFiles = () => {
+        
+        // const params ={
+        //     headers:{},
+        //     response: true,
+        //     queryStringParameters: {}
+        // }
+
+        // API.get("qcfilesapi", "/qcfiles", params)
+        //     .then(response => {
+        //         console.log(response)
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
+    }
+
     render() {
         return (
             <div>
                 Currently under QC record Window
+                <button onClick={this.handleGetFiles}> get files </button>
             </div>
         )
     }
