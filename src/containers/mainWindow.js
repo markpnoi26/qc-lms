@@ -9,12 +9,6 @@ import StabilityWindow from '../window-components/stabilityWindow'
 import NotValid from '../window-components/notValid'
 
 export default class MainWindow extends React.Component {
-    constructor() {
-        super() 
-        this.state={
-
-        }
-    }
 
     render() {
 
