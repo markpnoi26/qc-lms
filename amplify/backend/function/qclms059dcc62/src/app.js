@@ -78,9 +78,12 @@ app.get(path, function(req, res) {
  * HTTP Get method for get single object *
  *****************************************/
 
-app.get(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
+app.get(path + '/:qcId', function(req, res) {
+  console.log(req)
   console.log("lambda function called get item")
-  var params = {};
+  var params = {
+    num: req.params.qcId
+  };
 
   let getItemParams = {
     TableName: tableName,
@@ -108,10 +111,7 @@ app.get(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
 
 app.put(path, function(req, res) {
   console.log("lambda function called put")
-
-  if (userIdPresent) {
-    req.body['userId'] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
-  }
+  console.log(req)
 
   let putItemParams = {
     TableName: tableName,
@@ -138,6 +138,7 @@ app.post(path, function(req, res) {
     TableName: tableName,
     Item: req.body
   }
+
   dynamodb.put(putItemParams, (err, data) => {
     if(err) {
       res.statusCode = 500;
@@ -152,16 +153,18 @@ app.post(path, function(req, res) {
 * HTTP remove method to delete object *
 ***************************************/
 
-app.delete(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
+app.delete(path + '/:qcId', function(req, res) {
+  console.log(req)
   console.log("lambda function called delete")
   var params = {
-
+    num: req.params.qcId
   };
 
   let removeItemParams = {
     TableName: tableName,
     Key: params
   }
+
   dynamodb.delete(removeItemParams, (err, data)=> {
     if(err) {
       res.statusCode = 500;
