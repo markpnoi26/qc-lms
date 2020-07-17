@@ -74,7 +74,7 @@ export default class QCRecordWindow extends React.Component {
             response: true,
             queryStringParameters: {},
             body: {
-                qcNum: "20002",
+                num: "20002",
                 name: "Sample Name 2"
             }
         }
