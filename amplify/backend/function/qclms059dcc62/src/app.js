@@ -152,9 +152,6 @@ app.put(path, function(req, res) {
 
 app.post(path, function(req, res) {
   console.log("lambda function called post")
-  if (userIdPresent) {
-    req.body['userId'] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
-  }
 
   let putItemParams = {
     TableName: tableName,

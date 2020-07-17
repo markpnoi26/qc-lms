@@ -45,8 +45,7 @@ export default class QCRecordWindow extends React.Component {
                     requester: "NP",
                     requesterName: "Jordan P.",
                     finished: true
-                },
-
+                }
             ]
         }
     }
@@ -69,11 +68,32 @@ export default class QCRecordWindow extends React.Component {
             })
     }
 
+    handlePostFiles = () => {
+        const params = {
+            headers:{},
+            response: true,
+            queryStringParameters: {},
+            body: {
+                qcNum: "20002",
+                name: "Sample Name 2"
+            }
+        }
+
+        API.post("qcfilesAPI", "/qcfiles", params)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     render() {
         return (
             <div>
                 Currently under QC record Window
                 <button onClick={this.handleGetFiles}> get files </button>
+                <button onClick={this.handlePostFiles}> post something</button>
             </div>
         )
     }
