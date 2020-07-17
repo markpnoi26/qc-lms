@@ -88,12 +88,69 @@ export default class QCRecordWindow extends React.Component {
             })
     }
 
+    handlePutFiles = () => {
+        const params = {
+            headers:{},
+            response: true,
+            queryStringParameters: {},
+            body: {
+                num: "20002",
+                name: "Sample Name 2 (with some changes)"
+            }
+        }
+
+        API.put("qcfilesAPI", "/qcfiles", params)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+
+    handleGetOneItem = () => {
+        const params = {
+            headers:{},
+            response: true,
+            queryStringParameters: {},
+        }
+
+        API.get("qcfilesAPI", "/qcfiles/20002", params)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    handleDeleteFiles = () => {
+        const params = {
+            headers:{},
+            response: true,
+            queryStringParameters: {},
+            body: {}
+        }
+
+        API.del("qcfilesAPI", "/qcfiles/20002", params)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     render() {
         return (
             <div>
                 Currently under QC record Window
                 <button onClick={this.handleGetFiles}> get files </button>
                 <button onClick={this.handlePostFiles}> post something</button>
+                <button onClick={this.handlePutFiles}> put something</button>
+                <button onClick={this.handleDeleteFiles}> delete something</button>
+                <button onClick={this.handleGetOneItem}> get one single item</button> 
             </div>
         )
     }
