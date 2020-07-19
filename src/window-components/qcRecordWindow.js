@@ -1,6 +1,9 @@
 import React from 'react'
 import { API } from 'aws-amplify'
 
+
+import QCRecordForm from '../components/qcRecordForm'
+
 export default class QCRecordWindow extends React.Component {
 
     constructor(props) {
@@ -145,7 +148,28 @@ export default class QCRecordWindow extends React.Component {
     render() {
         return (
             <div>
-                Currently under QC record Window
+                <div> Selection Filter by date/QC num/Other</div>
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>QC Number</th>
+                            <th>Title</th>
+                            <th>Requester</th>
+                            <th>Tests</th>
+                            <th>lot #</th>
+                            <th>Sample Numbers</th>
+                            <th>Date Started</th>
+                            <th>Date Finished</th>
+                            <th>Analyst</th>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+
+                <QCRecordForm />
                 <button onClick={this.handleGetFiles}> get files </button>
                 <button onClick={this.handlePostFiles}> post something</button>
                 <button onClick={this.handlePutFiles}> put something</button>
