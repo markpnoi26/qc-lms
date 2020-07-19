@@ -22,7 +22,7 @@ if(process.env.ENV && process.env.ENV !== "NONE") {
   tableName = tableName + '-' + process.env.ENV;
 }
 
-const userIdPresent = false; // TODO: update in case is required to use that definition
+const userIdPresent = false; 
 const partitionKeyName = "num";
 const partitionKeyType = "S";
 const sortKeyName = "";
@@ -78,11 +78,11 @@ app.get(path, function(req, res) {
  * HTTP Get method for get single object *
  *****************************************/
 
-app.get(path + '/:qcId', function(req, res) {
+app.get(path + hashKeyPath, function(req, res) {
   console.log(req)
   console.log("lambda function called get item")
   var params = {
-    num: req.params.qcId
+    [partitionKeyName]: req.params[partitionKeyName]
   };
 
   let getItemParams = {
@@ -153,11 +153,11 @@ app.post(path, function(req, res) {
 * HTTP remove method to delete object *
 ***************************************/
 
-app.delete(path + '/:qcId', function(req, res) {
+app.delete(path + hashKeyPath, function(req, res) {
   console.log(req)
   console.log("lambda function called delete")
   var params = {
-    num: req.params.qcId
+    [partitionKeyName]: req.params[partitionKeyName]
   };
 
   let removeItemParams = {
