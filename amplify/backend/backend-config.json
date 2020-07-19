@@ -26,6 +26,25 @@
 					}
 				}
 			]
+		},
+		"retainFunction": {
+			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda",
+			"dependsOn": [
+				{
+					"category": "storage",
+					"resourceName": "retains",
+					"attributes": [
+						"Name",
+						"Arn"
+					],
+					"attributeEnvMap": {
+						"Name": "TABLE_NAME",
+						"Arn": "TABLE_ARN"
+					}
+				}
+			]
 		}
 	},
 	"api": {
@@ -42,10 +61,28 @@
 					]
 				}
 			]
+		},
+		"retainAPI": {
+			"service": "API Gateway",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "retainFunction",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			]
 		}
 	},
 	"storage": {
 		"qcfiles": {
+			"service": "DynamoDB",
+			"providerPlugin": "awscloudformation"
+		},
+		"retains": {
 			"service": "DynamoDB",
 			"providerPlugin": "awscloudformation"
 		}
