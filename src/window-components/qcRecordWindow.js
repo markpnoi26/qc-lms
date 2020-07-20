@@ -89,7 +89,6 @@ class QCRecordWindow extends React.Component {
 
         API.get("qcfilesAPI", "/qcfiles", params)
             .then(response => {
-                // need to query specific year later on... Keep in mind please
                 this.props.setCurrentQCFiles(response.data)
             })
             .then(() => {
@@ -107,9 +106,7 @@ class QCRecordWindow extends React.Component {
                     }
                     startQCFile++
                 }
-            })
-            .then((qcfile) => {
-                console.log(qcfile)
+                this.props.setCurrentAvailableQCFile(JSON.stringify(startQCFile))
             })
             .catch(error => {
                 console.log(error)
