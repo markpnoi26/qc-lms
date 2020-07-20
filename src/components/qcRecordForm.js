@@ -161,44 +161,56 @@ export default class QCRecordForm extends React.Component {
                     
                 </td>
                 <td>
-                    <select 
-                        value={this.state.requester} 
-                        onChange={(event) => this.setState({
-                            requester: event.target.value
-                        })}
-                    >
-                        <option value="">(none)</option>
-                        <option value="QC">QC</option>
-                        <option value="NP">NP</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </td>
-                <td>
                     <form>
-                        <label> HPLC:
-                            <input type="checkbox" value="hplc" checked={this.state.tests.hplc} onChange={this.handleTestsOnCheck}/>
-                        </label>
-                        <label> Color and Appearance:
-                            <input type="checkbox" value="colorAndAppearance" checked={this.state.tests.colorAndAppearance} onChange={this.handleTestsOnCheck}/>
-                        </label>
-                        <label> Loss On Dry:
-                            <input type="checkbox" value="lod" checked={this.state.tests.lod} onChange={this.handleTestsOnCheck}/>
-                        </label>
-                        <label> Heavy Metals:
-                            <input type="checkbox" value="heavyMetals" checked={this.state.tests.heavyMetals} onChange={this.handleTestsOnCheck}/>
-                        </label>
-                        <label> OSR:
-                            <input type="checkbox" value="osr" checked={this.state.tests.osr} onChange={this.handleTestsOnCheck}/>
-                        </label>
-                        <label> GC/MS:
-                            <input type="checkbox" value="gcms" checked={this.state.tests.gcms} onChange={this.handleTestsOnCheck}/>
-                        </label>
-                        <label> Pesticides:
-                            <input type="checkbox" value="pesticides" checked={this.state.tests.pesticides} onChange={this.handleTestsOnCheck}/>
-                        </label>
-                        <label> HPTLC:
-                            <input type="checkbox" value="hptlc" checked={this.state.tests.hptlc} onChange={this.handleTestsOnCheck}/>
-                        </label>
+                        <table>
+                            <tr>
+                                
+                                <td>
+                                    <input type="checkbox" value="hplc" checked={this.state.tests.hplc} onChange={this.handleTestsOnCheck}/>
+                                </td>
+                                <td>HPLC</td>
+
+                                <td>
+                                    <input type="checkbox" value="colorAndAppearance" checked={this.state.tests.colorAndAppearance} onChange={this.handleTestsOnCheck}/>
+                                </td>
+                                <td>C&A</td>
+
+                                
+                                <td>
+                                    <input type="checkbox" value="lod" checked={this.state.tests.lod} onChange={this.handleTestsOnCheck}/>
+                                </td>
+                                <td>LOD</td>
+                                
+                                <td>
+                                    <input type="checkbox" value="heavyMetals" checked={this.state.tests.heavyMetals} onChange={this.handleTestsOnCheck}/>
+                                </td>
+                                <td>H/M</td>
+                            </tr>
+                            <tr>
+                                
+                                <td>
+                                    <input type="checkbox" value="osr" checked={this.state.tests.osr} onChange={this.handleTestsOnCheck}/>
+                                </td>
+                                <td>OSR</td>
+
+                               
+                                <td>
+                                    <input type="checkbox" value="gcms" checked={this.state.tests.gcms} onChange={this.handleTestsOnCheck}/>
+                                </td>
+                                <td>GC/MS</td>
+                                
+                                <td>
+                                    <input type="checkbox" value="pesticides" checked={this.state.tests.pesticides} onChange={this.handleTestsOnCheck}/>
+                                </td>
+                                <td>Pestic.</td>
+                                
+                                <td>
+                                    <input type="checkbox" value="hptlc" checked={this.state.tests.hptlc} onChange={this.handleTestsOnCheck}/>
+                                </td>
+                                <td>HPTLC</td>
+                            </tr>
+                        </table>
+                        
                     </form>
                 </td>
                 <td>
@@ -229,7 +241,7 @@ export default class QCRecordForm extends React.Component {
                         <button onClick={this.handleAddNewLot}>+</button>
                     </form>
                 </td>
-                <td>
+                <td style={{textAlign:"center"}}>
                     {this.state.lotNums.length}
                 </td>
                 <td>
@@ -237,6 +249,19 @@ export default class QCRecordForm extends React.Component {
                 </td>
                 <td>
                     NotApplicable
+                </td>
+                <td>
+                    <select 
+                        value={this.state.requester} 
+                        onChange={(event) => this.setState({
+                            requester: event.target.value
+                        })}
+                    >
+                        <option value="">(none)</option>
+                        <option value="QC">QC</option>
+                        <option value="NP">NP</option>
+                        <option value="Other">Other</option>
+                    </select>
                 </td>
 
                 <td>
@@ -253,7 +278,7 @@ export default class QCRecordForm extends React.Component {
                     </select>
                 </td>
                     
-                <td>
+                <td style={{textAlign:"center"}}>
                     <button onClick={this.handleSubmitNewFile}> Add File</button>
                 </td>
             </>
