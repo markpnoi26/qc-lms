@@ -13,8 +13,7 @@ export default class MainWindow extends React.Component {
     render() {
 
         return (
-            <Container >
-                <h1>This is now the main window Container</h1>
+            <Container fluid>
                 <Switch>
                     <Route exact path="/" component={HomeWindow} />
                     <Route path="/records" component={QCRecordWindow} />
