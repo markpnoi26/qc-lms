@@ -6,7 +6,7 @@ class QCRecordForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            num: this.props.currQCFile,
+            num: this.props.currentAvailableQCFile,
             projectType: "",
             title: "",
             requester: "",
@@ -88,16 +88,17 @@ class QCRecordForm extends React.Component {
             body: bodyPreSend
         }
 
-        this.props.setNextQCFile()
-
         this.props.currentlyFetching()
         API.post("qcfilesAPI", "/qcfiles", params)
             .then(response => {
                 // This will be the response, will be able to add to the list of tests
                 // call REDUX Dispatch here:
-                console.log(response.config.data)
                 this.props.addQCFile(response.config.data)
                 this.props.fetchSuccess()
+            })
+            .then(() => {
+                const qcFiles = this.props.currentQCFiles
+                console.log(qcFiles)
             })
             .catch(error => {
                 // continue to log error just in case
@@ -129,8 +130,11 @@ class QCRecordForm extends React.Component {
         })
     }
 
-    componentWillReceiveProps(newProps) {
-        this.setState({num: newProps.currQCFile});
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.currentAvailableQCFile !== prevState.num){
+            return {num : nextProps.currentAvailableQCFile};
+        }
+        return null;
     }
     
     render() {
@@ -301,9 +305,18 @@ class QCRecordForm extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        currentAvailableQCFile: state.currentAvailableQCFile,
+        currentQCFiles: state.currentQCFiles,
+        currentYear: state.currentYear
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         addQCFile: (qcFile) => dispatch({type: "ADD_NEW_QC_FILE", payload: qcFile}),
+        setCurrentAvailableQCFile: (number) => ({type: "SET_AVAILABLE_QC_FILE", payload: number}),
         currentlyFetching: () => dispatch({type: "CURRENTLY_FETCHING"}),
         fetchSuccess: () => dispatch({type: "SUCCESS_FETCHING"}),
         fetchFail: () => dispatch({type: "FAILED_FETCHING"})
@@ -311,4 +324,4 @@ const mapDispatchToProps = dispatch => {
 }
   
 
-export default connect(null, mapDispatchToProps)(QCRecordForm)
+export default connect(mapStateToProps, mapDispatchToProps)(QCRecordForm)
