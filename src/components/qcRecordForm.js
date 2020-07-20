@@ -19,7 +19,7 @@ export default class QCRecordForm extends React.Component {
 
             },
             lotNums: [],
-            analyst: []
+            analyst: ""
         }
     }
 
@@ -27,7 +27,9 @@ export default class QCRecordForm extends React.Component {
         return(
             <div>
                 <form>
+                    <label>
                     QC Number:
+                    </label>
                     <input 
                         placeHolder="QC Number" 
                         value={this.state.qcNum} 
@@ -36,8 +38,10 @@ export default class QCRecordForm extends React.Component {
                         })}
                     >
                     </input>
-
+                    
+                    <label>
                     Title:
+                    </label>
                     <input 
                         placeHolder="Title" 
                         value={this.state.title} 
@@ -59,7 +63,7 @@ export default class QCRecordForm extends React.Component {
                         <option value="">(none)</option>
                         <option value="QC">QC</option>
                         <option value="NP">NP</option>
-                        <option value="Wenwen">Wenwen</option>
+                        <option value="Other">Other</option>
                     </select>
 
                     <label>
@@ -68,16 +72,16 @@ export default class QCRecordForm extends React.Component {
                     <select 
                         value={this.state.requester} 
                         onChange={(event) => this.setState({
-                            requester: event.target.value
+                            analyst: event.target.value
                         })}
                     >
                         <option value="">(none)</option>
-                        <option value="QC">QC</option>
-                        <option value="NP">NP</option>
-                        <option value="Wenwen">Wenwen</option>
+                        <option value="MD">MD</option>
+                        <option value="KH">KH</option>
+                        <option value="WM">WM</option>
                     </select>
 
-                    <button>Submit Button</button>
+                    <button>Add File</button>
                 </form>
             </div>
         )
