@@ -5,7 +5,7 @@ export default class QCRecordForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            num: "20002",
+            num: this.props.currQCFile,
             projectType: "",
             title: "",
             requester: "",
@@ -86,6 +86,8 @@ export default class QCRecordForm extends React.Component {
             body: bodyPreSend
         }
 
+        this.props.setNextQCFile()
+
         API.post("qcfilesAPI", "/qcfiles", params)
             .then(response => {
                 // This will be the response will be able to add to the list of tests
@@ -95,12 +97,32 @@ export default class QCRecordForm extends React.Component {
                 // continue to log error just in case
                 console.log(error)
             })
+
+        this.setState({
+            num: this.props.nextQCFile,
+            projectType: "",
+            title: "",
+            requester: "",
+            tests: {
+                hplc: false,
+                colorAndAppearance: false,
+                lod: false,
+                heavyMetals: false,
+                osr: false,
+                gcms: false,
+                pesticides: false,
+                hptlc: false,
+
+            },
+            lotNums: [],
+            analyst: "",
+            dateIn: this.setDateToday(),
+            currLotNum: ""
+        })
     }
 
-    handlePostFiles = () => {
-        
-
-        
+    componentWillReceiveProps(newProps) {
+        this.setState({num: newProps.currQCFile});
     }
     
     render() {
