@@ -68,6 +68,10 @@ export default class QCRecordForm extends React.Component {
             lotNums: newLotCollection
         })
     }
+
+    handleSubmitNewFile = (event) => {
+        console.log("add new QC file")
+    }
     
     render() {
         return(
