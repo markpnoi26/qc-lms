@@ -214,6 +214,18 @@ export default class QCRecordForm extends React.Component {
                     </form>
                 </td>
                 <td>
+                    <form>
+                        <input 
+                            value={this.state.currLotNum} 
+                            placeholder="New Lot" 
+                            onChange={(event) => {
+                                this.setState({
+                                    currLotNum: event.target.value
+                                })
+                            }}
+                        />
+                        <button onClick={this.handleAddNewLot}>+</button>
+                    </form>
                     <ul>
                         {this.state.lotNums.map((lot, idx) => (
                             <li 
@@ -228,18 +240,6 @@ export default class QCRecordForm extends React.Component {
                             )
                         )}
                     </ul>
-                    <form>
-                        <input 
-                            value={this.state.currLotNum} 
-                            placeholder="New Lot" 
-                            onChange={(event) => {
-                                this.setState({
-                                    currLotNum: event.target.value
-                                })
-                            }}
-                        />
-                        <button onClick={this.handleAddNewLot}>+</button>
-                    </form>
                 </td>
                 <td style={{textAlign:"center"}}>
                     {this.state.lotNums.length}
@@ -248,7 +248,7 @@ export default class QCRecordForm extends React.Component {
                     {this.state.dateIn}
                 </td>
                 <td>
-                    NotApplicable
+                    N/A
                 </td>
                 <td>
                     <select 
