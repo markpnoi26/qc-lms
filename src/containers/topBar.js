@@ -9,7 +9,6 @@ export default class TopBar extends React.Component {
         return (
             <React.Fragment>
                 <Col xs={10}>
-                    <h1>TopBar</h1>
                 </Col>
                 <Col>
                     <AmplifySignOut />
