@@ -154,6 +154,7 @@ export default class QCRecordWindow extends React.Component {
                     <tbody>
                         <tr>
                             <th>QC Number</th>
+                            <th>Project Type</th>
                             <th>Title</th>
                             <th>Requester</th>
                             <th>Tests</th>
@@ -162,6 +163,10 @@ export default class QCRecordWindow extends React.Component {
                             <th>Date Started</th>
                             <th>Date Finished</th>
                             <th>Analyst</th>
+                            <th>Update/Add/Delete</th>
+                        </tr>
+                        <tr>
+                            <QCRecordForm />
                         </tr>
                     </tbody>
                 </table>
@@ -169,7 +174,7 @@ export default class QCRecordWindow extends React.Component {
 
 
 
-                <QCRecordForm />
+                
                 <button onClick={this.handleGetFiles}> get files </button>
                 <button onClick={this.handlePostFiles}> post something</button>
                 <button onClick={this.handlePutFiles}> put something</button>
