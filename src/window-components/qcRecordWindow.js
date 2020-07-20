@@ -90,7 +90,6 @@ export default class QCRecordWindow extends React.Component {
 
         API.get("qcfilesAPI", "/qcfiles", params)
             .then(response => {
-                console.log(response.data)
                 this.setState({
                     qcFiles: response.data
                 })
@@ -103,20 +102,18 @@ export default class QCRecordWindow extends React.Component {
     render() {
         return (
             <div>
-                <div> Selection Filter by date/QC num/Other</div>
-
                 <table>
                     <tbody>
-                        <tr>
+                        <tr style={{textAlign: "center"}}>
                             <th>QC Number</th>
                             <th>Project Type</th>
                             <th>Title</th>
-                            <th>Requester</th>
                             <th>Tests</th>
                             <th>lot #</th>
-                            <th>Sample Numbers</th>
-                            <th>Date Started</th>
-                            <th>Date Finished</th>
+                            <th>Sample #</th>
+                            <th>Date In</th>
+                            <th>Date Out</th>
+                            <th>Req. by</th>
                             <th>Analyst</th>
                             <th>Update/Add/Delete</th>
                         </tr>
@@ -128,16 +125,8 @@ export default class QCRecordWindow extends React.Component {
                         </tr>
                     </tbody>
                 </table>
-
-
-
-
-                
-                <button onClick={this.handleGetFiles}> get files </button>
-                <button onClick={this.handlePutFiles}> put something</button>
-                <button onClick={this.handleDeleteFiles}> delete something</button>
-                <button onClick={this.handleGetOneItem}> get one single item</button> 
             </div>
+            
         )
     }
 }
