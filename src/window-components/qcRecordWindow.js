@@ -10,25 +10,8 @@ export default class QCRecordWindow extends React.Component {
         super(props)
         this.state = {
             currQCFile: "20002",
+            qcFiles: []
         }
-    }
-
-
-    handleGetFiles = () => {
-        
-        const params ={
-            headers:{},
-            response: true,
-            queryStringParameters: {}
-        }
-
-        API.get("qcfilesAPI", "/qcfiles", params)
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-            })
     }
 
 
@@ -97,6 +80,26 @@ export default class QCRecordWindow extends React.Component {
         })
     }
 
+    componentDidMount = () => {
+
+        const params ={
+            headers:{},
+            response: true,
+            queryStringParameters: {}
+        }
+
+        API.get("qcfilesAPI", "/qcfiles", params)
+            .then(response => {
+                console.log(response.data)
+                this.setState({
+                    qcFiles: response.data
+                })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     render() {
         return (
             <div>
@@ -117,6 +120,7 @@ export default class QCRecordWindow extends React.Component {
                             <th>Analyst</th>
                             <th>Update/Add/Delete</th>
                         </tr>
+
                         <tr>
                         </tr>
                         <tr>
