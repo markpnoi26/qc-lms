@@ -90,7 +90,7 @@ export default class QCRecordWindow extends React.Component {
         let currQCFile = this.state.currQCFile
         let numberfied = parseInt(currQCFile, 10)
         numberfied++
-        
+
         console.log(numberfied)
         this.setState({
             currQCFile: numberfied.toString()
@@ -116,6 +116,8 @@ export default class QCRecordWindow extends React.Component {
                             <th>Date Finished</th>
                             <th>Analyst</th>
                             <th>Update/Add/Delete</th>
+                        </tr>
+                        <tr>
                         </tr>
                         <tr>
                             <QCRecordForm currQCFile={this.state.currQCFile} setNextQCFile={this.setNextQCFile}/>
