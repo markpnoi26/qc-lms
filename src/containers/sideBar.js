@@ -1,27 +1,35 @@
-import React from 'react'
+import React from "react";
+import {Nav} from "react-bootstrap";
 import {Link} from 'react-router-dom'
+import { withRouter } from "react-router";
+import '../styles/sidebar.css'
 
-export default class SideBar extends React.Component {
+const Side = props => {
 
-    render() {
-        return (
-            <div>
-                <h1>Side Bar</h1>
-                <ul>
-                    <li> 
-                        <Link to="/"> Home </Link>
-                    </li>
-                    <li> 
-                        <Link to="/records"> QC Files </Link>
-                    </li>
-                    <li> 
-                        <Link to="/retain"> Retain </Link>
-                    </li>
-                    <li> 
-                        <Link to="/stability"> Stability </Link>
-                    </li>
-                </ul>
-            </div>
-        )
-    }
-}
+    return (
+        <>
+
+            <Nav 
+                className="d-none d-md-block bg-light sidebar"
+            >
+                <div className="sidebar-sticky">
+                    <Nav.Item>
+                        <Nav.Link as={Link} to="/">Home</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link as={Link} to="/records">QC Records</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link as={Link} to="/retain">QC Retains</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link as={Link} to="/stability" >Stability</Nav.Link>
+                    </Nav.Item>
+                </div>
+            </Nav>
+
+        </>
+        );
+  };
+  const SideBar = withRouter(Side);
+  export default SideBar
