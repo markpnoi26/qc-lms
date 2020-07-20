@@ -1,10 +1,13 @@
 export default function currentYear(state="", action) {
+    let currDate, currYear
     switch(action.type) {
         case "GET_CURRENT_YEAR":
-            return action.payload
+            currDate = new Date()
+            currYear = currDate.getUTCFullYear()
+            return JSON.stringify(currYear)
         default:
-            const currDate = new Date()
-            const currYear = currDate.getUTCFullYear()
-            return currYear
+            currDate = new Date()
+            currYear = currDate.getUTCFullYear()
+            return JSON.stringify(currYear)
     }
 }
