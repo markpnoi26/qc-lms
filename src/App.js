@@ -5,7 +5,7 @@ import TopBar from './containers/topBar'
 import SideBar from './containers/sideBar'
 import MainWindow from './containers/mainWindow'
 import {withAuthenticator} from '@aws-amplify/ui-react';
-import "./styles/sidebar.css"
+import "./styles/sidebar.scss"
 
 class App extends React.Component {
 
