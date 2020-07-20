@@ -1,7 +1,8 @@
 import React from 'react'
 import {API} from 'aws-amplify'
+import {connect} from 'react-redux'
 
-export default class QCRecordForm extends React.Component {
+class QCRecordForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -72,7 +73,7 @@ export default class QCRecordForm extends React.Component {
     }
 
     handleSubmitNewFile = (event) => {
-        console.log("adding... new QC file")
+        console.log("Adding... new QC file")
         const bodyPreSend = {...this.state, tests: {...this.state.tests}}
         delete bodyPreSend.currLotNum
 
@@ -89,14 +90,19 @@ export default class QCRecordForm extends React.Component {
 
         this.props.setNextQCFile()
 
+        this.props.currentlyFetching()
         API.post("qcfilesAPI", "/qcfiles", params)
             .then(response => {
-                // This will be the response will be able to add to the list of tests
-                console.log(response)
+                // This will be the response, will be able to add to the list of tests
+                // call REDUX Dispatch here:
+                console.log(response.config.data)
+                this.props.addQCFile(response.config.data)
+                this.props.fetchSuccess()
             })
             .catch(error => {
                 // continue to log error just in case
                 console.log(error)
+                this.props.fetchFail()
             })
 
         this.setState({
@@ -113,6 +119,7 @@ export default class QCRecordForm extends React.Component {
                 gcms: false,
                 pesticides: false,
                 hptlc: false,
+                uvVis: false
 
             },
             lotNums: [],
@@ -164,57 +171,59 @@ export default class QCRecordForm extends React.Component {
                 <td>
                     <form>
                         <table>
-                            <tr>
-                                
-                                <td>
-                                    <input type="checkbox" value="hplc" checked={this.state.tests.hplc} onChange={this.handleTestsOnCheck}/>
-                                </td>
-                                <td>HPLC</td>
+                            <tbody>
+                                <tr>
+                                    
+                                    <td>
+                                        <input type="checkbox" value="hplc" checked={this.state.tests.hplc} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>HPLC</td>
 
-                                <td>
-                                    <input type="checkbox" value="colorAndAppearance" checked={this.state.tests.colorAndAppearance} onChange={this.handleTestsOnCheck}/>
-                                </td>
-                                <td>C&A</td>
-                                <td>
-                                    <input type="checkbox" value="lod" checked={this.state.tests.lod} onChange={this.handleTestsOnCheck}/>
-                                </td>
-                                <td>LOD</td>
-                                
-                            </tr>
-                            <tr>
-                                
-                                <td>
-                                    <input type="checkbox" value="osr" checked={this.state.tests.osr} onChange={this.handleTestsOnCheck}/>
-                                </td>
-                                <td>OSR</td>
+                                    <td>
+                                        <input type="checkbox" value="colorAndAppearance" checked={this.state.tests.colorAndAppearance} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>C&A</td>
+                                    <td>
+                                        <input type="checkbox" value="lod" checked={this.state.tests.lod} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>LOD</td>
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td>
+                                        <input type="checkbox" value="osr" checked={this.state.tests.osr} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>OSR</td>
 
-                               
-                                <td>
-                                    <input type="checkbox" value="gcms" checked={this.state.tests.gcms} onChange={this.handleTestsOnCheck}/>
-                                </td>
-                                <td>GC/MS</td>
                                 
-                                
-                                <td>
-                                    <input type="checkbox" value="hptlc" checked={this.state.tests.hptlc} onChange={this.handleTestsOnCheck}/>
-                                </td>
-                                <td>HPTLC</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" value="uvVis" checked={this.state.tests.uvVis} onChange={this.handleTestsOnCheck}/>
-                                </td>
-                                <td>UV-Vis</td>
-                                <td>
-                                    <input type="checkbox" value="pesticides" checked={this.state.tests.pesticides} onChange={this.handleTestsOnCheck}/>
-                                </td>
-                                <td>Pestic.</td>
-                                <td>
-                                    <input type="checkbox" value="heavyMetals" checked={this.state.tests.heavyMetals} onChange={this.handleTestsOnCheck}/>
-                                </td>
-                                <td>H/M</td>
-                                
-                            </tr>
+                                    <td>
+                                        <input type="checkbox" value="gcms" checked={this.state.tests.gcms} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>GC/MS</td>
+                                    
+                                    
+                                    <td>
+                                        <input type="checkbox" value="hptlc" checked={this.state.tests.hptlc} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>HPTLC</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" value="uvVis" checked={this.state.tests.uvVis} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>UV-Vis</td>
+                                    <td>
+                                        <input type="checkbox" value="pesticides" checked={this.state.tests.pesticides} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>Pestic.</td>
+                                    <td>
+                                        <input type="checkbox" value="heavyMetals" checked={this.state.tests.heavyMetals} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>H/M</td>
+                                    
+                                </tr>
+                            </tbody>
                         </table>
                         
                     </form>
@@ -291,3 +300,15 @@ export default class QCRecordForm extends React.Component {
         )
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addQCFile: (qcFile) => dispatch({type: "ADD_NEW_QC_FILE", payload: qcFile}),
+        currentlyFetching: () => dispatch({type: "CURRENTLY_FETCHING"}),
+        fetchSuccess: () => dispatch({type: "SUCCESS_FETCHING"}),
+        fetchFail: () => dispatch({type: "FAILED_FETCHING"})
+    }
+}
+  
+
+export default connect(null, mapDispatchToProps)(QCRecordForm)
