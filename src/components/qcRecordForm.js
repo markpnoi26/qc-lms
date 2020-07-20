@@ -1,10 +1,11 @@
 import React from 'react'
+import {API} from 'aws-amplify'
 
 export default class QCRecordForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            qcNum: "20002",
+            num: "20002",
             projectType: "",
             title: "",
             requester: "",
@@ -20,9 +21,9 @@ export default class QCRecordForm extends React.Component {
 
             },
             lotNums: [],
-            currLotNum: "",
             analyst: "",
-            dateToday: this.setDateToday(),
+            dateIn: this.setDateToday(),
+            currLotNum: ""
         }
     }
 
@@ -70,22 +71,52 @@ export default class QCRecordForm extends React.Component {
     }
 
     handleSubmitNewFile = (event) => {
-        console.log("add new QC file")
+        console.log("adding... new QC file")
+        const bodyPreSend = {...this.state, tests: {...this.state.tests}}
+        delete bodyPreSend.currLotNum
+
+
+        if (bodyPreSend.title === "" ) alert("Please make sure title exists.")
+        if (bodyPreSend.projectType === "" ) alert("Please make sure you assign the project type.")
+
+        const params = {
+            headers:{},
+            response: true,
+            queryStringParameters: {},
+            body: bodyPreSend
+        }
+
+        API.post("qcfilesAPI", "/qcfiles", params)
+            .then(response => {
+                // This will be the response will be able to add to the list of tests
+                console.log(response)
+            })
+            .catch(error => {
+                // continue to log error just in case
+                console.log(error)
+            })
+    }
+
+    handlePostFiles = () => {
+        
+
+        
     }
     
     render() {
         return(
             <>
                 <td>
-                    {this.state.qcNum}
+                    {this.state.num}
                 </td>
                 <td>
                     <select 
-                        value={this.state.requester} 
+                        value={this.state.projectType} 
                         onChange={(event) => this.setState({
                             projectType: event.target.value
                         })}
                     >
+                        <option value="">Select Projet Type</option>
                         <option value="P">Project</option>
                         <option value="S">Stability</option>
                         <option value="I">Investigation</option>
@@ -180,7 +211,7 @@ export default class QCRecordForm extends React.Component {
                     {this.state.lotNums.length}
                 </td>
                 <td>
-                    {this.state.dateToday}
+                    {this.state.dateIn}
                 </td>
                 <td>
                     NotApplicable
@@ -188,12 +219,12 @@ export default class QCRecordForm extends React.Component {
 
                 <td>
                     <select 
-                        value={this.state.requester} 
+                        value={this.state.analyst} 
                         onChange={(event) => this.setState({
                             analyst: event.target.value
                         })}
                     >
-                        <option value="none">(none)</option>
+                        <option value="">(none)</option>
                         <option value="MD">MD</option>
                         <option value="KH">KH</option>
                         <option value="WM">WM</option>
@@ -201,7 +232,7 @@ export default class QCRecordForm extends React.Component {
                 </td>
                     
                 <td>
-                    <button>+</button>
+                    <button onClick={this.handleSubmitNewFile}> Add File</button>
                 </td>
             </>
         )
