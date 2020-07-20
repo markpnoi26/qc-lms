@@ -3,7 +3,7 @@ import {Nav} from "react-bootstrap";
 import {Link} from 'react-router-dom'
 import { withRouter } from "react-router";
 import { AmplifySignOut } from '@aws-amplify/ui-react';
-import '../styles/sidebar.css'
+import '../styles/sidebar.scss'
 
 const Side = props => {
 
