@@ -1,10 +1,11 @@
 import React from 'react'
 import { API } from 'aws-amplify'
+import {connect} from 'react-redux'
 
 
 import QCRecordForm from '../components/qcRecordForm'
 
-export default class QCRecordWindow extends React.Component {
+class QCRecordWindow extends React.Component {
 
     constructor(props) {
         super(props)
@@ -82,6 +83,8 @@ export default class QCRecordWindow extends React.Component {
 
     componentDidMount = () => {
 
+
+
         const params ={
             headers:{},
             response: true,
@@ -93,6 +96,11 @@ export default class QCRecordWindow extends React.Component {
                 this.setState({
                     qcFiles: response.data
                 })
+                return response.data
+            })
+            .then(data => {
+                // set the next available qc file here using the current year
+                // 
             })
             .catch(error => {
                 console.log(error)
@@ -130,3 +138,20 @@ export default class QCRecordWindow extends React.Component {
         )
     }
 }
+
+
+const mapStateToProps = state => {
+    return {
+        fetchStatus: state.fetchStatus,
+        currentQCFiles: state.currentQCFiles,
+        currentYear: state.currentYear
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getCurrentAvailableQCFile: (nextFile) => dispatch({type: "SET_AVAILABLE_QC_FIle", payload: nextFile})
+    }
+}
+
+export default connect(null, null)(QCRecordWindow)
