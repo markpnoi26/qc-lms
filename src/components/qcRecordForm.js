@@ -91,14 +91,27 @@ class QCRecordForm extends React.Component {
         this.props.currentlyFetching()
         API.post("qcfilesAPI", "/qcfiles", params)
             .then(response => {
-                // This will be the response, will be able to add to the list of tests
-                // call REDUX Dispatch here:
-                this.props.addQCFile(response.config.data)
+                const data = JSON.parse(response.config.data)
+                return data
+            })
+            .then((data) => {
+                this.props.addQCFile(data)
                 this.props.fetchSuccess()
             })
             .then(() => {
-                const qcFiles = this.props.currentQCFiles
-                console.log(qcFiles)
+                const currentQCFiles = this.props.currentQCFiles
+                const start = this.props.currentYear.substring(2,4) + "000"
+                
+                let startQCFile = parseInt(start, 10) + 1
+                for (let i = 0; i<currentQCFiles.length; i++) {
+                    const stringedFileNum = JSON.stringify(startQCFile)
+                    if (currentQCFiles[i].num !== stringedFileNum) {
+                        this.props.setCurrentAvailableQCFile(stringedFileNum)
+                        return stringedFileNum
+                    }
+                    startQCFile++
+                }
+                this.props.setCurrentAvailableQCFile(JSON.stringify(startQCFile))
             })
             .catch(error => {
                 // continue to log error just in case
