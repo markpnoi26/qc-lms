@@ -10,80 +10,76 @@ class QCRecordWindow extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            currQCFile: "20002",
-            qcFiles: []
         }
     }
 
 
-    handlePutFiles = () => {
-        const params = {
-            headers:{},
-            response: true,
-            queryStringParameters: {},
-            body: {
-                num: "20002",
-                name: "Sample Name 2 (with some changes)"
-            }
-        }
+    // handlePutFiles = () => {
+    //     const params = {
+    //         headers:{},
+    //         response: true,
+    //         queryStringParameters: {},
+    //         body: {
+    //             num: "20002",
+    //             name: "Sample Name 2 (with some changes)"
+    //         }
+    //     }
 
-        API.put("qcfilesAPI", "/qcfiles", params)
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
+    //     API.put("qcfilesAPI", "/qcfiles", params)
+    //         .then(response => {
+    //             console.log(response)
+    //         })
+    //         .catch(error => {
+    //             console.log(error)
+    //         })
+    // }
 
 
-    handleGetOneItem = () => {
-        const params = {
-            headers:{},
-            response: true,
-            queryStringParameters: {},
-        }
+    // handleGetOneItem = () => {
+    //     const params = {
+    //         headers:{},
+    //         response: true,
+    //         queryStringParameters: {},
+    //     }
 
-        API.get("qcfilesAPI", "/qcfiles/20002", params)
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
+    //     API.get("qcfilesAPI", "/qcfiles/20002", params)
+    //         .then(response => {
+    //             console.log(response)
+    //         })
+    //         .catch(error => {
+    //             console.log(error)
+    //         })
+    // }
 
-    handleDeleteFiles = () => {
-        const params = {
-            headers:{},
-            response: true,
-            queryStringParameters: {},
-            body: {}
-        }
+    // handleDeleteFiles = () => {
+    //     const params = {
+    //         headers:{},
+    //         response: true,
+    //         queryStringParameters: {},
+    //         body: {}
+    //     }
 
-        API.del("qcfilesAPI", "/qcfiles/20002", params)
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
+    //     API.del("qcfilesAPI", "/qcfiles/20002", params)
+    //         .then(response => {
+    //             console.log(response)
+    //         })
+    //         .catch(error => {
+    //             console.log(error)
+    //         })
+    // }
 
-    setNextQCFile = () => {
-        let currQCFile = this.state.currQCFile
-        let numberfied = parseInt(currQCFile, 10)
-        numberfied++
+    // setNextQCFile = () => {
+    //     let currQCFile = this.state.currQCFile
+    //     let numberfied = parseInt(currQCFile, 10)
+    //     numberfied++
 
-        console.log(numberfied)
-        this.setState({
-            currQCFile: numberfied.toString()
-        })
-    }
+    //     console.log(numberfied)
+    //     this.setState({
+    //         currQCFile: numberfied.toString()
+    //     })
+    // }
 
     componentDidMount = () => {
-
-
 
         const params ={
             headers:{},
@@ -93,14 +89,27 @@ class QCRecordWindow extends React.Component {
 
         API.get("qcfilesAPI", "/qcfiles", params)
             .then(response => {
-                this.setState({
-                    qcFiles: response.data
-                })
-                return response.data
+                // need to query specific year later on... Keep in mind please
+                this.props.setCurrentQCFiles(response.data)
             })
-            .then(data => {
-                // set the next available qc file here using the current year
-                // 
+            .then(() => {
+                // set the next available qc file
+            
+                const currentQCFiles = this.props.currentQCFiles
+                const start = this.props.currentYear.substring(2,4) + "000"
+                
+                let startQCFile = parseInt(start, 10) + 1
+                for (let i = 0; i<currentQCFiles.length; i++) {
+                    const stringedFileNum = JSON.stringify(startQCFile)
+                    if (currentQCFiles[i].num !== stringedFileNum) {
+                        this.props.setCurrentAvailableQCFile(stringedFileNum)
+                        return stringedFileNum
+                    }
+                    startQCFile++
+                }
+            })
+            .then((qcfile) => {
+                console.log(qcfile)
             })
             .catch(error => {
                 console.log(error)
@@ -129,7 +138,7 @@ class QCRecordWindow extends React.Component {
                         <tr>
                         </tr>
                         <tr>
-                            <QCRecordForm currQCFile={this.state.currQCFile} setNextQCFile={this.setNextQCFile}/>
+                            <QCRecordForm />
                         </tr>
                     </tbody>
                 </table>
@@ -150,8 +159,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getCurrentAvailableQCFile: (nextFile) => dispatch({type: "SET_AVAILABLE_QC_FIle", payload: nextFile})
+        setCurrentAvailableQCFile: (number) => dispatch({type: "SET_AVAILABLE_QC_FILE", payload: number}),
+        setCurrentQCFiles: (qcFiles) => dispatch({type: "SET_CURRENT_QC_FILES", payload: qcFiles})
     }
 }
 
-export default connect(null, null)(QCRecordWindow)
+export default connect(mapStateToProps, mapDispatchToProps)(QCRecordWindow)
