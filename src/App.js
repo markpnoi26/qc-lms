@@ -17,11 +17,11 @@ class App extends React.Component {
           </Row>
           <Router>
             <Row>
-              <Col xs={1} id="sidebar-wrapper">
+              <Col xs={2} id="sidebar-wrapper">
                 <SideBar />
               </Col>
 
-              <Col xs={11} id="page-content-wrapper">
+              <Col xs={10} id="page-content-wrapper">
                 <MainWindow />
               </Col>
             </Row>
