@@ -18,6 +18,7 @@ export default class QCRecordForm extends React.Component {
                 gcms: false,
                 pesticides: false,
                 hptlc: false,
+                uvVis: false
 
             },
             lotNums: [],
@@ -174,17 +175,11 @@ export default class QCRecordForm extends React.Component {
                                     <input type="checkbox" value="colorAndAppearance" checked={this.state.tests.colorAndAppearance} onChange={this.handleTestsOnCheck}/>
                                 </td>
                                 <td>C&A</td>
-
-                                
                                 <td>
                                     <input type="checkbox" value="lod" checked={this.state.tests.lod} onChange={this.handleTestsOnCheck}/>
                                 </td>
                                 <td>LOD</td>
                                 
-                                <td>
-                                    <input type="checkbox" value="heavyMetals" checked={this.state.tests.heavyMetals} onChange={this.handleTestsOnCheck}/>
-                                </td>
-                                <td>H/M</td>
                             </tr>
                             <tr>
                                 
@@ -199,15 +194,26 @@ export default class QCRecordForm extends React.Component {
                                 </td>
                                 <td>GC/MS</td>
                                 
-                                <td>
-                                    <input type="checkbox" value="pesticides" checked={this.state.tests.pesticides} onChange={this.handleTestsOnCheck}/>
-                                </td>
-                                <td>Pestic.</td>
                                 
                                 <td>
                                     <input type="checkbox" value="hptlc" checked={this.state.tests.hptlc} onChange={this.handleTestsOnCheck}/>
                                 </td>
                                 <td>HPTLC</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" value="uvVis" checked={this.state.tests.uvVis} onChange={this.handleTestsOnCheck}/>
+                                </td>
+                                <td>UV-Vis</td>
+                                <td>
+                                    <input type="checkbox" value="pesticides" checked={this.state.tests.pesticides} onChange={this.handleTestsOnCheck}/>
+                                </td>
+                                <td>Pestic.</td>
+                                <td>
+                                    <input type="checkbox" value="heavyMetals" checked={this.state.tests.heavyMetals} onChange={this.handleTestsOnCheck}/>
+                                </td>
+                                <td>H/M</td>
+                                
                             </tr>
                         </table>
                         
