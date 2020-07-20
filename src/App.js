@@ -19,7 +19,7 @@ class App extends React.Component {
               <Col>
                 <SideBar />
               </Col>
-              <Col xs={10}>
+              <Col xs={11}>
                 <MainWindow />
               </Col>
             </Row>
