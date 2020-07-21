@@ -1,4 +1,5 @@
 import React from 'react'
+import {Button} from 'react-bootstrap'
 
 
 export default class QcRecordEntry extends React.Component {
@@ -26,16 +27,16 @@ export default class QcRecordEntry extends React.Component {
                                 <tr>
                                     
                                     <td>
-                                        <input type="checkbox" value="hplc" checked={this.props.file.tests.hplc} disabled/>
+                                        <input type="checkbox" value="hplc" checked={this.props.file.tests.hplc} readOnly/>
                                     </td>
                                     <td>HPLC</td>
 
                                     <td>
-                                        <input type="checkbox" value="colorAndAppearance" checked={this.props.file.tests.colorAndAppearance} disabled/>
+                                        <input type="checkbox" value="colorAndAppearance" checked={this.props.file.tests.colorAndAppearance} readOnly/>
                                     </td>
                                     <td>C&A</td>
                                     <td>
-                                        <input type="checkbox" value="lod" checked={this.props.file.tests.lod} disabled/>
+                                        <input type="checkbox" value="lod" checked={this.props.file.tests.lod} readOnly/>
                                     </td>
                                     <td>LOD</td>
                                     
@@ -43,33 +44,33 @@ export default class QcRecordEntry extends React.Component {
                                 <tr>
                                     
                                     <td>
-                                        <input type="checkbox" value="osr" checked={this.props.file.tests.osr} disabled/>
+                                        <input type="checkbox" value="osr" checked={this.props.file.tests.osr} readOnly/>
                                     </td>
                                     <td>OSR</td>
 
                                 
                                     <td>
-                                        <input type="checkbox" value="gcms" checked={this.props.file.tests.gcms} disabled/>
+                                        <input type="checkbox" value="gcms" checked={this.props.file.tests.gcms} readOnly/>
                                     </td>
                                     <td>GC/MS</td>
                                     
                                     
                                     <td>
-                                        <input type="checkbox" value="hptlc" checked={this.props.file.tests.hptlc} disabled/>
+                                        <input type="checkbox" value="hptlc" checked={this.props.file.tests.hptlc} readOnly/>
                                     </td>
                                     <td>HPTLC</td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="checkbox" value="uvVis" checked={this.props.file.tests.uvVis} disabled/>
+                                        <input type="checkbox" value="uvVis" checked={this.props.file.tests.uvVis} readOnly/>
                                     </td>
                                     <td>UV-Vis</td>
                                     <td>
-                                        <input type="checkbox" value="pesticides" checked={this.props.file.tests.pesticides} disabled/>
+                                        <input type="checkbox" value="pesticides" checked={this.props.file.tests.pesticides} readOnly/>
                                     </td>
                                     <td>Pestic.</td>
                                     <td>
-                                        <input type="checkbox" value="heavyMetals" checked={this.props.file.tests.heavyMetals} disabled/>
+                                        <input type="checkbox" value="heavyMetals" checked={this.props.file.tests.heavyMetals} readOnly/>
                                     </td>
                                     <td>H/M</td>
                                     
@@ -108,8 +109,8 @@ export default class QcRecordEntry extends React.Component {
                 </td>
                     
                 <td style={{textAlign:"center"}}>
-                    <button > Update File</button>
-                    <button > Delete File</button>
+                    <Button variant="secondary"> Update </Button>
+                    <Button variant="danger"> Delete </Button>
                 </td>
             </>
         )
