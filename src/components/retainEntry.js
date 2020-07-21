@@ -1,7 +1,7 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
-
-export default class RetainEntry extends React.Component {
+class RetainEntry extends React.Component {
     constructor() {
         super()
         this.state={}
@@ -10,8 +10,22 @@ export default class RetainEntry extends React.Component {
     render() {
         return(
             <div>
-                I am a sample retain
+            
             </div>
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RetainEntry)
