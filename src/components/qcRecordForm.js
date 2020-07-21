@@ -25,6 +25,9 @@ class QCRecordForm extends React.Component {
             lotNums: [],
             analyst: "",
             dateIn: this.setDateToday(),
+            dateOut: "",
+            nbPage: "",
+            notes: "",
             currLotNum: ""
         }
     }
@@ -139,6 +142,9 @@ class QCRecordForm extends React.Component {
             lotNums: [],
             analyst: "",
             dateIn: this.setDateToday(),
+            dateOut: "",
+            nbPage: "",
+            notes: "",
             currLotNum: ""
         })
     }
