@@ -256,7 +256,6 @@ class QCRecordForm extends React.Component {
                     </form>
                 </td>
                 <td>
-
                     <InputGroup >
                         <FormControl
                             type="text"
@@ -272,21 +271,24 @@ class QCRecordForm extends React.Component {
                         <Button variant="outline-primary" onClick={this.handleAddNewLot} >+</Button>
                         </InputGroup.Append>
                     </InputGroup>
-                    <ul>
-                        {this.state.lotNums.map((lot, idx) => (
-                            <li 
-                                key={idx}> 
-                                {lot} 
-                                <Button 
-                                    variant="outline-danger"
-                                    value={lot} 
-                                    onClick={this.handleDeleteLot}> 
-                                    - 
-                                </Button>
-                            </li> 
-                            )
-                        )}
-                    </ul>
+                    
+                    {"Lot Numbers:"}
+                    
+                    {this.state.lotNums.map((lot, idx) => (
+                        <InputGroup className="mb-3" key={idx}>
+                            <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon3">
+                                {lot}
+                                </InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <InputGroup.Append>
+                                <Button variant="outline-danger" onClick={this.handleDeleteLot}  value={"lot"}>-</Button>
+                            </InputGroup.Append>
+                        </InputGroup>
+                        )
+                    )}
+                    
+                        
                 </td>
                 <td style={{textAlign:"center"}}>
                     {this.state.lotNums.length}
