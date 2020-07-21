@@ -96,9 +96,9 @@ class QCRecordWindow extends React.Component {
                 // set the next available qc file
             
                 const currentQCFiles = this.props.currentQCFiles
-                const start = this.props.currentYear.substring(2,4) + "000"
+                const start = this.props.currentYear.substring(2,4) + "001"
                 
-                let startQCFile = parseInt(start, 10) + 1
+                let startQCFile = parseInt(start, 10)
                 for (let i = 0; i<currentQCFiles.length; i++) {
                     const stringedFileNum = JSON.stringify(startQCFile)
                     if (currentQCFiles[i].num !== stringedFileNum) {
