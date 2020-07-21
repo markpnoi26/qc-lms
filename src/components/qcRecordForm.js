@@ -256,6 +256,7 @@ class QCRecordForm extends React.Component {
                     </form>
                 </td>
                 <td>
+                    Lot Numbers:
                     <InputGroup >
                         <FormControl
                             type="text"
@@ -271,8 +272,6 @@ class QCRecordForm extends React.Component {
                         <Button variant="outline-primary" onClick={this.handleAddNewLot} >+</Button>
                         </InputGroup.Append>
                     </InputGroup>
-                    
-                    {"Lot Numbers:"}
                     
                     {this.state.lotNums.map((lot, idx) => (
                         <InputGroup className="mb-3" key={idx}>
