@@ -1,6 +1,7 @@
 import React from 'react'
 import { API } from 'aws-amplify'
 import {connect} from 'react-redux'
+import {Table} from 'react-bootstrap'
 
 
 import QCRecordForm from '../components/qcRecordForm'
@@ -117,12 +118,12 @@ class QCRecordWindow extends React.Component {
     render() {
         return (
             <div>
-                <table >
-                    <tbody >
-                        <tr style={{border:"dashed grey", textAlign:"center"}}>
+                <Table bordered hover >
+                    <thead>
+                        <tr style={{textAlign: "center"}} >
                             <th>QC Number</th>
                             <th>Project Type</th>
-                            <th>Title</th>
+                            <th>Project Title</th>
                             <th>Tests</th>
                             <th>lot #</th>
                             <th>Sample #</th>
@@ -132,20 +133,21 @@ class QCRecordWindow extends React.Component {
                             <th>Analyst</th>
                             <th>Update/Add/Delete</th>
                         </tr>
-
+                    </thead>
+                    <tbody >
                         {this.props.currentQCFiles.map(file => {
                             return (
-                                <tr key={file.num} style={{border:"dashed grey", textAlign:"center"}}>
+                                <tr key={file.num} style={{textAlign: "center"}}>
                                     <QCRecordEntry file={file} />
                                 </tr>
                             )
                         })}
                         
-                        <tr style={{border:"dashed grey", textAlign:"center"}}>
+                        <tr >
                             <QCRecordForm />
                         </tr>
                     </tbody>
-                </table>
+                </Table>
             </div>
             
         )
