@@ -131,7 +131,7 @@ class QCRecordWindow extends React.Component {
                             <th>Date Out</th>
                             <th>Req. by</th>
                             <th>Analyst</th>
-                            <th>Update/Add/Delete</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody >
