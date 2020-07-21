@@ -2,6 +2,8 @@ import React from 'react'
 import {API} from 'aws-amplify'
 import {connect} from 'react-redux'
 
+import {Button, Form, InputGroup, FormControl} from 'react-bootstrap'
+
 class QCRecordForm extends React.Component {
     constructor(props) {
         super(props)
@@ -163,32 +165,34 @@ class QCRecordForm extends React.Component {
                     {this.state.num}
                 </td>
                 <td>
-                    <select 
-                        value={this.state.projectType} 
-                        onChange={(event) => this.setState({
-                            projectType: event.target.value
-                        })}
-                    >
-                        <option value="">Select Projet Type</option>
-                        <option value="P">Project</option>
-                        <option value="S">Stability</option>
-                        <option value="I">Investigation</option>
-                        <option value="R">Release</option>
-                        <option value="SQ">Standard Qualification</option>
-
-                    </select>
+                    <Form>
+                        <Form.Control 
+                            as="select"
+                            value={this.state.projectType} 
+                            onChange={(event) => this.setState({
+                                projectType: event.target.value
+                            })}>
+                            <option value="">(none)</option>
+                            <option value="P">(P) Project</option>
+                            <option value="S">(S) Stability</option>
+                            <option value="I">(I) Investigation</option>
+                            <option value="R">(I) Release</option>
+                            <option value="SQ">(SQ) Standard Qualification</option>
+                        </Form.Control>
+                    </Form>
                 </td>
                 <td>
-                    <form>
-                        <input 
+                    <Form>
+                        <Form.Control 
+                            type="text"
                             placeholder="Title" 
                             value={this.state.title} 
                             onChange={(event) => this.setState({
                                 title: event.target.value
                             })}
                         >
-                        </input>
-                    </form>
+                        </Form.Control>
+                    </Form>
                     
                 </td>
                 <td>
@@ -252,8 +256,10 @@ class QCRecordForm extends React.Component {
                     </form>
                 </td>
                 <td>
-                    <form>
-                        <input 
+
+                    <InputGroup >
+                        <FormControl
+                            type="text"
                             value={this.state.currLotNum} 
                             placeholder="New Lot" 
                             onChange={(event) => {
@@ -262,18 +268,21 @@ class QCRecordForm extends React.Component {
                                 })
                             }}
                         />
-                        <button onClick={this.handleAddNewLot}>+</button>
-                    </form>
+                        <InputGroup.Append>
+                        <Button variant="outline-primary" onClick={this.handleAddNewLot} >+</Button>
+                        </InputGroup.Append>
+                    </InputGroup>
                     <ul>
                         {this.state.lotNums.map((lot, idx) => (
                             <li 
                                 key={idx}> 
                                 {lot} 
-                                <button 
+                                <Button 
+                                    variant="outline-danger"
                                     value={lot} 
                                     onClick={this.handleDeleteLot}> 
                                     - 
-                                </button>
+                                </Button>
                             </li> 
                             )
                         )}
@@ -289,35 +298,40 @@ class QCRecordForm extends React.Component {
                     N/A
                 </td>
                 <td>
-                    <select 
-                        value={this.state.requester} 
-                        onChange={(event) => this.setState({
-                            requester: event.target.value
-                        })}
-                    >
-                        <option value="">(none)</option>
-                        <option value="QC">QC</option>
-                        <option value="NP">NP</option>
-                        <option value="Other">Other</option>
-                    </select>
+
+                    <Form>
+                        <Form.Control 
+                            as="select"
+                            value={this.state.requester} 
+                            onChange={(event) => this.setState({
+                                requester: event.target.value
+                            })}>
+                            <option value="">none</option>
+                            <option value="QC">QC</option>
+                            <option value="NP">NP</option>
+                            <option value="Other">Other</option>
+                        </Form.Control>
+                    </Form>
                 </td>
 
                 <td>
-                    <select 
-                        value={this.state.analyst} 
-                        onChange={(event) => this.setState({
-                            analyst: event.target.value
-                        })}
-                    >
-                        <option value="">(none)</option>
-                        <option value="MD">MD</option>
-                        <option value="KH">KH</option>
-                        <option value="WM">WM</option>
-                    </select>
+                    <Form>
+                        <Form.Control 
+                            as="select"
+                            value={this.state.analyst} 
+                            onChange={(event) => this.setState({
+                                analyst: event.target.value
+                            })}>
+                            <option value="">none</option>
+                            <option value="MD">MD</option>
+                            <option value="KH">KH</option>
+                            <option value="WM">WM</option>
+                        </Form.Control>
+                    </Form>
                 </td>
                     
                 <td style={{textAlign:"center"}}>
-                    <button onClick={this.handleSubmitNewFile}> Add File</button>
+                    <Button variant="primary" onClick={this.handleSubmitNewFile}> Add File</Button>
                 </td>
             </>
         )
