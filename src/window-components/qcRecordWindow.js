@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 
 
 import QCRecordForm from '../components/qcRecordForm'
+import QCRecordEntry from '../components/qcRecordEntry'
 
 class QCRecordWindow extends React.Component {
 
@@ -116,9 +117,9 @@ class QCRecordWindow extends React.Component {
     render() {
         return (
             <div>
-                <table>
-                    <tbody>
-                        <tr style={{textAlign: "center"}}>
+                <table >
+                    <tbody >
+                        <tr style={{border:"dashed grey", textAlign:"center"}}>
                             <th>QC Number</th>
                             <th>Project Type</th>
                             <th>Title</th>
@@ -132,9 +133,15 @@ class QCRecordWindow extends React.Component {
                             <th>Update/Add/Delete</th>
                         </tr>
 
-                        <tr>
-                        </tr>
-                        <tr>
+                        {this.props.currentQCFiles.map(file => {
+                            return (
+                                <tr key={file.num} style={{border:"dashed grey", textAlign:"center"}}>
+                                    <QCRecordEntry file={file} />
+                                </tr>
+                            )
+                        })}
+                        
+                        <tr style={{border:"dashed grey", textAlign:"center"}}>
                             <QCRecordForm />
                         </tr>
                     </tbody>
