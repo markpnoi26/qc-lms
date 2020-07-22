@@ -14,15 +14,31 @@ class QCRecordForm extends React.Component {
             requester: "",
             tests: {
                 hplc: false,
+                sec: false,
                 colorAndAppearance: false,
                 lod: false,
+                ash: false,
+                particleSize: false,
+                solids: false,
+                odor: false,
+                meltingPoint: false,
+                ftir: false,
+                nmr: false,
                 heavyMetals: false,
                 osr: false,
                 gcms: false,
                 pesticides: false,
                 hptlc: false,
+                totalPlateCount: false,
+                coliform: false,
+                yeastAndMold: false,
+                eColi: false,
+                salmonella: false,
+                arsenic: false,
+                lead: false,
+                mercury: false,
+                cadmium: false,
                 uvVis: false
-
             },
             lotNums: [],
             analyst: "",
@@ -131,15 +147,31 @@ class QCRecordForm extends React.Component {
             requester: "",
             tests: {
                 hplc: false,
+                sec: false,
                 colorAndAppearance: false,
                 lod: false,
+                ash: false,
+                particleSize: false,
+                solids: false,
+                odor: false,
+                meltingPoint: false,
+                ftir: false,
+                nmr: false,
                 heavyMetals: false,
                 osr: false,
                 gcms: false,
                 pesticides: false,
                 hptlc: false,
+                totalPlateCount: false,
+                coliform: false,
+                yeastAndMold: false,
+                eColi: false,
+                salmonella: false,
+                arsenic: false,
+                lead: false,
+                mercury: false,
+                cadmium: false,
                 uvVis: false
-
             },
             lotNums: [],
             analyst: "",
@@ -200,59 +232,158 @@ class QCRecordForm extends React.Component {
                         <table>
                             <tbody>
                                 <tr>
-                                    
-                                    <td>
-                                        <input type="checkbox" value="hplc" checked={this.state.tests.hplc} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>HPLC</td>
+                                    <td colSpan="6"> Physical/Spectroscopic </td>
+                                </tr>
+                                <tr>
 
                                     <td>
                                         <input type="checkbox" value="colorAndAppearance" checked={this.state.tests.colorAndAppearance} onChange={this.handleTestsOnCheck}/>
                                     </td>
-                                    <td>C&A</td>
+                                    <td>Color & Appearance</td>
                                     <td>
                                         <input type="checkbox" value="lod" checked={this.state.tests.lod} onChange={this.handleTestsOnCheck}/>
                                     </td>
                                     <td>LOD</td>
+                                    <td>
+                                        <input type="checkbox" value="ash" checked={this.state.tests.ash} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>Ash</td>
                                     
                                 </tr>
                                 <tr>
                                     
                                     <td>
-                                        <input type="checkbox" value="osr" checked={this.state.tests.osr} onChange={this.handleTestsOnCheck}/>
+                                        <input type="checkbox" value="particleSize" checked={this.state.tests.particleSize} onChange={this.handleTestsOnCheck}/>
                                     </td>
-                                    <td>OSR</td>
+                                    <td>Particle Sz.</td>
 
                                 
                                     <td>
-                                        <input type="checkbox" value="gcms" checked={this.state.tests.gcms} onChange={this.handleTestsOnCheck}/>
+                                        <input type="checkbox" value="solids" checked={this.state.tests.solids} onChange={this.handleTestsOnCheck}/>
                                     </td>
-                                    <td>GC/MS</td>
+                                    <td>Solids</td>
                                     
                                     
                                     <td>
-                                        <input type="checkbox" value="hptlc" checked={this.state.tests.hptlc} onChange={this.handleTestsOnCheck}/>
+                                        <input type="checkbox" value="odor" checked={this.state.tests.odor} onChange={this.handleTestsOnCheck}/>
                                     </td>
-                                    <td>HPTLC</td>
+                                    <td>Odor</td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="checkbox" value="uvVis" checked={this.state.tests.uvVis} onChange={this.handleTestsOnCheck}/>
+                                        <input type="checkbox" value="meltingPoint" checked={this.state.tests.meltingPoint} onChange={this.handleTestsOnCheck}/>
                                     </td>
-                                    <td>UV-Vis</td>
+                                    <td>Melting Pt.</td>
                                     <td>
-                                        <input type="checkbox" value="pesticides" checked={this.state.tests.pesticides} onChange={this.handleTestsOnCheck}/>
+                                        <input type="checkbox" value="ftir" checked={this.state.tests.ftir} onChange={this.handleTestsOnCheck}/>
                                     </td>
-                                    <td>Pestic.</td>
+                                    <td>FTIR</td>
                                     <td>
-                                        <input type="checkbox" value="heavyMetals" checked={this.state.tests.heavyMetals} onChange={this.handleTestsOnCheck}/>
+                                        <input type="checkbox" value="nmr" checked={this.state.tests.nmr} onChange={this.handleTestsOnCheck}/>
                                     </td>
-                                    <td>H/M</td>
+                                    <td>NMR</td>
                                     
                                 </tr>
                             </tbody>
                         </table>
-                        
+                    </form>
+                    <form>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td colSpan="8"> Chromatographic </td>
+                                </tr>
+                                <tr>
+
+                                    <td>
+                                        <input type="checkbox" value="hplc" checked={this.state.tests.hplc} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>HPLC</td>
+                                    <td>
+                                        <input type="checkbox" value="gcms" checked={this.state.tests.gcms} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>GCMS</td>
+                                    <td>
+                                        <input type="checkbox" value="hptlc" checked={this.state.tests.hptlc} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>HPTLC</td>
+                                    <td>
+                                        <input type="checkbox" value="sec" checked={this.state.tests.sec} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>SEC</td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                    <form>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td colSpan="8"> Microbial </td>
+                                </tr>
+                                <tr>
+
+                                    <td>
+                                        <input type="checkbox" value="totalPlateCount" checked={this.state.tests.totalPlateCount} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>TPC</td>
+                                    <td>
+                                        <input type="checkbox" value="coliform" checked={this.state.tests.coliform} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>Coliform</td>
+                                    <td>
+                                        <input type="checkbox" value="yeastAndMold" checked={this.state.tests.yeastAndMold} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>Y&M</td>
+                                    <td>
+                                        <input type="checkbox" value="eColi" checked={this.state.tests.eColi} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>E.Coli</td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" value="salmonella" checked={this.state.tests.salmonella} onChange={this.handleTestsOnCheck}/>
+                                    </td >
+                                    <td colSpan={"7"} >Salmonella</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                    <form>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td colSpan="8"> Heavy Metals </td>
+                                    <td colSpan="2"> Other </td>
+                                </tr>
+                                <tr>
+
+                                    <td>
+                                        <input type="checkbox" value="arsenic" checked={this.state.tests.arsenic} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>As</td>
+                                    <td>
+                                        <input type="checkbox" value="lead" checked={this.state.tests.lead} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>Pb</td>
+                                    <td>
+                                        <input type="checkbox" value="mercury" checked={this.state.tests.mercury} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>Hg</td>
+                                    <td>
+                                        <input type="checkbox" value="cadmium" checked={this.state.tests.cadmium} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>Cd</td>
+                                    <td>
+                                        <input type="checkbox" value="uvVis" checked={this.state.tests.uvVis} onChange={this.handleTestsOnCheck}/>
+                                    </td>
+                                    <td>uvVis</td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
                     </form>
                 </td>
                 <td>
