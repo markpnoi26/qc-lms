@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, ListGroup} from 'react-bootstrap'
+import {Button, Badge} from 'react-bootstrap'
 import QCEntryModal from '../modalComponent/qcEntryModal'
 
 
@@ -31,30 +31,30 @@ export default class QcRecordEntry extends React.Component {
                     {title}
                 </td>
                 <td>
-                    <ListGroup horizontal>
+                    <div>
                         {Object.keys(tests).map((test, idx) => {
                             if (tests[test]) {
                                 switch(test) {
                                     case "colorAndAppearance":
-                                        return <ListGroup.Item key={test}> C&A </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> C&A </Badge>
                                     case 'lod':
-                                        return <ListGroup.Item key={test}> LOD </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> LOD </Badge>
                                     case 'ash':
-                                        return <ListGroup.Item key={test}> Ash </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> Ash </Badge>
                                     case 'particleSize':
-                                        return <ListGroup.Item key={test}> Particle Size </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> Particle Size </Badge>
                                     case 'solids':
-                                        return <ListGroup.Item key={test}> Solids </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> Solids </Badge>
                                     case 'odor':
-                                        return <ListGroup.Item key={test}> Odor </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> Odor </Badge>
                                     case 'meltingPoint':
-                                        return <ListGroup.Item key={test}> Melting Point </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> Melting Point </Badge>
                                     case 'ftir':
-                                        return <ListGroup.Item key={test}> FTIR </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> FTIR </Badge>
                                     case 'nmr':
-                                        return <ListGroup.Item key={test}> NMR </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> NMR </Badge>
                                     case 'uvVis':
-                                        return <ListGroup.Item key={test}> UV-Vis/ </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> UV-Vis </Badge>
                                     default :
                                         return null
                                 }
@@ -63,19 +63,19 @@ export default class QcRecordEntry extends React.Component {
                             return <React.Fragment key={idx}></React.Fragment>
                         })}
                         
-                    </ListGroup>
-                    <ListGroup horizontal>
+                    </div>
+                    <div>
                         {Object.keys(tests).map((test, idx) => {
                             if (tests[test]) {
                                 switch(test) {
                                     case "hplc":
-                                        return <ListGroup.Item key={test}> HPLC </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> HPLC </Badge>
                                     case "gcms":
-                                        return <ListGroup.Item key={test}> GC/MS </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> GC/MS </Badge>
                                     case "hptlc":
-                                        return <ListGroup.Item key={test}> HPTLC </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> HPTLC </Badge>
                                     case "sec":
-                                        return <ListGroup.Item key={test}> SEC </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> SEC </Badge>
                                     default :
                                         return null
                                 }
@@ -84,21 +84,21 @@ export default class QcRecordEntry extends React.Component {
                             return <React.Fragment key={idx}></React.Fragment>
                         })}
                         
-                    </ListGroup>
-                    <ListGroup horizontal>
+                    </div>
+                    <div >
                         {Object.keys(tests).map((test, idx) => {
                             if (tests[test]) {
                                 switch(test) {
                                     case "totalPlateCount":
-                                        return <ListGroup.Item key={test}> TPC </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> TPC </Badge>
                                     case "coliform":
-                                        return <ListGroup.Item key={test}> Coliform </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> Coliform </Badge>
                                     case "yeastAndMold":
-                                        return <ListGroup.Item key={test}> Y&M </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> Y&M </Badge>
                                     case "eColi":
-                                        return <ListGroup.Item key={test}> E.Coli </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> E.Coli </Badge>
                                     case "salmonella":
-                                        return <ListGroup.Item key={test}> Salmonella </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> Salmonella </Badge>
                                     default :
                                         return null
                                 }
@@ -107,19 +107,21 @@ export default class QcRecordEntry extends React.Component {
                             return <React.Fragment key={idx}></React.Fragment>
                         })}
                         
-                    </ListGroup>
-                    <ListGroup horizontal>
+                    </div>
+                    <div>
                         {Object.keys(tests).map((test, idx) => {
                             if (tests[test]) {
                                 switch(test) {
                                     case "arsenic":
-                                        return <ListGroup.Item key={test}> As (HM) </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> As (HM) </Badge>
                                     case "lead":
-                                        return <ListGroup.Item key={test}> Pb (HM)</ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> Pb (HM)</Badge>
                                     case "mercury":
-                                        return <ListGroup.Item key={test}> Hg (HM) </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> Hg (HM) </Badge>
                                     case "cadmium":
-                                        return <ListGroup.Item key={test}> Cd (HM) </ListGroup.Item>
+                                        return <Badge variant="primary" key={test}> Cd (HM) </Badge>
+                                    case 'retain':
+                                        return <Badge variant="primary" key={test}> Retain </Badge>
                                     default :
                                         return null
                                 }
@@ -128,7 +130,7 @@ export default class QcRecordEntry extends React.Component {
                             return <React.Fragment key={idx}></React.Fragment>
                         })}
                         
-                    </ListGroup>
+                    </div>
                 </td>
                 <td>
                     <ol>
