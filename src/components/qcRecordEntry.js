@@ -148,7 +148,7 @@ export default class QcRecordEntry extends React.Component {
                     {dateIn}
                 </td>
                 <td>
-                    N/A
+                    {dateOut === undefined? "N/A":dateOut}
                 </td>
                 <td>
                     {requester}
