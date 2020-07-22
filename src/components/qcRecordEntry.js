@@ -18,21 +18,22 @@ export default class QcRecordEntry extends React.Component {
     }
 
     render() {
+        let {num, projectType, title, tests, lotNums, dateIn, dateOut, requester, analyst} = this.props.file
         return(
             <>
                 <td>
-                    {this.props.file.num}
+                    {num}
                 </td>
                 <td>
-                    {this.props.file.projectType}
+                    {projectType}
                 </td>
                 <td>
-                    {this.props.file.title}
+                    {title}
                 </td>
                 <td>
                     <ListGroup horizontal>
-                        {Object.keys(this.props.file.tests).map((test, idx) => {
-                            if (this.props.file.tests[test]) {
+                        {Object.keys(tests).map((test, idx) => {
+                            if (tests[test]) {
                                 switch(test) {
                                     case "colorAndAppearance":
                                         return <ListGroup.Item key={test}> C&A </ListGroup.Item>
@@ -64,8 +65,8 @@ export default class QcRecordEntry extends React.Component {
                         
                     </ListGroup>
                     <ListGroup horizontal>
-                        {Object.keys(this.props.file.tests).map((test, idx) => {
-                            if (this.props.file.tests[test]) {
+                        {Object.keys(tests).map((test, idx) => {
+                            if (tests[test]) {
                                 switch(test) {
                                     case "hplc":
                                         return <ListGroup.Item key={test}> HPLC </ListGroup.Item>
@@ -85,8 +86,8 @@ export default class QcRecordEntry extends React.Component {
                         
                     </ListGroup>
                     <ListGroup horizontal>
-                        {Object.keys(this.props.file.tests).map((test, idx) => {
-                            if (this.props.file.tests[test]) {
+                        {Object.keys(tests).map((test, idx) => {
+                            if (tests[test]) {
                                 switch(test) {
                                     case "totalPlateCount":
                                         return <ListGroup.Item key={test}> TPC </ListGroup.Item>
@@ -108,8 +109,8 @@ export default class QcRecordEntry extends React.Component {
                         
                     </ListGroup>
                     <ListGroup horizontal>
-                        {Object.keys(this.props.file.tests).map((test, idx) => {
-                            if (this.props.file.tests[test]) {
+                        {Object.keys(tests).map((test, idx) => {
+                            if (tests[test]) {
                                 switch(test) {
                                     case "arsenic":
                                         return <ListGroup.Item key={test}> As (HM) </ListGroup.Item>
@@ -131,7 +132,7 @@ export default class QcRecordEntry extends React.Component {
                 </td>
                 <td>
                     <ol>
-                        {this.props.file.lotNums.map((lot, idx) => (
+                        {lotNums.map((lot, idx) => (
                             <li 
                                 key={idx}> 
                                 {lot} 
@@ -141,31 +142,32 @@ export default class QcRecordEntry extends React.Component {
                     </ol>
                 </td>
                 <td >
-                    {this.props.file.lotNums.length}
+                    {lotNums.length}
                 </td>
                 <td>
-                    {this.props.file.dateIn}
+                    {dateIn}
                 </td>
                 <td>
                     N/A
                 </td>
                 <td>
-                    {this.props.file.requester}
+                    {requester}
                 </td>
 
                 <td>
-                    {this.props.file.analyst}
+                    {analyst}
                 </td>
                     
                 <td style={{textAlign:"center"}}>
                     <Button 
-                        variant="secondary" 
+                        variant="info" 
                         onClick={() => this.setModalShow()}> 
-                        Info Card 
+                        Info 
                     </Button>
                 </td>
 
-                <QCEntryModal 
+                <QCEntryModal
+                    file={this.props.file}
                     show={this.state.modalShow}
                     onHide={() => this.setModalShow()}
                 />
