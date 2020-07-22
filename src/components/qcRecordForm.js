@@ -253,7 +253,7 @@ class QCRecordForm extends React.Component {
                             onChange={(event) => this.setState({
                                 projectType: event.target.value
                             })}>
-                            <option value="">(none)</option>
+                            <option value="">Select Type</option>
                             <option value="P">(P) Project</option>
                             <option value="S">(S) Stability</option>
                             <option value="I">(I) Investigation</option>
@@ -475,7 +475,7 @@ class QCRecordForm extends React.Component {
                             onChange={(event) => this.setState({
                                 requester: event.target.value
                             })}>
-                            <option value="">none</option>
+                            <option value="">Select Requester</option>
                             <option value="QC">QC</option>
                             <option value="NP">NP</option>
                             <option value="Other">Other</option>
@@ -491,7 +491,7 @@ class QCRecordForm extends React.Component {
                             onChange={(event) => this.setState({
                                 analyst: event.target.value
                             })}>
-                            <option value="">none</option>
+                            <option value="">Select Analyst</option>
                             <option value="MD">MD</option>
                             <option value="KH">KH</option>
                             <option value="WM">WM</option>
