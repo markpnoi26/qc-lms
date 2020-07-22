@@ -38,7 +38,8 @@ class QCRecordForm extends React.Component {
                 lead: false,
                 mercury: false,
                 cadmium: false,
-                uvVis: false
+                uvVis: false,
+                retain: false
             },
             lotNums: [],
             analyst: "",
@@ -171,7 +172,8 @@ class QCRecordForm extends React.Component {
                 lead: false,
                 mercury: false,
                 cadmium: false,
-                uvVis: false
+                uvVis: false,
+                retain: false
             },
             lotNums: [],
             analyst: "",
@@ -191,6 +193,53 @@ class QCRecordForm extends React.Component {
     }
     
     render() {
+
+        const physSpecID = [
+            ["colorAndAppearance", "lod", "ash"],
+            ["particleSize", "solids", "odor"],
+            ["meltingPoint", "ftir", "nmr"]
+        ]
+
+        const physSpecLabel = [
+            ["Color & Appearance", "LOD", "Ash"],
+            ["Particle Size", "Solids", "Odor"],
+            ["Melting Pt.", "FTIR", "NMR"]
+        ]
+
+        const chromatographicID = [
+            ["hplc", "gcms", "hptlc", "sec"]
+        ]
+
+        const chromatographicLabel = [
+            ["HPLC", "GCMS", "HPTLC", "SEC"]
+        ]
+
+        const microbialID = [
+            ["totalPlateCount", "coliform", "yeastAndMold"], 
+            ["eColi", "salmonella"]
+        ]
+
+        const microbialLabel = [
+            ["TPC", "Coliform", "Y&M"], 
+            ["E.Coli", "Salmonella"]
+        ]
+
+        const heavyMetalsID = [
+            ["arsenic", "lead", "mercury", "cadmium"]
+        ]
+
+        const heavyMetalsLabel = [
+            ["As", "Pb", "Hg", "Cd"]
+        ]
+
+        const otherID = [
+            ["uvVis", "retain"]
+        ]
+
+        const otherLabel = [
+            ["UV/Vis", "Retain"]
+        ]
+
         return(
             <>
                 <td>
@@ -228,163 +277,151 @@ class QCRecordForm extends React.Component {
                     
                 </td>
                 <td>
-                    <form>
+                    <Form>
                         <table>
                             <tbody>
                                 <tr>
-                                    <td colSpan="6"> Physical/Spectroscopic </td>
+                                    <td colSpan="3"> Physical/Spectroscopic </td>
                                 </tr>
-                                <tr>
-
-                                    <td>
-                                        <input type="checkbox" value="colorAndAppearance" checked={this.state.tests.colorAndAppearance} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>Color & Appearance</td>
-                                    <td>
-                                        <input type="checkbox" value="lod" checked={this.state.tests.lod} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>LOD</td>
-                                    <td>
-                                        <input type="checkbox" value="ash" checked={this.state.tests.ash} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>Ash</td>
-                                    
-                                </tr>
-                                <tr>
-                                    
-                                    <td>
-                                        <input type="checkbox" value="particleSize" checked={this.state.tests.particleSize} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>Particle Sz.</td>
-
-                                
-                                    <td>
-                                        <input type="checkbox" value="solids" checked={this.state.tests.solids} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>Solids</td>
-                                    
-                                    
-                                    <td>
-                                        <input type="checkbox" value="odor" checked={this.state.tests.odor} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>Odor</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" value="meltingPoint" checked={this.state.tests.meltingPoint} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>Melting Pt.</td>
-                                    <td>
-                                        <input type="checkbox" value="ftir" checked={this.state.tests.ftir} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>FTIR</td>
-                                    <td>
-                                        <input type="checkbox" value="nmr" checked={this.state.tests.nmr} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>NMR</td>
-                                    
-                                </tr>
+                                {physSpecID.map((section, i) => {
+                                    return (
+                                        <tr> 
+                                            {section.map((test, idx) => {
+                                                return (
+                                                    <td>
+                                                        <Form.Check  
+                                                            value={test}
+                                                            type="switch"
+                                                            label={physSpecLabel[i][idx]}
+                                                            id={test}
+                                                            checked={this.state.tests[test]} 
+                                                            onChange={this.handleTestsOnCheck}
+                                                        />
+                                                    </td>
+                                                )
+                                            })}
+                                        </tr>
+                                    )
+                                })}
                             </tbody>
                         </table>
-                    </form>
-                    <form>
+                    </Form>
+                    <Form>
                         <table>
                             <tbody>
                                 <tr>
                                     <td colSpan="8"> Chromatographic </td>
                                 </tr>
-                                <tr>
-
-                                    <td>
-                                        <input type="checkbox" value="hplc" checked={this.state.tests.hplc} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>HPLC</td>
-                                    <td>
-                                        <input type="checkbox" value="gcms" checked={this.state.tests.gcms} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>GCMS</td>
-                                    <td>
-                                        <input type="checkbox" value="hptlc" checked={this.state.tests.hptlc} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>HPTLC</td>
-                                    <td>
-                                        <input type="checkbox" value="sec" checked={this.state.tests.sec} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>SEC</td>
-                                    
-                                </tr>
+                                {chromatographicID.map((section, i) => {
+                                    return (
+                                        <tr> 
+                                            {section.map((test, idx) => {
+                                                return (
+                                                    <td>
+                                                        <Form.Check  
+                                                            value={test}
+                                                            type="switch"
+                                                            label={chromatographicLabel[i][idx]}
+                                                            id={test}
+                                                            checked={this.state.tests[test]} 
+                                                            onChange={this.handleTestsOnCheck}
+                                                        />
+                                                    </td>
+                                                )
+                                            })}
+                                        </tr>
+                                    )
+                                })}
                             </tbody>
                         </table>
-                    </form>
-                    <form>
+                    </Form>
+                    <Form>
                         <table>
                             <tbody>
                                 <tr>
                                     <td colSpan="8"> Microbial </td>
                                 </tr>
-                                <tr>
-
-                                    <td>
-                                        <input type="checkbox" value="totalPlateCount" checked={this.state.tests.totalPlateCount} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>TPC</td>
-                                    <td>
-                                        <input type="checkbox" value="coliform" checked={this.state.tests.coliform} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>Coliform</td>
-                                    <td>
-                                        <input type="checkbox" value="yeastAndMold" checked={this.state.tests.yeastAndMold} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>Y&M</td>
-                                    <td>
-                                        <input type="checkbox" value="eColi" checked={this.state.tests.eColi} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>E.Coli</td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" value="salmonella" checked={this.state.tests.salmonella} onChange={this.handleTestsOnCheck}/>
-                                    </td >
-                                    <td colSpan={"7"} >Salmonella</td>
-                                </tr>
+                                {microbialID.map((section, i) => {
+                                    return (
+                                        <tr> 
+                                            {section.map((test, idx) => {
+                                                return (
+                                                    <td>
+                                                        <Form.Check  
+                                                            value={test}
+                                                            type="switch"
+                                                            label={microbialLabel[i][idx]}
+                                                            id={test}
+                                                            checked={this.state.tests[test]} 
+                                                            onChange={this.handleTestsOnCheck}
+                                                        />
+                                                    </td>
+                                                )
+                                            })}
+                                        </tr>
+                                    )
+                                })}
                             </tbody>
                         </table>
-                    </form>
-                    <form>
+                    </Form>
+                    <Form>
                         <table>
                             <tbody>
                                 <tr>
                                     <td colSpan="8"> Heavy Metals </td>
-                                    <td colSpan="2"> Other </td>
                                 </tr>
-                                <tr>
-
-                                    <td>
-                                        <input type="checkbox" value="arsenic" checked={this.state.tests.arsenic} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>As</td>
-                                    <td>
-                                        <input type="checkbox" value="lead" checked={this.state.tests.lead} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>Pb</td>
-                                    <td>
-                                        <input type="checkbox" value="mercury" checked={this.state.tests.mercury} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>Hg</td>
-                                    <td>
-                                        <input type="checkbox" value="cadmium" checked={this.state.tests.cadmium} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>Cd</td>
-                                    <td>
-                                        <input type="checkbox" value="uvVis" checked={this.state.tests.uvVis} onChange={this.handleTestsOnCheck}/>
-                                    </td>
-                                    <td>UV</td>
-                                    
-                                </tr>
+                                {heavyMetalsID.map((section, i) => {
+                                    return (
+                                        <tr> 
+                                            {section.map((test, idx) => {
+                                                return (
+                                                    <td>
+                                                        <Form.Check  
+                                                            value={test}
+                                                            type="switch"
+                                                            label={heavyMetalsLabel[i][idx]}
+                                                            id={test}
+                                                            checked={this.state.tests[test]} 
+                                                            onChange={this.handleTestsOnCheck}
+                                                        />
+                                                    </td>
+                                                )
+                                            })}
+                                        </tr>
+                                    )
+                                })}
                             </tbody>
                         </table>
-                    </form>
+                    </Form>
+                    <Form>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td colSpan="8"> Other </td>
+                                </tr>
+                                {otherID.map((section, i) => {
+                                    return (
+                                        <tr> 
+                                            {section.map((test, idx) => {
+                                                return (
+                                                    <td>
+                                                        <Form.Check  
+                                                            value={test}
+                                                            type="switch"
+                                                            label={otherLabel[i][idx]}
+                                                            id={test}
+                                                            checked={this.state.tests[test]} 
+                                                            onChange={this.handleTestsOnCheck}
+                                                        />
+                                                    </td>
+                                                )
+                                            })}
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
+                        </table>
+                    </Form>
                 </td>
                 <td>
                     Lot Numbers:
