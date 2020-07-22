@@ -163,6 +163,7 @@ export default class QcRecordEntry extends React.Component {
                 <td style={{textAlign:"center"}}>
                     <Button 
                         variant="info" 
+                        size="sm"
                         onClick={() => this.setModalShow()}> 
                         Info 
                     </Button>
