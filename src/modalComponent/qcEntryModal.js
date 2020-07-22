@@ -6,7 +6,8 @@ export default class QCEntryModal extends React.Component {
         super(props)
         this.state = {
             confirmUpdateOpen: false,
-            confirmDeleteOpen: false
+            confirmDeleteOpen: false,
+            changeDetected: false
         }
     }
 
@@ -37,7 +38,7 @@ export default class QCEntryModal extends React.Component {
     }
 
     render() {
-        let {title, num} = this.props.file
+        let {num, projectType, title, tests, lotNums, dateIn, dateOut, requester, analyst} = this.props.file
 
         return(
             <Modal
@@ -50,11 +51,10 @@ export default class QCEntryModal extends React.Component {
             >
                 <Modal.Header >
                     <Modal.Title id="contained-modal-title-vcenter">
-                    QC{num}
+                    QC{num} - {title}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <h4>{title}</h4>
                     <p>
                     Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
                     dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
@@ -62,7 +62,7 @@ export default class QCEntryModal extends React.Component {
                     </p>
                 </Modal.Body>
                 <Modal.Footer hidden={this.state.confirmUpdateOpen || this.state.confirmDeleteOpen}>
-                    <Button variant="info" onClick={this.setUpdateConfirmation}>Save</Button>
+                    <Button variant="info" onClick={this.setUpdateConfirmation} disabled={!this.state.changeDetected}>Save</Button>
                     <Button variant="danger" onClick={this.setDeleteConfirmation}>Delete</Button>
                     <Button onClick={this.props.onHide}>Close</Button>
                 </Modal.Footer>
