@@ -2,7 +2,7 @@ import React from 'react'
 import {API} from 'aws-amplify'
 import {connect} from 'react-redux'
 
-import {Button, Form, InputGroup, FormControl} from 'react-bootstrap'
+import {Button, Form, InputGroup, FormControl, Table} from 'react-bootstrap'
 
 class QCRecordForm extends React.Component {
     constructor(props) {
@@ -249,6 +249,7 @@ class QCRecordForm extends React.Component {
                     <Form>
                         <Form.Control 
                             as="select"
+                            size="sm"
                             value={this.state.projectType} 
                             onChange={(event) => this.setState({
                                 projectType: event.target.value
@@ -266,6 +267,7 @@ class QCRecordForm extends React.Component {
                     <Form>
                         <Form.Control 
                             type="text"
+                            size="sm"
                             placeholder="Title" 
                             value={this.state.title} 
                             onChange={(event) => this.setState({
@@ -278,7 +280,7 @@ class QCRecordForm extends React.Component {
                 </td>
                 <td>
                     <Form>
-                        <table>
+                        <Table size="sm" variant="dark">
                             <tbody>
                                 <tr>
                                     <td colSpan="3"> Physical/Spectroscopic </td>
@@ -304,10 +306,10 @@ class QCRecordForm extends React.Component {
                                     )
                                 })}
                             </tbody>
-                        </table>
+                        </Table>
                     </Form>
                     <Form>
-                        <table>
+                        <Table size="sm" variant="dark">
                             <tbody>
                                 <tr>
                                     <td colSpan="8"> Chromatographic </td>
@@ -333,10 +335,10 @@ class QCRecordForm extends React.Component {
                                     )
                                 })}
                             </tbody>
-                        </table>
+                        </Table>
                     </Form>
                     <Form>
-                        <table>
+                        <Table size="sm" variant="dark">
                             <tbody>
                                 <tr>
                                     <td colSpan="8"> Microbial </td>
@@ -362,10 +364,10 @@ class QCRecordForm extends React.Component {
                                     )
                                 })}
                             </tbody>
-                        </table>
+                        </Table>
                     </Form>
                     <Form>
-                        <table>
+                        <Table size="sm" variant="dark">
                             <tbody>
                                 <tr>
                                     <td colSpan="8"> Heavy Metals </td>
@@ -391,10 +393,10 @@ class QCRecordForm extends React.Component {
                                     )
                                 })}
                             </tbody>
-                        </table>
+                        </Table>
                     </Form>
                     <Form>
-                        <table>
+                        <Table size="sm" variant="dark">
                             <tbody>
                                 <tr>
                                     <td colSpan="8"> Other </td>
@@ -420,7 +422,7 @@ class QCRecordForm extends React.Component {
                                     )
                                 })}
                             </tbody>
-                        </table>
+                        </Table>
                     </Form>
                 </td>
                 <td>
@@ -428,6 +430,7 @@ class QCRecordForm extends React.Component {
                     <InputGroup >
                         <FormControl
                             type="text"
+                            size="sm"
                             value={this.state.currLotNum} 
                             placeholder="New Lot" 
                             onChange={(event) => {
@@ -437,12 +440,12 @@ class QCRecordForm extends React.Component {
                             }}
                         />
                         <InputGroup.Append>
-                        <Button variant="outline-primary" onClick={this.handleAddNewLot} >+</Button>
+                        <Button size="sm" variant="outline-primary" onClick={this.handleAddNewLot} >+</Button>
                         </InputGroup.Append>
                     </InputGroup>
                     
                     {this.state.lotNums.map((lot, idx) => (
-                        <InputGroup className="mb-3" key={idx}>
+                        <InputGroup className="mb-3" key={idx} size="sm">
                             <InputGroup.Prepend>
                                 <InputGroup.Text id="basic-addon3">
                                 {lot}
@@ -471,6 +474,7 @@ class QCRecordForm extends React.Component {
                     <Form>
                         <Form.Control 
                             as="select"
+                            size="sm"
                             value={this.state.requester} 
                             onChange={(event) => this.setState({
                                 requester: event.target.value
@@ -487,6 +491,7 @@ class QCRecordForm extends React.Component {
                     <Form>
                         <Form.Control 
                             as="select"
+                            size="sm"
                             value={this.state.analyst} 
                             onChange={(event) => this.setState({
                                 analyst: event.target.value
@@ -500,7 +505,7 @@ class QCRecordForm extends React.Component {
                 </td>
                     
                 <td style={{textAlign:"center"}}>
-                    <Button variant="primary" onClick={this.handleSubmitNewFile}> Add </Button>
+                    <Button size="sm" variant="primary" onClick={this.handleSubmitNewFile}> Add </Button>
                 </td>
             </>
         )
