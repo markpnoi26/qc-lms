@@ -11,7 +11,7 @@ class App extends React.Component {
 
   render() {
     return (
-        <Container fluid >
+        <Container style={{fontSize: 12}} fluid >
           <Row>
             <TopBar />
           </Row>
