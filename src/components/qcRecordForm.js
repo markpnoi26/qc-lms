@@ -379,7 +379,7 @@ class QCRecordForm extends React.Component {
                                     <td>
                                         <input type="checkbox" value="uvVis" checked={this.state.tests.uvVis} onChange={this.handleTestsOnCheck}/>
                                     </td>
-                                    <td>uvVis</td>
+                                    <td>UV</td>
                                     
                                 </tr>
                             </tbody>
@@ -463,7 +463,7 @@ class QCRecordForm extends React.Component {
                 </td>
                     
                 <td style={{textAlign:"center"}}>
-                    <Button variant="primary" onClick={this.handleSubmitNewFile}> Add File</Button>
+                    <Button variant="primary" onClick={this.handleSubmitNewFile}> Add </Button>
                 </td>
             </>
         )
