@@ -1,7 +1,7 @@
 import React from 'react'
 import {Form} from 'react-bootstrap'
 
-export default class EditTitleTypeLot extends React.Component {
+export default class EditLayout extends React.Component {
     
 
     render() {
