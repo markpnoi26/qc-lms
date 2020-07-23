@@ -1,8 +1,10 @@
 import React from 'react'
 import {Modal, Button, Row, Col, Container} from 'react-bootstrap'
+import {PencilSquare} from 'react-bootstrap-icons'
 import {connect} from 'react-redux'
 import {API} from 'aws-amplify'
 import TestSelection from '../components/testSelection'
+import EditTitleTypeLot from '../components/editTitleTypeLot'
 
 class QCEntryModal extends React.Component {
     constructor(props) {
@@ -13,6 +15,7 @@ class QCEntryModal extends React.Component {
             confirmDeleteOpen: false,
             confirmCloseModalOpen: false,
             changeDetected: false,
+            editTitleTypeLotOpen: false,
             num,
             projectType,
             title,
@@ -152,6 +155,7 @@ class QCEntryModal extends React.Component {
         })
     }
 
+
     render() {
         let {num, projectType, title, tests, lotNums, dateIn, dateOut, requester, analyst, notes, nbPage} = this.state
         return(
@@ -166,18 +170,27 @@ class QCEntryModal extends React.Component {
                     <Container fluid>
                         <Row>
                             <Modal.Title id="contained-modal-title-vcenter">
-                                QC{num} - ({projectType}) - {title}
+                                QC{num} - ({projectType}) - {title} {" "}
+                                <PencilSquare 
+                                    size={12} 
+                                    style={{cursor: "pointer"}} 
+                                    onClick={() => this.setState({editTitleTypeLotOpen: !this.state.editTitleTypeLotOpen})}
+                                />
                             </Modal.Title>
                         </Row>
                         <Row>
                             <Col>
-                                <h6>{lotNums.join(", ")}</h6>
+                                <h6>Lot Numbers: {lotNums.join(", ")}</h6>
                             </Col>
 
                         </Row>
-                        <Row>
+                        <Row hidden={!this.state.editTitleTypeLotOpen}>
                             <Col>
-                                Edit Title, Project Type Here...
+                                <EditTitleTypeLot 
+                                    projectType
+                                    lotNums
+                                    Title
+                                />
                             </Col>
 
                         </Row>
