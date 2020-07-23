@@ -171,9 +171,7 @@ class QCEntryModal extends React.Component {
                         </Row>
                         <Row>
                             <Col>
-                                {lotNums.map(lot=> {
-                                    return `${lot} `
-                                })}
+                                <h6>{lotNums.join(", ")}</h6>
                             </Col>
 
                         </Row>
@@ -209,10 +207,10 @@ class QCEntryModal extends React.Component {
                                     uniqueID={"modal"}
                                />
                             </Col>
-                        </Row>
-                        <Row>
-                            <p>{notes}</p>
-                            <p>{nbPage}</p>
+                            <Col>
+                                <p>Notes: {notes}</p>
+                                <p>NoteBook Pages:{nbPage}</p>
+                            </Col>
                         </Row>
                     </Container>
                 </Modal.Body>
@@ -231,8 +229,8 @@ class QCEntryModal extends React.Component {
 
                 <Modal.Footer hidden={!this.state.confirmDeleteOpen}>
                     Are you sure you want to delete this QC File?
-                    <Button variant="outline-success" onClick={this.onClickDelete} value="yes">Yes</Button>
-                    <Button variant="outline-danger" onClick={this.onClickDelete} value="no">No</Button>
+                    <Button variant="outline-danger" onClick={this.onClickDelete} value="yes">Yes</Button>
+                    <Button variant="outline-success" onClick={this.onClickDelete} value="no">No</Button>
                 </Modal.Footer>
 
                 <Modal.Footer hidden={!this.state.confirmCloseModalOpen}>
