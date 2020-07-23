@@ -329,7 +329,8 @@ const mapStateToProps = state => {
     return {
         currentAvailableQCFile: state.currentAvailableQCFile,
         currentQCFiles: state.currentQCFiles,
-        currentYear: state.currentYear
+        currentYear: state.currentYear,
+        fetchStatus: state.fetchStatus
     }
 }
 
