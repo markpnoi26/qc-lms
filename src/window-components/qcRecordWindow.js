@@ -93,7 +93,7 @@ class QCRecordWindow extends React.Component {
                             )
                         })}
                         
-                        <tr >
+                        <tr style={{textAlign: "center"}}>
                             <QCRecordForm />
                         </tr>
                     </tbody>
