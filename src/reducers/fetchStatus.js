@@ -1,4 +1,4 @@
-export default function currentlyFetching(state=false, action) {
+export default function fetchStatus(state=false, action) {
     switch(action.type) {
         case "CURRENTLY_FETCHING":
             return true
