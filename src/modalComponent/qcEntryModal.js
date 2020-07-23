@@ -1,5 +1,6 @@
 import React from 'react'
 import {Modal, Button, Row, Col, Container} from 'react-bootstrap'
+import {API} from 'aws-amplify'
 import TestSelection from '../components/testSelection'
 
 export default class QCEntryModal extends React.Component {
@@ -9,8 +10,8 @@ export default class QCEntryModal extends React.Component {
         this.state = {
             confirmUpdateOpen: false,
             confirmDeleteOpen: false,
+            confirmCloseModalOpen: false,
             changeDetected: false,
-            savedChanges: false,
             num,
             projectType,
             title,
@@ -26,12 +27,10 @@ export default class QCEntryModal extends React.Component {
     }
 
     onCloseModal = () => {
-        if (this.state.changeDetected && !this.state.savedChanges) {
+        if (this.state.changeDetected) {
             this.setState({
-                changeDetected: false,
-                savedChanges: false,
-                ...this.props.file
-            }, this.props.onHide)
+                confirmCloseModalOpen: !this.state.confirmCloseModalOpen
+            })
         } else {
             this.props.onHide()
         }
@@ -49,13 +48,66 @@ export default class QCEntryModal extends React.Component {
         })
     }
 
+    onClickCloseModal = (event) => {
+        // confirms whether to save to db or discard state changes...
+        if (event.target.value === "yes") {
+            this.setState({
+                changeDetected: false,
+                savedChanges: false,
+                ...this.props.file
+            }, () => {
+                // closes the modal and resets the state
+                this.setState({
+                    confirmCloseModalOpen: !this.state.confirmCloseModalOpen
+                })
+                this.props.onHide()
+            })
+        } else {
+            this.setState({
+                confirmCloseModalOpen: !this.state.confirmCloseModalOpen
+            })
+        }
+       
+    }
+
     onClickUpdate = (event) => {
         // this will ultimately update the db
         // on submit, update db, update state, 
         console.log(event.target.value)
-        this.setState({
-            confirmUpdateOpen: !this.state.confirmUpdateOpen
-        })
+
+        if (event.target.value === "yes") {
+            const bodyPreSend = {...this.state, tests:{...this.state.tests}}
+            delete bodyPreSend.confirmUpdateOpen
+            delete bodyPreSend.confirmDeleteOpen
+            delete bodyPreSend.confirmCloseModalOpen
+            delete bodyPreSend.changeDetected
+            delete bodyPreSend.savedChanges
+
+            const params = {
+                headers:{},
+                response: true,
+                queryStringParameters: {},
+                body: bodyPreSend
+            }
+    
+            API.put("qcfilesAPI", "/qcfiles", params)
+                .then(response => {
+                    console.log(response)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+
+            this.setState({
+                confirmUpdateOpen: !this.state.confirmUpdateOpen,
+                changeDetected: false
+            })
+        } else {
+            this.setState({
+                confirmUpdateOpen: !this.state.confirmUpdateOpen
+            })
+        }
+        
     }
 
     onClickDelete = (event) => {
@@ -63,10 +115,23 @@ export default class QCEntryModal extends React.Component {
         this.setState({
             confirmDeleteOpen: !this.state.confirmDeleteOpen
         })
+        // const params = {
+            //         headers:{},
+            //         response: true,
+            //         queryStringParameters: {},
+            //         body: {}
+            //     }
+        
+            //     API.del("qcfilesAPI", "/qcfiles/20002", params)
+            //         .then(response => {
+            //             console.log(response)
+            //         })
+            //         .catch(error => {
+            //             console.log(error)
+            //         })
     }
 
     handleTestsOnCheck = (event) => {
-        console.log("testing....")
         this.setState({
             ...this.state,
             changeDetected: true,
@@ -141,11 +206,13 @@ export default class QCEntryModal extends React.Component {
                         </Row>
                     </Container>
                 </Modal.Body>
-                <Modal.Footer hidden={this.state.confirmUpdateOpen || this.state.confirmDeleteOpen}>
+
+                <Modal.Footer hidden={this.state.confirmUpdateOpen || this.state.confirmDeleteOpen || this.state.confirmCloseModalOpen}>
                     <Button variant="info" onClick={this.setUpdateConfirmation} disabled={!this.state.changeDetected}>Save</Button>
                     <Button variant="danger" onClick={this.setDeleteConfirmation}>Delete</Button>
                     <Button onClick={this.onCloseModal}>Close</Button>
                 </Modal.Footer>
+
                 <Modal.Footer hidden={!this.state.confirmUpdateOpen}>
                     Are you sure you want to save updates to this QC File?
                     <Button variant="outline-success" onClick={this.onClickUpdate} value="yes">Yes</Button>
@@ -156,6 +223,12 @@ export default class QCEntryModal extends React.Component {
                     Are you sure you want to delete this QC File?
                     <Button variant="outline-success" onClick={this.onClickDelete} value="yes">Yes</Button>
                     <Button variant="outline-danger" onClick={this.onClickDelete} value="no">No</Button>
+                </Modal.Footer>
+
+                <Modal.Footer hidden={!this.state.confirmCloseModalOpen}>
+                    Are you sure you want to exit without saving? The changes will be lost otherwise.
+                    <Button variant="outline-danger" onClick={this.onClickCloseModal} value="yes">Yes</Button>
+                    <Button variant="outline-success" onClick={this.onClickCloseModal} value="no">No</Button>
                 </Modal.Footer>
 
             </Modal>
