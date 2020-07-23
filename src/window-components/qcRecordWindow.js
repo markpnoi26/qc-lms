@@ -15,28 +15,6 @@ class QCRecordWindow extends React.Component {
         }
     }
 
-
-    // handlePutFiles = () => {
-    //     const params = {
-    //         headers:{},
-    //         response: true,
-    //         queryStringParameters: {},
-    //         body: {
-    //             num: "20002",
-    //             name: "Sample Name 2 (with some changes)"
-    //         }
-    //     }
-
-    //     API.put("qcfilesAPI", "/qcfiles", params)
-    //         .then(response => {
-    //             console.log(response)
-    //         })
-    //         .catch(error => {
-    //             console.log(error)
-    //         })
-    // }
-
-
     // handleGetOneItem = () => {
     //     const params = {
     //         headers:{},
@@ -51,34 +29,6 @@ class QCRecordWindow extends React.Component {
     //         .catch(error => {
     //             console.log(error)
     //         })
-    // }
-
-    // handleDeleteFiles = () => {
-    //     const params = {
-    //         headers:{},
-    //         response: true,
-    //         queryStringParameters: {},
-    //         body: {}
-    //     }
-
-    //     API.del("qcfilesAPI", "/qcfiles/20002", params)
-    //         .then(response => {
-    //             console.log(response)
-    //         })
-    //         .catch(error => {
-    //             console.log(error)
-    //         })
-    // }
-
-    // setNextQCFile = () => {
-    //     let currQCFile = this.state.currQCFile
-    //     let numberfied = parseInt(currQCFile, 10)
-    //     numberfied++
-
-    //     console.log(numberfied)
-    //     this.setState({
-    //         currQCFile: numberfied.toString()
-    //     })
     // }
 
     componentDidMount = () => {
