@@ -1,8 +1,8 @@
 import React from 'react'
 import {API} from 'aws-amplify'
 import {connect} from 'react-redux'
-
-import {Button, Form, InputGroup, FormControl, Table} from 'react-bootstrap'
+import {Button, Form, InputGroup, FormControl} from 'react-bootstrap'
+import TestSelection from './testSelection'
 
 class QCRecordForm extends React.Component {
     constructor(props) {
@@ -193,53 +193,6 @@ class QCRecordForm extends React.Component {
     }
     
     render() {
-
-        const physSpecID = [
-            ["colorAndAppearance", "lod", "ash"],
-            ["particleSize", "solids", "odor"],
-            ["meltingPoint", "ftir", "nmr"]
-        ]
-
-        const physSpecLabel = [
-            ["Color & Appearance", "LOD", "Ash"],
-            ["Particle Size", "Solids", "Odor"],
-            ["Melting Pt.", "FTIR", "NMR"]
-        ]
-
-        const chromatographicID = [
-            ["hplc", "gcms", "hptlc", "sec"]
-        ]
-
-        const chromatographicLabel = [
-            ["HPLC", "GCMS", "HPTLC", "SEC"]
-        ]
-
-        const microbialID = [
-            ["totalPlateCount", "coliform", "yeastAndMold"], 
-            ["eColi", "salmonella"]
-        ]
-
-        const microbialLabel = [
-            ["TPC", "Coliform", "Y&M"], 
-            ["E.Coli", "Salmonella"]
-        ]
-
-        const heavyMetalsID = [
-            ["arsenic", "lead", "mercury", "cadmium"]
-        ]
-
-        const heavyMetalsLabel = [
-            ["As", "Pb", "Hg", "Cd"]
-        ]
-
-        const otherID = [
-            ["uvVis", "retain"]
-        ]
-
-        const otherLabel = [
-            ["UV/Vis", "Retain"]
-        ]
-
         return(
             <>
                 <td>
@@ -279,151 +232,11 @@ class QCRecordForm extends React.Component {
                     
                 </td>
                 <td>
-                    <Form>
-                        <Table size="sm" variant="dark">
-                            <tbody>
-                                <tr>
-                                    <td colSpan="3"> Physical/Spectroscopic </td>
-                                </tr>
-                                {physSpecID.map((section, i) => {
-                                    return (
-                                        <tr key={`ps${i}`}> 
-                                            {section.map((test, idx) => {
-                                                return (
-                                                    <td key={`p${idx}`}> 
-                                                        <Form.Check  
-                                                            value={test}
-                                                            type="switch"
-                                                            label={physSpecLabel[i][idx]}
-                                                            id={test}
-                                                            checked={this.state.tests[test]} 
-                                                            onChange={this.handleTestsOnCheck}
-                                                        />
-                                                    </td>
-                                                )
-                                            })}
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
-                        </Table>
-                    </Form>
-                    <Form>
-                        <Table size="sm" variant="dark">
-                            <tbody>
-                                <tr>
-                                    <td colSpan="8"> Chromatographic </td>
-                                </tr>
-                                {chromatographicID.map((section, i) => {
-                                    return (
-                                        <tr key={`cs${i}`}>
-                                            {section.map((test, idx) => {
-                                                return (
-                                                    <td key={`c${idx}`}>
-                                                        <Form.Check  
-                                                            value={test}
-                                                            type="switch"
-                                                            label={chromatographicLabel[i][idx]}
-                                                            id={test}
-                                                            checked={this.state.tests[test]} 
-                                                            onChange={this.handleTestsOnCheck}
-                                                        />
-                                                    </td>
-                                                )
-                                            })}
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
-                        </Table>
-                    </Form>
-                    <Form>
-                        <Table size="sm" variant="dark">
-                            <tbody>
-                                <tr>
-                                    <td colSpan="8"> Microbial </td>
-                                </tr>
-                                {microbialID.map((section, i) => {
-                                    return (
-                                        <tr key={`ms${i}`}>  
-                                            {section.map((test, idx) => {
-                                                return (
-                                                    <td key={`m${idx}`}>
-                                                        <Form.Check  
-                                                            value={test}
-                                                            type="switch"
-                                                            label={microbialLabel[i][idx]}
-                                                            id={test}
-                                                            checked={this.state.tests[test]} 
-                                                            onChange={this.handleTestsOnCheck}
-                                                        />
-                                                    </td>
-                                                )
-                                            })}
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
-                        </Table>
-                    </Form>
-                    <Form>
-                        <Table size="sm" variant="dark">
-                            <tbody>
-                                <tr>
-                                    <td colSpan="8"> Heavy Metals </td>
-                                </tr>
-                                {heavyMetalsID.map((section, i) => {
-                                    return (
-                                        <tr key={`hms${i}`}> 
-                                            {section.map((test, idx) => {
-                                                return (
-                                                    <td key={`hm${idx}`}>
-                                                        <Form.Check  
-                                                            value={test}
-                                                            type="switch"
-                                                            label={heavyMetalsLabel[i][idx]}
-                                                            id={test}
-                                                            checked={this.state.tests[test]} 
-                                                            onChange={this.handleTestsOnCheck}
-                                                        />
-                                                    </td>
-                                                )
-                                            })}
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
-                        </Table>
-                    </Form>
-                    <Form>
-                        <Table size="sm" variant="dark">
-                            <tbody>
-                                <tr>
-                                    <td colSpan="8"> Other </td>
-                                </tr>
-                                {otherID.map((section, i) => {
-                                    return (
-                                        <tr key={`os${i}`}> 
-                                            {section.map((test, idx) => {
-                                                return (
-                                                    <td key={`o${idx}`}>
-                                                        <Form.Check  
-                                                            value={test}
-                                                            type="switch"
-                                                            label={otherLabel[i][idx]}
-                                                            id={test}
-                                                            checked={this.state.tests[test]} 
-                                                            onChange={this.handleTestsOnCheck}
-                                                        />
-                                                    </td>
-                                                )
-                                            })}
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
-                        </Table>
-                    </Form>
+                    <TestSelection 
+                        tests={this.state.tests}
+                        handleTestsOnCheck={this.handleTestsOnCheck}
+                        uniqueID={"form"}
+                    />
                 </td>
                 <td>
                     Lot Numbers:
