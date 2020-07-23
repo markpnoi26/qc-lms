@@ -1,9 +1,10 @@
 import React from 'react'
 import {Modal, Button, Row, Col, Container} from 'react-bootstrap'
+import {connect} from 'react-redux'
 import {API} from 'aws-amplify'
 import TestSelection from '../components/testSelection'
 
-export default class QCEntryModal extends React.Component {
+class QCEntryModal extends React.Component {
     constructor(props) {
         let {num, projectType, title, tests, lotNums, dateIn, dateOut, requester, analyst, notes, nbPage} = props.file
         super(props)
@@ -73,8 +74,6 @@ export default class QCEntryModal extends React.Component {
     onClickUpdate = (event) => {
         // this will ultimately update the db
         // on submit, update db, update state, 
-        console.log(event.target.value)
-
         if (event.target.value === "yes") {
             const bodyPreSend = {...this.state, tests:{...this.state.tests}}
             delete bodyPreSend.confirmUpdateOpen
@@ -89,12 +88,23 @@ export default class QCEntryModal extends React.Component {
                 queryStringParameters: {},
                 body: bodyPreSend
             }
-    
+            
+            this.props.currentlyFetching()
             API.put("qcfilesAPI", "/qcfiles", params)
                 .then(response => {
-                    console.log(response)
+                    this.props.fetchSuccess()
+                    return JSON.parse(response.config.data)
+                })
+                .then(data => {
+                    // take target QC Number
+                    const targetNum = data.num
+                    const remainingQCFiles = this.props.currentQCFiles.filter(file => file.num !== targetNum)
+                    remainingQCFiles.push(data)
+                    remainingQCFiles.sort((a, b) => a.num - b.num)
+                    this.props.updateQCFiles(remainingQCFiles)
                 })
                 .catch(error => {
+                    this.props.fetchFail()
                     console.log(error)
                 })
 
@@ -235,3 +245,21 @@ export default class QCEntryModal extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        currentQCFiles: state.currentQCFiles,
+        fetchStatus: state.fetchStatus
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        updateQCFiles: (newFiles) => dispatch({type: "UPDATE_QC_FILES", payload: newFiles}),
+        currentlyFetching: () => dispatch({type: "CURRENTLY_FETCHING"}),
+        fetchSuccess: () => dispatch({type: "SUCCESS_FETCHING"}),
+        fetchFail: () => dispatch({type: "FAILED_FETCHING"})
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(QCEntryModal)
