@@ -24,6 +24,8 @@ export default class QCEntryModal extends React.Component {
     }
 
     onClickUpdate = (event) => {
+        // this will ultimately update the db
+        // on submit, update db, update state, 
         console.log(event.target.value)
         this.setState({
             confirmUpdateOpen: !this.state.confirmUpdateOpen
