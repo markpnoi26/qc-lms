@@ -4,7 +4,7 @@ import {PencilSquare} from 'react-bootstrap-icons'
 import {connect} from 'react-redux'
 import {API} from 'aws-amplify'
 import TestSelection from '../components/testSelection'
-import EditTitleTypeLot from '../components/editTitleTypeLot'
+import EditLayout from '../components/editLayout'
 
 class QCEntryModal extends React.Component {
     constructor(props) {
@@ -15,7 +15,7 @@ class QCEntryModal extends React.Component {
             confirmDeleteOpen: false,
             confirmCloseModalOpen: false,
             changeDetected: false,
-            editTitleTypeLotOpen: false,
+            editLayoutOpen: false,
             num,
             projectType,
             title,
@@ -174,7 +174,7 @@ class QCEntryModal extends React.Component {
                                 <PencilSquare 
                                     size={12} 
                                     style={{cursor: "pointer"}} 
-                                    onClick={() => this.setState({editTitleTypeLotOpen: !this.state.editTitleTypeLotOpen})}
+                                    onClick={() => this.setState({editLayoutOpen: !this.state.editLayoutOpen})}
                                 />
                             </Modal.Title>
                         </Row>
@@ -184,9 +184,9 @@ class QCEntryModal extends React.Component {
                             </Col>
 
                         </Row>
-                        <Row hidden={!this.state.editTitleTypeLotOpen}>
+                        <Row hidden={!this.state.editLayoutOpen}>
                             <Col>
-                                <EditTitleTypeLot 
+                                <EditLayout 
                                     projectType
                                     lotNums
                                     Title
