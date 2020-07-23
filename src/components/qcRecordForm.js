@@ -287,10 +287,10 @@ class QCRecordForm extends React.Component {
                                 </tr>
                                 {physSpecID.map((section, i) => {
                                     return (
-                                        <tr> 
+                                        <tr key={`ps${i}`}> 
                                             {section.map((test, idx) => {
                                                 return (
-                                                    <td>
+                                                    <td key={`p${idx}`}> 
                                                         <Form.Check  
                                                             value={test}
                                                             type="switch"
@@ -316,10 +316,10 @@ class QCRecordForm extends React.Component {
                                 </tr>
                                 {chromatographicID.map((section, i) => {
                                     return (
-                                        <tr> 
+                                        <tr key={`cs${i}`}>
                                             {section.map((test, idx) => {
                                                 return (
-                                                    <td>
+                                                    <td key={`c${idx}`}>
                                                         <Form.Check  
                                                             value={test}
                                                             type="switch"
@@ -345,10 +345,10 @@ class QCRecordForm extends React.Component {
                                 </tr>
                                 {microbialID.map((section, i) => {
                                     return (
-                                        <tr> 
+                                        <tr key={`ms${i}`}>  
                                             {section.map((test, idx) => {
                                                 return (
-                                                    <td>
+                                                    <td key={`m${idx}`}>
                                                         <Form.Check  
                                                             value={test}
                                                             type="switch"
@@ -374,10 +374,10 @@ class QCRecordForm extends React.Component {
                                 </tr>
                                 {heavyMetalsID.map((section, i) => {
                                     return (
-                                        <tr> 
+                                        <tr key={`hms${i}`}> 
                                             {section.map((test, idx) => {
                                                 return (
-                                                    <td>
+                                                    <td key={`hm${idx}`}>
                                                         <Form.Check  
                                                             value={test}
                                                             type="switch"
@@ -403,10 +403,10 @@ class QCRecordForm extends React.Component {
                                 </tr>
                                 {otherID.map((section, i) => {
                                     return (
-                                        <tr> 
+                                        <tr key={`os${i}`}> 
                                             {section.map((test, idx) => {
                                                 return (
-                                                    <td>
+                                                    <td key={`o${idx}`}>
                                                         <Form.Check  
                                                             value={test}
                                                             type="switch"
