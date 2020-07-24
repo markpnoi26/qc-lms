@@ -231,7 +231,7 @@ class QCRecordForm extends React.Component {
                     </Form>
                     
                 </td>
-                <td>
+                <td style={{ textAlign: "left" }}>
                     <TestSelection 
                         tests={this.state.tests}
                         handleTestsOnCheck={this.handleTestsOnCheck}
