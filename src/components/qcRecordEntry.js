@@ -36,25 +36,25 @@ export default class QcRecordEntry extends React.Component {
                             if (tests[test]) {
                                 switch(test) {
                                     case "colorAndAppearance":
-                                        return <Badge variant="primary" key={test}> C&A </Badge>
+                                        return <span><Badge pill variant="info" key={test}> C&A </Badge> </span>
                                     case 'lod':
-                                        return <Badge variant="primary" key={test}> LOD </Badge>
+                                        return <span><Badge pill variant="info" key={test}> LOD </Badge> </span>
                                     case 'ash':
-                                        return <Badge variant="primary" key={test}> Ash </Badge>
+                                        return <span><Badge pill variant="info" key={test}> Ash </Badge> </span>
                                     case 'particleSize':
-                                        return <Badge variant="primary" key={test}> Particle Size </Badge>
+                                        return <span><Badge pill variant="info" key={test}> Particle Size </Badge> </span>
                                     case 'solids':
-                                        return <Badge variant="primary" key={test}> Solids </Badge>
+                                        return <span><Badge pill variant="info" key={test}> Solids </Badge> </span>
                                     case 'odor':
-                                        return <Badge variant="primary" key={test}> Odor </Badge>
+                                        return <span><Badge pill variant="info" key={test}> Odor </Badge> </span>
                                     case 'meltingPoint':
-                                        return <Badge variant="primary" key={test}> Melting Point </Badge>
+                                        return <span><Badge pill variant="info" key={test}> Melting Point </Badge> </span>
                                     case 'ftir':
-                                        return <Badge variant="primary" key={test}> FTIR </Badge>
+                                        return <span><Badge pill variant="info" key={test}> FTIR </Badge> </span>
                                     case 'nmr':
-                                        return <Badge variant="primary" key={test}> NMR </Badge>
+                                        return <span><Badge pill variant="info" key={test}> NMR </Badge> </span>
                                     case 'uvVis':
-                                        return <Badge variant="primary" key={test}> UV-Vis </Badge>
+                                        return <span><Badge pill variant="info" key={test}> UV-Vis </Badge> </span>
                                     default :
                                         return null
                                 }
@@ -69,13 +69,13 @@ export default class QcRecordEntry extends React.Component {
                             if (tests[test]) {
                                 switch(test) {
                                     case "hplc":
-                                        return <Badge variant="primary" key={test}> HPLC </Badge>
+                                        return <span><Badge pill variant="info" key={test}> HPLC </Badge> </span>
                                     case "gcms":
-                                        return <Badge variant="primary" key={test}> GC/MS </Badge>
+                                        return <span><Badge pill variant="info" key={test}> GC/MS </Badge> </span>
                                     case "hptlc":
-                                        return <Badge variant="primary" key={test}> HPTLC </Badge>
+                                        return <span><Badge pill variant="info" key={test}> HPTLC </Badge> </span>
                                     case "sec":
-                                        return <Badge variant="primary" key={test}> SEC </Badge>
+                                        return <span><Badge pill variant="info" key={test}> SEC </Badge> </span>
                                     default :
                                         return null
                                 }
@@ -90,15 +90,15 @@ export default class QcRecordEntry extends React.Component {
                             if (tests[test]) {
                                 switch(test) {
                                     case "totalPlateCount":
-                                        return <Badge variant="primary" key={test}> TPC </Badge>
+                                        return <span><Badge pill variant="info" key={test}> TPC </Badge> </span>
                                     case "coliform":
-                                        return <Badge variant="primary" key={test}> Coliform </Badge>
+                                        return <span><Badge pill variant="info" key={test}> Coliform </Badge> </span>
                                     case "yeastAndMold":
-                                        return <Badge variant="primary" key={test}> Y&M </Badge>
+                                        return <span><Badge pill variant="info" key={test}> Y&M </Badge> </span>
                                     case "eColi":
-                                        return <Badge variant="primary" key={test}> E.Coli </Badge>
+                                        return <span><Badge pill variant="info" key={test}> E.Coli </Badge> </span>
                                     case "salmonella":
-                                        return <Badge variant="primary" key={test}> Salmonella </Badge>
+                                        return <span><Badge pill variant="info" key={test}> Salmonella </Badge> </span>
                                     default :
                                         return null
                                 }
@@ -113,15 +113,15 @@ export default class QcRecordEntry extends React.Component {
                             if (tests[test]) {
                                 switch(test) {
                                     case "arsenic":
-                                        return <Badge variant="primary" key={test}> As (HM) </Badge>
+                                        return <span><Badge pill variant="info" key={test}> As (HM) </Badge> </span>
                                     case "lead":
-                                        return <Badge variant="primary" key={test}> Pb (HM)</Badge>
+                                        return <span><Badge pill variant="info" key={test}> Pb (HM)</Badge> </span>
                                     case "mercury":
-                                        return <Badge variant="primary" key={test}> Hg (HM) </Badge>
+                                        return <span><Badge pill variant="info" key={test}> Hg (HM) </Badge> </span>
                                     case "cadmium":
-                                        return <Badge variant="primary" key={test}> Cd (HM) </Badge>
+                                        return <span><Badge pill variant="info" key={test}> Cd (HM) </Badge> </span>
                                     case 'retain':
-                                        return <Badge variant="primary" key={test}> Retain </Badge>
+                                        return <span><Badge pill variant="info" key={test}> Retain </Badge> </span>
                                     default :
                                         return null
                                 }
