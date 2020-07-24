@@ -9,7 +9,7 @@ class App extends React.Component {
 
   render() {
     return (
-        <Container style={{fontSize: 12}} fluid >
+        <Container style={{fontSize: 14}} fluid >
           <Router>
             <Row>
               <Col>
