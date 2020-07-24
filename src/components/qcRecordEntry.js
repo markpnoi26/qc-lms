@@ -32,104 +32,108 @@ export default class QcRecordEntry extends React.Component {
                 </td>
                 <td>
                     <div>
-                        {Object.keys(tests).map((test, idx) => {
-                            if (tests[test]) {
-                                switch(test) {
-                                    case "colorAndAppearance":
-                                        return <span><Badge pill variant="info" key={test}> C&A </Badge> </span>
-                                    case 'lod':
-                                        return <span><Badge pill variant="info" key={test}> LOD </Badge> </span>
-                                    case 'ash':
-                                        return <span><Badge pill variant="info" key={test}> Ash </Badge> </span>
-                                    case 'particleSize':
-                                        return <span><Badge pill variant="info" key={test}> Particle Size </Badge> </span>
-                                    case 'solids':
-                                        return <span><Badge pill variant="info" key={test}> Solids </Badge> </span>
-                                    case 'odor':
-                                        return <span><Badge pill variant="info" key={test}> Odor </Badge> </span>
-                                    case 'meltingPoint':
-                                        return <span><Badge pill variant="info" key={test}> Melting Point </Badge> </span>
-                                    case 'ftir':
-                                        return <span><Badge pill variant="info" key={test}> FTIR </Badge> </span>
-                                    case 'nmr':
-                                        return <span><Badge pill variant="info" key={test}> NMR </Badge> </span>
-                                    case 'uvVis':
-                                        return <span><Badge pill variant="info" key={test}> UV-Vis </Badge> </span>
-                                    default :
-                                        return null
-                                }
+                        <h6>
+                            {Object.keys(tests).map((test, idx) => {
+                                if (tests[test]) {
+                                    switch(test) {
+                                        case "colorAndAppearance":
+                                            return <span><Badge pill variant="info" key={test}> C&A </Badge> </span>
+                                        case 'lod':
+                                            return <span><Badge pill variant="info" key={test}> LOD </Badge> </span>
+                                        case 'ash':
+                                            return <span><Badge pill variant="info" key={test}> Ash </Badge> </span>
+                                        case 'particleSize':
+                                            return <span><Badge pill variant="info" key={test}> Particle Size </Badge> </span>
+                                        case 'solids':
+                                            return <span><Badge pill variant="info" key={test}> Solids </Badge> </span>
+                                        case 'odor':
+                                            return <span><Badge pill variant="info" key={test}> Odor </Badge> </span>
+                                        case 'meltingPoint':
+                                            return <span><Badge pill variant="info" key={test}> Melting Point </Badge> </span>
+                                        case 'ftir':
+                                            return <span><Badge pill variant="info" key={test}> FTIR </Badge> </span>
+                                        case 'nmr':
+                                            return <span><Badge pill variant="info" key={test}> NMR </Badge> </span>
+                                        case 'uvVis':
+                                            return <span><Badge pill variant="info" key={test}> UV-Vis </Badge> </span>
+                                        default :
+                                            return null
+                                    }
 
-                            }
-                            return <React.Fragment key={idx}></React.Fragment>
-                        })}
-                        
+                                }
+                                return <React.Fragment key={idx}></React.Fragment>
+                            })}
+                        </h6>
                     </div>
                     <div>
-                        {Object.keys(tests).map((test, idx) => {
-                            if (tests[test]) {
-                                switch(test) {
-                                    case "hplc":
-                                        return <span><Badge pill variant="info" key={test}> HPLC </Badge> </span>
-                                    case "gcms":
-                                        return <span><Badge pill variant="info" key={test}> GC/MS </Badge> </span>
-                                    case "hptlc":
-                                        return <span><Badge pill variant="info" key={test}> HPTLC </Badge> </span>
-                                    case "sec":
-                                        return <span><Badge pill variant="info" key={test}> SEC </Badge> </span>
-                                    default :
-                                        return null
-                                }
+                        <h6>
+                            {Object.keys(tests).map((test, idx) => {
+                                if (tests[test]) {
+                                    switch(test) {
+                                        case "hplc":
+                                            return <span><Badge pill variant="info" key={test}> HPLC </Badge> </span>
+                                        case "gcms":
+                                            return <span><Badge pill variant="info" key={test}> GC/MS </Badge> </span>
+                                        case "hptlc":
+                                            return <span><Badge pill variant="info" key={test}> HPTLC </Badge> </span>
+                                        case "sec":
+                                            return <span><Badge pill variant="info" key={test}> SEC </Badge> </span>
+                                        default :
+                                            return null
+                                    }
 
-                            }
-                            return <React.Fragment key={idx}></React.Fragment>
-                        })}
-                        
+                                }
+                                return <React.Fragment key={idx}></React.Fragment>
+                            })}
+                        </h6>
                     </div>
                     <div >
-                        {Object.keys(tests).map((test, idx) => {
-                            if (tests[test]) {
-                                switch(test) {
-                                    case "totalPlateCount":
-                                        return <span><Badge pill variant="info" key={test}> TPC </Badge> </span>
-                                    case "coliform":
-                                        return <span><Badge pill variant="info" key={test}> Coliform </Badge> </span>
-                                    case "yeastAndMold":
-                                        return <span><Badge pill variant="info" key={test}> Y&M </Badge> </span>
-                                    case "eColi":
-                                        return <span><Badge pill variant="info" key={test}> E.Coli </Badge> </span>
-                                    case "salmonella":
-                                        return <span><Badge pill variant="info" key={test}> Salmonella </Badge> </span>
-                                    default :
-                                        return null
-                                }
+                        <h6>
+                            {Object.keys(tests).map((test, idx) => {
+                                if (tests[test]) {
+                                    switch(test) {
+                                        case "totalPlateCount":
+                                            return <span><Badge pill variant="info" key={test}> TPC </Badge> </span>
+                                        case "coliform":
+                                            return <span><Badge pill variant="info" key={test}> Coliform </Badge> </span>
+                                        case "yeastAndMold":
+                                            return <span><Badge pill variant="info" key={test}> Y&M </Badge> </span>
+                                        case "eColi":
+                                            return <span><Badge pill variant="info" key={test}> E.Coli </Badge> </span>
+                                        case "salmonella":
+                                            return <span><Badge pill variant="info" key={test}> Salmonella </Badge> </span>
+                                        default :
+                                            return null
+                                    }
 
-                            }
-                            return <React.Fragment key={idx}></React.Fragment>
-                        })}
-                        
+                                }
+                                return <React.Fragment key={idx}></React.Fragment>
+                            })}
+                        </h6>
                     </div>
                     <div>
-                        {Object.keys(tests).map((test, idx) => {
-                            if (tests[test]) {
-                                switch(test) {
-                                    case "arsenic":
-                                        return <span><Badge pill variant="info" key={test}> As (HM) </Badge> </span>
-                                    case "lead":
-                                        return <span><Badge pill variant="info" key={test}> Pb (HM)</Badge> </span>
-                                    case "mercury":
-                                        return <span><Badge pill variant="info" key={test}> Hg (HM) </Badge> </span>
-                                    case "cadmium":
-                                        return <span><Badge pill variant="info" key={test}> Cd (HM) </Badge> </span>
-                                    case 'retain':
-                                        return <span><Badge pill variant="info" key={test}> Retain </Badge> </span>
-                                    default :
-                                        return null
-                                }
+                        <h6>
+                            {Object.keys(tests).map((test, idx) => {
+                                if (tests[test]) {
+                                    switch(test) {
+                                        case "arsenic":
+                                            return <span><Badge pill variant="info" key={test}> As (HM) </Badge> </span>
+                                        case "lead":
+                                            return <span><Badge pill variant="info" key={test}> Pb (HM)</Badge> </span>
+                                        case "mercury":
+                                            return <span><Badge pill variant="info" key={test}> Hg (HM) </Badge> </span>
+                                        case "cadmium":
+                                            return <span><Badge pill variant="info" key={test}> Cd (HM) </Badge> </span>
+                                        case 'retain':
+                                            return <span><Badge pill variant="info" key={test}> Retain </Badge> </span>
+                                        default :
+                                            return null
+                                    }
 
-                            }
-                            return <React.Fragment key={idx}></React.Fragment>
-                        })}
-                        
+                                }
+                                return <React.Fragment key={idx}></React.Fragment>
+                            })}
+                        </h6>
                     </div>
                 </td>
                 <td>
