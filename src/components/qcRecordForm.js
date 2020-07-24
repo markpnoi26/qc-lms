@@ -239,7 +239,6 @@ class QCRecordForm extends React.Component {
                     />
                 </td>
                 <td>
-                    Lot Numbers:
                     <InputGroup >
                         <FormControl
                             type="text"
