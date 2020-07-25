@@ -25,7 +25,8 @@ class QCEntryModal extends React.Component {
             requester,
             analyst,
             notes,
-            nbPage
+            nbPage,
+            currLotNum: ""
         }
     }
 
@@ -175,10 +176,44 @@ class QCEntryModal extends React.Component {
 
     }
 
+    handleProjectTextChange = (event) => {
+        const targetLabel = event.target.attributes.label.nodeValue
+        const targetValue = event.target.value
+        this.setState({
+            ...this.state,
+            changeDetected: true,
+            [targetLabel]: targetValue
+        })
+    }
+
+    handleAddNewLot = (event) => {
+        event.preventDefault()
+        if (this.state.currLotNum === "") return
+
+        const currLot = this.state.currLotNum
+        const newLotCollection = this.state.lotNums
+        newLotCollection.push(currLot)
+        this.setState({
+            lotNums: newLotCollection,
+            currLotNum: ""
+        })
+    }
+
+    handleDeleteLot = (event) => {
+        event.preventDefault()
+        console.log(this.state.lotNums.indexOf(event.target))
+        // const idxOfTarget = this.state.lotNums.indexOf(event.target.value)
+        // const newLotCollection = this.state.lotNums
+        // newLotCollection.splice(idxOfTarget, 1)
+        // this.setState({
+        //     lotNums: newLotCollection
+        // })
+    }
+
 
     render() {
         // spread operator to keep code DRY
-        let {num, projectType, title, tests, lotNums, dateIn, dateOut, requester, analyst, notes, nbPage} = this.state
+        let {num, projectType, title, tests, lotNums, dateIn, dateOut, requester, analyst, notes, nbPage, currLotNum} = this.state
         // below prevents certain props related to the parent to stay as parent props only.
         const { currentQCFiles, fetchStatus, updateQCFiles, currentlyFetching, fetchSuccess, fetchFail, ...rest} = this.props
         return(
@@ -236,7 +271,11 @@ class QCEntryModal extends React.Component {
                                     nbPage={nbPage}
                                     dateIn={dateIn}
                                     dateOut={dateOut}
+                                    currLotNum={currLotNum}
                                     handleProjectInfoChange={this.handleProjectInfoChange}
+                                    handleProjectTextChange={this.handleProjectTextChange}
+                                    handleAddNewLot={this.handleAddNewLot}
+                                    handleDeleteLot={this.handleDeleteLot}
                                 />
                             </Accordion.Collapse>
                         </Accordion>
