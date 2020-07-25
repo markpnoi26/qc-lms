@@ -3,6 +3,7 @@ import {API} from 'aws-amplify'
 import {connect} from 'react-redux'
 import {Button, Form, InputGroup, FormControl} from 'react-bootstrap'
 import TestSelection from './testSelection'
+import moment from 'moment'
 
 class QCRecordForm extends React.Component {
     constructor(props) {
@@ -43,23 +44,12 @@ class QCRecordForm extends React.Component {
             },
             lotNums: [],
             analyst: "",
-            dateIn: this.setDateToday(),
+            dateIn: moment().format("L"),
             dateOut: "",
             nbPage: "",
             notes: "",
             currLotNum: ""
         }
-    }
-
-    setDateToday = () => {
-        const dateObj = new Date();
-        let month = dateObj.getUTCMonth() + 1; 
-        let day = dateObj.getUTCDate();
-        let year = dateObj.getUTCFullYear();
-
-        const dateToday = `${month}-${day}-${year}`;
-
-        return dateToday
     }
 
     handleTestsOnCheck = (event) => {
@@ -177,7 +167,7 @@ class QCRecordForm extends React.Component {
             },
             lotNums: [],
             analyst: "",
-            dateIn: this.setDateToday(),
+            dateIn: moment().local("L"),
             dateOut: "",
             nbPage: "",
             notes: "",
