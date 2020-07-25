@@ -19,7 +19,6 @@ export default class EditLayout extends React.Component {
                                     <option value="I">(I) Investigation</option>
                                     <option value="R">(I) Release</option>
                                     <option value="SQ">(SQ) Standard Qualification</option>
-
                             </Form.Control>
                                 
                         </Col>
