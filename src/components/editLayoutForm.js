@@ -23,10 +23,10 @@ export default class EditLayoutForm extends React.Component {
 
     render() {
         return(
-            <Form>
-                <Container>
-                    <Row>
-                        <Col>
+            <Container>
+                <Row>
+                    <Col>
+                        <Form>
                             <Form.Control
                                 as="select"
                                 size="sm"
@@ -40,42 +40,41 @@ export default class EditLayoutForm extends React.Component {
                                     <option value="R">(I) Release</option>
                                     <option value="SQ">(SQ) Standard Qualification</option>
                             </Form.Control>
-                        </Col>
-                        <Col>
-                            <Form>
-                                <Form.Control
-                                    as="select"
-                                    size="sm"
-                                    value={this.state.requester}
-                                    onChange={(event) => this.setState({
-                                        requester: event.target.value
-                                    })}>
+                        </Form>    
+                    </Col>
+                    <Col>
+                        <Form>
+                            <Form.Control
+                                as="select"
+                                size="sm"
+                                label="requester"
+                                value={this.state.requester}
+                                onChange={this.props.handleProjectInfoChange}>
                                     <option value="">Select Requester</option>
                                     <option value="QC">QC</option>
                                     <option value="NP">NP</option>
                                     <option value="Other">Other</option>
-                                </Form.Control>
-                            </Form>
-                        </Col>
-                        <Col>
-                            <Form>
-                                <Form.Control
-                                    as="select"
-                                    size="sm"
-                                    value={this.state.analyst}
-                                    onChange={(event) => this.setState({
-                                        analyst: event.target.value
-                                    })}>
+                            </Form.Control>
+                        </Form>
+                    </Col>
+                    <Col>
+                        <Form>
+                            <Form.Control
+                                as="select"
+                                size="sm"
+                                label="analyst"
+                                value={this.state.analyst}
+                                onChange={this.props.handleProjectInfoChange}>
                                     <option value="">Select Analyst</option>
                                     <option value="MD">MD</option>
                                     <option value="KH">KH</option>
                                     <option value="WM">WM</option>
-                                </Form.Control>
-                            </Form>
-                        </Col>
-                    </Row>
-                </Container>
-            </Form>
+                            </Form.Control>
+                        </Form>
+                    </Col>
+                </Row>
+            </Container>
+
         )
     }
 }
