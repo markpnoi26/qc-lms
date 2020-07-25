@@ -1,7 +1,8 @@
 import React from 'react'
 import {API} from 'aws-amplify'
 import {connect} from 'react-redux'
-import {Button, Form, InputGroup, FormControl} from 'react-bootstrap'
+import {Button, Form, InputGroup, FormControl, Row, Col, Container, Badge} from 'react-bootstrap'
+import {v4 as uuidv4} from 'uuid'
 import TestSelection from './testSelection'
 import moment from 'moment'
 
@@ -63,7 +64,7 @@ class QCRecordForm extends React.Component {
     }
 
     handleAddNewLot = (event) => {
-        event.preventDefault()
+
         if (this.state.currLotNum === "") return
 
         const currLot = this.state.currLotNum
@@ -76,12 +77,14 @@ class QCRecordForm extends React.Component {
     }
 
     handleDeleteLot = (event) => {
-        const idxOfTarget = this.state.lotNums.indexOf(event.target.value)
-        const newLotCollection = this.state.lotNums
-        newLotCollection.splice(idxOfTarget, 1)
-        this.setState({
-            lotNums: newLotCollection
-        })
+        console.dir(event.target)
+        // const idxOfTarget = this.state.lotNums.indexOf(event.target.attributes.label.nodeValue)
+        // console.log(idxOfTarget)
+        // const newLotCollection = this.state.lotNums
+        // newLotCollection.splice(idxOfTarget, 1)
+        // this.setState({
+        //     lotNums: newLotCollection
+        // })
     }
 
     handleSubmitNewFile = (event) => {
@@ -245,22 +248,21 @@ class QCRecordForm extends React.Component {
                         <Button size="sm" variant="outline-primary" onClick={this.handleAddNewLot} >+</Button>
                         </InputGroup.Append>
                     </InputGroup>
+
+                    <Container>
+                        {this.state.lotNums.map((lot) => (
+                            <Row key={uuidv4()} >
+                                <Col>
+                                    {lot} 
+                                </Col>
+                                <Col value={lot} >
+                                    <Badge pill value={lot} variant="danger" style={{ cursor: "pointer" }} onClick={this.handleDeleteLot}>X</Badge>
+                                </Col>
+                            </Row>
+                        ))
+                        }
+                    </Container>
                     
-                    {this.state.lotNums.map((lot, idx) => (
-                        <InputGroup className="mb-3" key={idx} size="sm">
-                            <InputGroup.Prepend>
-                                <InputGroup.Text id="basic-addon3">
-                                {lot}
-                                </InputGroup.Text>
-                            </InputGroup.Prepend>
-                            <InputGroup.Append>
-                                <Button variant="outline-danger" onClick={this.handleDeleteLot}  value={"lot"}>-</Button>
-                            </InputGroup.Append>
-                        </InputGroup>
-                        )
-                    )}
-                    
-                        
                 </td>
                 <td style={{textAlign:"center"}}>
                     {this.state.lotNums.length}
