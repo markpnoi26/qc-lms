@@ -155,14 +155,31 @@ class QCEntryModal extends React.Component {
     }
 
     handleProjectInfoChange = (event) => {
-        console.dir(event.target.attributes.label.nodeValue)
+        // only these labels are handled by this callback
+        // projectType
+        // title
+        // dateIn
+        // dateOut
+        // requester
+        // analyst
+        // nbPage
+        // console.dir(event.target.attributes.label.nodeValue)
+        const targetLabel = event.target.attributes.label.nodeValue
+        const targetValue = event.target.value
+
+        this.setState({
+            ...this.state,
+            changeDetected: true,
+            [targetLabel]: targetValue
+        })
+
     }
 
 
     render() {
         // spread operator to keep code DRY
         let {num, projectType, title, tests, lotNums, dateIn, dateOut, requester, analyst, notes, nbPage} = this.state
-        // below prevents certain props related to the parent to stay as parent components only.
+        // below prevents certain props related to the parent to stay as parent props only.
         const { currentQCFiles, fetchStatus, updateQCFiles, currentlyFetching, fetchSuccess, fetchFail, ...rest} = this.props
         return(
             <Modal
@@ -181,11 +198,33 @@ class QCEntryModal extends React.Component {
                         </Row>
                         <Row>
                             <Col>
-                                <h6>Lot Numbers: {lotNums.join(", ")}</h6>
+                                Requested By: {requester}
+                            </Col>
+                            <Col>
+                                Main Analyst: {analyst}
+                            </Col>
+                            <Col>
+                                Date in: {dateIn}
+                            </Col>
+                            <Col>
+                                Date out: {dateOut}
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                Lot: {lotNums.join(", ")}
+                            </Col>
+                            <Col>
+                                NB Pages: {nbPage}
                             </Col>
                         </Row>
                         <Accordion>
-                            <Accordion.Toggle size={12} as={PencilSquare} variant="link" eventKey="0" style={{ cursor: "pointer" }}>
+                            <Accordion.Toggle
+                                size={12}
+                                as={PencilSquare}
+                                variant="link"
+                                eventKey="0"
+                                style={{ cursor: "pointer" }}>
                             </Accordion.Toggle>
                             <Accordion.Collapse eventKey="0">
                                 <EditLayoutForm
@@ -206,18 +245,7 @@ class QCEntryModal extends React.Component {
                 <Modal.Body>
                     <Container fluid>
                         <Row>
-                            <Col>
-                                Date in: {dateIn}
-                            </Col>
-                            <Col>
-                                Date out: {dateOut}
-                            </Col>
-                            <Col>
-                                Requested By: {requester}
-                            </Col>
-                            <Col>
-                                Main Analyst: {analyst}
-                            </Col>
+                            
                         </Row>
                         <Row>
                             <Col>
@@ -229,7 +257,6 @@ class QCEntryModal extends React.Component {
                             </Col>
                             <Col>
                                 <p>Notes: {notes}</p>
-                                <p>NoteBook Pages:{nbPage}</p>
                             </Col>
                         </Row>
                     </Container>
