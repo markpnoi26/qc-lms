@@ -4,24 +4,14 @@ import {Form, Row, Col, Container} from 'react-bootstrap'
 export default class EditLayoutForm extends React.Component {
 
     constructor(props) {
-        let { projectType, title, tests, lotNums, dateIn, dateOut, requester, analyst, notes, nbPage } = props
         super(props)
         this.state = {
-            projectType,
-            title,
-            requester,
-            tests,
-            lotNums,
-            analyst,
-            dateIn,
-            dateOut,
-            nbPage,
-            notes,
             currLotNum: ""
         }
     }
 
     render() {
+        let { projectType, title, tests, lotNums, dateIn, dateOut, requester, analyst, notes, nbPage } = this.props
         return(
             <Container>
                 <Row>
@@ -32,7 +22,7 @@ export default class EditLayoutForm extends React.Component {
                                 size="sm"
                                 label="projectType"
                                 onChange={this.props.handleProjectInfoChange}
-                                value={this.state.projectType}>
+                                value={projectType}>
                                     <option value="">Select Project Type</option>
                                     <option value="P">(P) Project</option>
                                     <option value="S">(S) Stability</option>
@@ -48,7 +38,7 @@ export default class EditLayoutForm extends React.Component {
                                 as="select"
                                 size="sm"
                                 label="requester"
-                                value={this.state.requester}
+                                value={requester}
                                 onChange={this.props.handleProjectInfoChange}>
                                     <option value="">Select Requester</option>
                                     <option value="QC">QC</option>
@@ -63,7 +53,7 @@ export default class EditLayoutForm extends React.Component {
                                 as="select"
                                 size="sm"
                                 label="analyst"
-                                value={this.state.analyst}
+                                value={analyst}
                                 onChange={this.props.handleProjectInfoChange}>
                                     <option value="">Select Analyst</option>
                                     <option value="MD">MD</option>
@@ -72,6 +62,11 @@ export default class EditLayoutForm extends React.Component {
                             </Form.Control>
                         </Form>
                     </Col>
+                </Row>
+                <Row>
+                    <Form>
+                        
+                    </Form>
                 </Row>
             </Container>
 
