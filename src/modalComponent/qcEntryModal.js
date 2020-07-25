@@ -155,15 +155,18 @@ class QCEntryModal extends React.Component {
     }
 
     handleProjectInfoChange = (event) => {
-        console.log(event.target)
+        console.dir(event.target.attributes.label.nodeValue)
     }
 
 
     render() {
+        // spread operator to keep code DRY
         let {num, projectType, title, tests, lotNums, dateIn, dateOut, requester, analyst, notes, nbPage} = this.state
+        // below prevents certain props related to the parent to stay as parent components only.
+        const { currentQCFiles, fetchStatus, updateQCFiles, currentlyFetching, fetchSuccess, fetchFail, ...rest} = this.props
         return(
             <Modal
-                {...this.props}
+                {...rest}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 backdrop={'static'}
