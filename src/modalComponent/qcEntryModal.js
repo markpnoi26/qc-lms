@@ -1,10 +1,10 @@
 import React from 'react'
-import {Modal, Button, Row, Col, Container} from 'react-bootstrap'
+import {Modal, Button, Row, Col, Container, Accordion} from 'react-bootstrap'
 import {PencilSquare} from 'react-bootstrap-icons'
 import {connect} from 'react-redux'
 import {API} from 'aws-amplify'
 import TestSelection from '../components/testSelection'
-import EditLayout from '../components/editLayout'
+import EditLayoutForm from '../components/editLayoutForm'
 
 class QCEntryModal extends React.Component {
     constructor(props) {
@@ -15,7 +15,6 @@ class QCEntryModal extends React.Component {
             confirmDeleteOpen: false,
             confirmCloseModalOpen: false,
             changeDetected: false,
-            editLayoutOpen: false,
             num,
             projectType,
             title,
@@ -155,6 +154,10 @@ class QCEntryModal extends React.Component {
         })
     }
 
+    handleProjectInfoChange = (event) => {
+        console.log(event.target)
+    }
+
 
     render() {
         let {num, projectType, title, tests, lotNums, dateIn, dateOut, requester, analyst, notes, nbPage} = this.state
@@ -171,29 +174,30 @@ class QCEntryModal extends React.Component {
                         <Row>
                             <Modal.Title id="contained-modal-title-vcenter">
                                 QC{num} - ({projectType}) - {title} {" "}
-                                <PencilSquare 
-                                    size={12} 
-                                    style={{cursor: "pointer"}} 
-                                    onClick={() => this.setState({editLayoutOpen: !this.state.editLayoutOpen})}
-                                />
                             </Modal.Title>
                         </Row>
                         <Row>
                             <Col>
                                 <h6>Lot Numbers: {lotNums.join(", ")}</h6>
                             </Col>
-
                         </Row>
-                        <Row hidden={!this.state.editLayoutOpen}>
-                            <Col>
-                                <EditLayout 
-                                    projectType
-                                    lotNums
-                                    Title
+                        <Accordion>
+                            <Accordion.Toggle size={12} as={PencilSquare} variant="link" eventKey="0" style={{ cursor: "pointer" }}>
+                            </Accordion.Toggle>
+                            <Accordion.Collapse eventKey="0">
+                                <EditLayoutForm
+                                    projectType={projectType}
+                                    lotNums={lotNums}
+                                    title={title}
+                                    requester={requester}
+                                    analyst={analyst}
+                                    nbPage={nbPage}
+                                    dateIn={dateIn}
+                                    dateOut={dateOut}
+                                    handleProjectInfoChange={this.handleProjectInfoChange}
                                 />
-                            </Col>
-
-                        </Row>
+                            </Accordion.Collapse>
+                        </Accordion>
                     </Container>
                 </Modal.Header>
                 <Modal.Body>
