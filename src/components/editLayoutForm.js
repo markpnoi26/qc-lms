@@ -1,7 +1,6 @@
 import React from 'react'
-import {Form, Row, Col, Container, InputGroup, FormControl, Button} from 'react-bootstrap'
+import {Form, Row, Col, Container, InputGroup, FormControl, Button, Badge} from 'react-bootstrap'
 import {v4 as uuidv4} from 'uuid'
-import {DashCircleFill} from 'react-bootstrap-icons'
 
 export default class EditLayoutForm extends React.Component {
 
@@ -22,7 +21,7 @@ export default class EditLayoutForm extends React.Component {
                                     <option value="P">(P) Project</option>
                                     <option value="S">(S) Stability</option>
                                     <option value="I">(I) Investigation</option>
-                                    <option value="R">(I) Release</option>
+                                    <option value="R">(R) Release</option>
                                     <option value="SQ">(SQ) Standard Qualification</option>
                             </Form.Control>
                         </Form>    
@@ -75,7 +74,7 @@ export default class EditLayoutForm extends React.Component {
                                             size="sm"
                                             value={currLotNum}
                                             label="currLotNum"
-                                            placeholder="New Lot"
+                                            placeholder="Add Another Lot"
                                             onChange={handleProjectTextChange}
                                         />
                                         <InputGroup.Append>
@@ -86,16 +85,14 @@ export default class EditLayoutForm extends React.Component {
                             </Container>
                             <Container>
                                 {lotNums.map((lot) => (
-                                    <Row key={uuidv4()}>
+                                    <Row key={uuidv4()} >
                                         <Col>
                                             {lot}
-                                        </Col> 
-                                        <Col>
-                                            <DashCircleFill size="11" color="red" style={{ cursor: "pointer" }} onClick={handleDeleteLot} value={"lot"} />
                                         </Col>
-                                        
+                                        <Col value={lot} >
+                                            <Badge pill variant="danger" style={{ cursor: "pointer" }} onClick={handleDeleteLot}>X</Badge>
+                                        </Col>
                                     </Row>
-                                
                                     ))
                                 }
                             </Container>    
