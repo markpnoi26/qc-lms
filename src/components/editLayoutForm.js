@@ -21,8 +21,9 @@ export default class EditLayoutForm extends React.Component {
                                         type="text"
                                         size="sm"
                                         placeholder="Title" 
+                                        label="title"
                                         value={title} 
-                                        
+                                        onChange={handleProjectTextChange}
                                     >
                                     </Form.Control>
                                     
@@ -43,7 +44,8 @@ export default class EditLayoutForm extends React.Component {
                                         size="sm"
                                         placeholder="Notebook Pages" 
                                         value={nbPage} 
-                                        
+                                        label="nbPage"
+                                        onChange={handleProjectTextChange}
                                     >
                                     </Form.Control>
                                     
@@ -150,16 +152,15 @@ export default class EditLayoutForm extends React.Component {
                                     <strong> Date In:  </strong>
                                 </Row>
                                 <Row>
-                                    
-                                        <Form.Control 
-                                            type="text"
-                                            size="sm"
-                                            placeholder="Date In" 
-                                            value={dateIn} 
-                                            
-                                        >
-                                        </Form.Control>
-                                    
+                                    <Form.Control 
+                                        type="text"
+                                        size="sm"
+                                        placeholder="Date In" 
+                                        value={dateIn} 
+                                        label="dateIn"
+                                        onChange={handleProjectTextChange}
+                                    >
+                                    </Form.Control>
                                 </Row>
                             </Container>
                         </Form>
@@ -171,16 +172,15 @@ export default class EditLayoutForm extends React.Component {
                                     <strong> Date Out:  </strong>
                                 </Row>
                                 <Row>
-                                    
-                                        <Form.Control 
-                                            type="text"
-                                            size="sm"
-                                            placeholder="Date Out" 
-                                            value={dateOut} 
-                                            
-                                        >
-                                        </Form.Control>
-                                    
+                                    <Form.Control 
+                                        type="text"
+                                        size="sm"
+                                        placeholder="Date Out" 
+                                        value={dateOut} 
+                                        label="dateOut"
+                                        onChange={handleProjectTextChange}
+                                    >
+                                    </Form.Control>
                                 </Row>
                             </Container>
                         </Form>
