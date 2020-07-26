@@ -77,14 +77,13 @@ class QCRecordForm extends React.Component {
     }
 
     handleDeleteLot = (event) => {
-        console.dir(event.target)
-        // const idxOfTarget = this.state.lotNums.indexOf(event.target.attributes.label.nodeValue)
-        // console.log(idxOfTarget)
-        // const newLotCollection = this.state.lotNums
-        // newLotCollection.splice(idxOfTarget, 1)
-        // this.setState({
-        //     lotNums: newLotCollection
-        // })
+        const lotValue = event.target.parentNode.attributes.value.value
+        const idxOfTarget = this.state.lotNums.indexOf(lotValue)
+        const newLotCollection = this.state.lotNums
+        newLotCollection.splice(idxOfTarget, 1)
+        this.setState({
+            lotNums: newLotCollection
+        })
     }
 
     handleSubmitNewFile = (event) => {
@@ -204,7 +203,7 @@ class QCRecordForm extends React.Component {
                             <option value="P">(P) Project</option>
                             <option value="S">(S) Stability</option>
                             <option value="I">(I) Investigation</option>
-                            <option value="R">(I) Release</option>
+                            <option value="R">(R) Release</option>
                             <option value="SQ">(SQ) Standard Qualification</option>
                         </Form.Control>
                     </Form>
