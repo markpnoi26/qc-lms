@@ -5,12 +5,58 @@ import {v4 as uuidv4} from 'uuid'
 export default class EditLayoutForm extends React.Component {
 
     render() {
-        let { projectType, title, tests, lotNums, dateIn, dateOut, requester, analyst, nbPage, currLotNum, handleProjectInfoChange, handleProjectTextChange, handleAddNewLot, handleDeleteLot} = this.props
+        let { projectType, title, lotNums, dateIn, dateOut, requester, analyst, nbPage, currLotNum, handleProjectInfoChange, handleProjectTextChange, handleAddNewLot, handleDeleteLot} = this.props
         return(
             <Container>
                 <Row>
                     <Col>
                         <Form>
+                            <Container>
+                                <Row>
+                                    <strong> QC Title:  </strong>
+                                </Row>
+                                <Row>
+                                    
+                                    <Form.Control 
+                                        type="text"
+                                        size="sm"
+                                        placeholder="Title" 
+                                        value={title} 
+                                        
+                                    >
+                                    </Form.Control>
+                                    
+                                </Row>
+                            </Container>
+                        </Form>
+                    </Col>
+                    <Col>
+                        <Form>
+                            <Container>
+                                <Row>
+                                    <strong> Note Book Page:  </strong>
+                                </Row>
+                                <Row>
+                                    
+                                    <Form.Control 
+                                        type="text"
+                                        size="sm"
+                                        placeholder="Notebook Pages" 
+                                        value={nbPage} 
+                                        
+                                    >
+                                    </Form.Control>
+                                    
+                                </Row>
+                            </Container>
+                        </Form>
+                    </Col>   
+                    
+                </Row>
+                <Row>
+                    <Col>
+                        <Form>
+                            <strong> Project Type:  </strong>
                             <Form.Control
                                 as="select"
                                 size="sm"
@@ -28,6 +74,7 @@ export default class EditLayoutForm extends React.Component {
                     </Col>
                     <Col>
                         <Form>
+                            <strong> Requester: </strong>
                             <Form.Control
                                 as="select"
                                 size="sm"
@@ -43,6 +90,7 @@ export default class EditLayoutForm extends React.Component {
                     </Col>
                     <Col>
                         <Form>
+                            <strong> Analyst: </strong>
                             <Form.Control
                                 as="select"
                                 size="sm"
@@ -58,15 +106,12 @@ export default class EditLayoutForm extends React.Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Form>
-                        <Col>
-                        
-                        </Col>
-                        <Col>
-                        
-                        </Col> 
-                        <Col>
+                    <Col>
+                        <Form>
                             <Container>
+                                <Row>
+                                    <strong> Lot Numbers:  </strong>
+                                </Row>
                                 <Row>
                                     <InputGroup >
                                         <FormControl
@@ -96,8 +141,50 @@ export default class EditLayoutForm extends React.Component {
                                     ))
                                 }
                             </Container>    
-                        </Col>  
-                    </Form>
+                        </Form>
+                    </Col>
+                    <Col>
+                        <Form>
+                            <Container>
+                                <Row>
+                                    <strong> Date In:  </strong>
+                                </Row>
+                                <Row>
+                                    
+                                        <Form.Control 
+                                            type="text"
+                                            size="sm"
+                                            placeholder="Date In" 
+                                            value={dateIn} 
+                                            
+                                        >
+                                        </Form.Control>
+                                    
+                                </Row>
+                            </Container>
+                        </Form>
+                    </Col>
+                    <Col>
+                        <Form>
+                            <Container>
+                                <Row>
+                                    <strong> Date Out:  </strong>
+                                </Row>
+                                <Row>
+                                    
+                                        <Form.Control 
+                                            type="text"
+                                            size="sm"
+                                            placeholder="Date Out" 
+                                            value={dateOut} 
+                                            
+                                        >
+                                        </Form.Control>
+                                    
+                                </Row>
+                            </Container>
+                        </Form>
+                    </Col>   
                 </Row>
             </Container>
 
