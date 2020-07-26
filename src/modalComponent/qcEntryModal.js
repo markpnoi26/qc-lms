@@ -165,6 +165,7 @@ class QCEntryModal extends React.Component {
                     this.props.setAvailableQCFile(num)
                 })
                 .catch(error => {
+                    this.props.fetchFail()
                     console.log(error)
                 })
             this.setState({
