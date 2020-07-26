@@ -105,6 +105,7 @@ class QCRecordForm extends React.Component {
         this.props.currentlyFetching()
         API.post("qcfilesAPI", "/qcfiles", params)
             .then(response => {
+                this.props.fetchSuccess()
                 const data = JSON.parse(response.config.data)
                 return data
             })
@@ -169,7 +170,7 @@ class QCRecordForm extends React.Component {
             },
             lotNums: [],
             analyst: "",
-            dateIn: moment().local("L"),
+            dateIn: moment().format("L"),
             dateOut: "",
             nbPage: "",
             notes: "",
