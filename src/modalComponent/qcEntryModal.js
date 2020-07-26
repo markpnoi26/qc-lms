@@ -126,24 +126,46 @@ class QCEntryModal extends React.Component {
     }
 
     onClickDelete = (event) => {
-        console.log(event.target.value)
-        this.setState({
-            confirmDeleteOpen: !this.state.confirmDeleteOpen
-        })
-        // const params = {
-            //         headers:{},
-            //         response: true,
-            //         queryStringParameters: {},
-            //         body: {}
-            //     }
-        
-            //     API.del("qcfilesAPI", "/qcfiles/20002", params)
-            //         .then(response => {
-            //             console.log(response)
-            //         })
-            //         .catch(error => {
-            //             console.log(error)
-            //         })
+        // if the user clicks yes, 
+        // delete the file, update the state, and close the modal completely.
+        if (event.target.value === "yes") {
+            // delete the file in db
+            // update the state of the application to delete the file in the state
+            const params = {
+                headers:{},
+                response: true,
+                queryStringParameters: {},
+                body: {}
+            }
+
+            this.props.currentlyFetching()
+            API.del("qcfilesAPI", `/qcfiles/${this.state.num}`, params)
+                .then(response => {
+                    this.props.fetchSuccess()
+                    let targetURL = response.data.url
+                    let qcNum = targetURL.split("/")[2]
+                    return qcNum
+                })
+                .then(num => {
+                    const remainingQCFiles = this.props.currentQCFiles.filter(file => file.num !== num)
+                    this.props.updateQCFiles(remainingQCFiles)
+                    this.props.setAvailableQCFile(num)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+            this.setState({
+                confirmCloseModalOpen: this.state.confirmCloseModalOpen,
+                changeDetected: false
+            }, () => {
+                this.props.onHide()
+            })
+        } else {
+            this.setState({
+                confirmDeleteOpen: !this.state.confirmDeleteOpen
+            })
+        }
+    
     }
 
     handleTestsOnCheck = (event) => {
@@ -317,7 +339,7 @@ class QCEntryModal extends React.Component {
                 </Modal.Footer>
 
                 <Modal.Footer hidden={!this.state.confirmDeleteOpen}>
-                    Are you sure you want to delete this QC File?
+                    You want to delete this QC File? This action cannot be undone, are you sure?
                     <Button variant="outline-danger" onClick={this.onClickDelete} value="yes">Yes</Button>
                     <Button variant="outline-success" onClick={this.onClickDelete} value="no">No</Button>
                 </Modal.Footer>
@@ -345,7 +367,8 @@ const mapDispatchToProps = dispatch => {
         updateQCFiles: (newFiles) => dispatch({type: "UPDATE_QC_FILES", payload: newFiles}),
         currentlyFetching: () => dispatch({type: "CURRENTLY_FETCHING"}),
         fetchSuccess: () => dispatch({type: "SUCCESS_FETCHING"}),
-        fetchFail: () => dispatch({type: "FAILED_FETCHING"})
+        fetchFail: () => dispatch({type: "FAILED_FETCHING"}),
+        setAvailableQCFile: (qcFile) => dispatch({type: "SET_AVAILABLE_QC_FILE", payload: qcFile})
     }
 }
 
