@@ -92,8 +92,8 @@ class QCRecordForm extends React.Component {
         delete bodyPreSend.currLotNum
 
 
-        if (bodyPreSend.title === "" ) alert("Please make sure title exists.")
-        if (bodyPreSend.projectType === "" ) alert("Please make sure you assign the project type.")
+        if (bodyPreSend.title === "" ) return alert("Please make sure title exists.")
+        if (bodyPreSend.projectType === "" ) return alert("Please make sure you assign the project type.")
 
         const params = {
             headers:{},
@@ -267,7 +267,7 @@ class QCRecordForm extends React.Component {
                     {this.state.lotNums.length}
                 </td>
                 <td>
-                    {this.state.dateIn}
+                    {moment().format("L")}
                 </td>
                 <td>
                     N/A
