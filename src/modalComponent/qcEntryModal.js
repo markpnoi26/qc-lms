@@ -58,7 +58,9 @@ class QCEntryModal extends React.Component {
             this.setState({
                 changeDetected: false,
                 savedChanges: false,
-                ...this.props.file
+                ...this.props.file,
+                lotNums: [...this.props.file.lotNums],
+                tests: {...this.props.file.tests}
             }, () => {
                 // closes the modal and resets the state
                 this.setState({
@@ -187,27 +189,28 @@ class QCEntryModal extends React.Component {
     }
 
     handleAddNewLot = (event) => {
-        event.preventDefault()
         if (this.state.currLotNum === "") return
-
         const currLot = this.state.currLotNum
         const newLotCollection = this.state.lotNums
         newLotCollection.push(currLot)
         this.setState({
+            ...this.state,
+            changeDetected: true,
             lotNums: newLotCollection,
             currLotNum: ""
         })
     }
 
     handleDeleteLot = (event) => {
-        event.preventDefault()
-        console.log(this.state.lotNums.indexOf(event.target))
-        // const idxOfTarget = this.state.lotNums.indexOf(event.target.value)
-        // const newLotCollection = this.state.lotNums
-        // newLotCollection.splice(idxOfTarget, 1)
-        // this.setState({
-        //     lotNums: newLotCollection
-        // })
+        const lotValue = event.target.parentNode.attributes.value.value
+        const idxOfTarget = this.state.lotNums.indexOf(lotValue)
+        const newLotCollection = this.state.lotNums
+        newLotCollection.splice(idxOfTarget, 1)
+        this.setState({
+            ...this.state,
+            changeDetected: true,
+            lotNums: newLotCollection
+        })
     }
 
 
@@ -233,24 +236,24 @@ class QCEntryModal extends React.Component {
                         </Row>
                         <Row>
                             <Col>
-                                Requested By: {requester}
+                                <strong> Requested By: </strong> {requester}
                             </Col>
                             <Col>
-                                Main Analyst: {analyst}
+                                <strong> Main Analyst: </strong> {analyst}
                             </Col>
                             <Col>
-                                Date in: {dateIn}
+                                <strong> Date in: </strong> {dateIn}
                             </Col>
                             <Col>
-                                Date out: {dateOut}
+                                <strong> Date out: </strong> {dateOut}
                             </Col>
                         </Row>
                         <Row>
                             <Col>
-                                Lot: {lotNums.join(", ")}
+                                <strong> Lot:  </strong> {lotNums.join(", ")}
                             </Col>
                             <Col>
-                                NB Pages: {nbPage}
+                                <strong> Note Book Pages: </strong> {nbPage}
                             </Col>
                         </Row>
                         <Accordion>
