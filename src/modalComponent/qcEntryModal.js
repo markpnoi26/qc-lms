@@ -149,6 +149,19 @@ class QCEntryModal extends React.Component {
                 .then(num => {
                     const remainingQCFiles = this.props.currentQCFiles.filter(file => file.num !== num)
                     this.props.updateQCFiles(remainingQCFiles)
+
+                    
+                    const start = this.props.currentYear.substring(2, 4) + "001"
+                    let startQCFile = parseInt(start, 10)
+                    for (let i = 0; i < remainingQCFiles.length; i++) {
+                        const stringedFileNum = JSON.stringify(startQCFile)
+                        if (remainingQCFiles[i].num !== stringedFileNum) {
+                            this.props.setCurrentAvailableQCFile(stringedFileNum)
+                            return stringedFileNum
+                        }
+                        startQCFile++
+                    }
+                    this.props.setCurrentAvailableQCFile(JSON.stringify(startQCFile))
                     this.props.setAvailableQCFile(num)
                 })
                 .catch(error => {
@@ -358,7 +371,8 @@ class QCEntryModal extends React.Component {
 const mapStateToProps = state => {
     return {
         currentQCFiles: state.currentQCFiles,
-        fetchStatus: state.fetchStatus
+        fetchStatus: state.fetchStatus,
+        currentYear: state.currentYear
     }
 }
 
@@ -368,7 +382,7 @@ const mapDispatchToProps = dispatch => {
         currentlyFetching: () => dispatch({type: "CURRENTLY_FETCHING"}),
         fetchSuccess: () => dispatch({type: "SUCCESS_FETCHING"}),
         fetchFail: () => dispatch({type: "FAILED_FETCHING"}),
-        setAvailableQCFile: (qcFile) => dispatch({type: "SET_AVAILABLE_QC_FILE", payload: qcFile})
+        setCurrentAvailableQCFile: (qcFile) => dispatch({type: "SET_AVAILABLE_QC_FILE", payload: qcFile})
     }
 }
 
