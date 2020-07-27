@@ -3,8 +3,10 @@ import {Modal, Button, Row, Col, Container, Accordion} from 'react-bootstrap'
 import {PencilSquare} from 'react-bootstrap-icons'
 import {connect} from 'react-redux'
 import {API} from 'aws-amplify'
+import {EditorState, Editor} from 'draft-js'
 import TestSelection from '../components/testSelection'
 import EditLayoutForm from '../components/editLayoutForm'
+import 'draft-js/dist/Draft.css'
 
 class QCEntryModal extends React.Component {
     constructor(props) {
@@ -26,7 +28,8 @@ class QCEntryModal extends React.Component {
             analyst,
             notes,
             nbPage,
-            currLotNum: ""
+            currLotNum: "",
+            editorState: EditorState.createEmpty()
         }
     }
 
@@ -193,6 +196,13 @@ class QCEntryModal extends React.Component {
         })
     }
 
+    handleNoteBookInfoChange = (editorState) => {
+        this.setState({
+            changeDetected: true,
+            editorState
+        })
+    }
+
     handleProjectInfoChange = (event) => {
         // only these labels are handled by this callback
         // projectType
@@ -254,7 +264,7 @@ class QCEntryModal extends React.Component {
         // spread operator to keep code DRY
         let {num, projectType, title, tests, lotNums, dateIn, dateOut, requester, analyst, notes, nbPage, currLotNum} = this.state
         // below prevents certain props related to the parent to stay as parent props only.
-        const { currentQCFiles, fetchStatus, updateQCFiles, currentlyFetching, fetchSuccess, fetchFail, ...rest} = this.props
+        const { currentQCFiles, fetchStatus, updateQCFiles, currentlyFetching, fetchSuccess, fetchFail, setCurrentAvailableQCFile, currentYear, ...rest} = this.props
         return(
             <Modal
                 {...rest}
@@ -335,6 +345,10 @@ class QCEntryModal extends React.Component {
                             </Col>
                             <Col>
                                 <p>Notes: {notes}</p>
+                                <Editor 
+                                    editorState={this.state.editorState} 
+                                    onChange={this.handleNoteBookInfoChange}
+                                />
                             </Col>
                         </Row>
                     </Container>
