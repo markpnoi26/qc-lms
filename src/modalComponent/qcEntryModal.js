@@ -373,6 +373,7 @@ class QCEntryModal extends React.Component {
                                         <Editor
                                             editorState={this.state.editorState}
                                             onChange={this.handleNoteBookInfoChange}
+                                            placeholder="Add notes here..."
                                         />
 
                                     </Toast.Body>
