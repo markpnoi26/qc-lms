@@ -199,11 +199,11 @@ class QCEntryModal extends React.Component {
 
     handleNoteBookInfoChange = (editorState) => {
         // console.log(convertToRaw(editorState.getCurrentContent()))
-        this.setState({
-            changeDetected: true,
-            notes: convertToRaw(editorState.getCurrentContent()),
-            editorState
-        })
+        // this.setState({
+        //     changeDetected: true,
+        //     notes: convertToRaw(editorState.getCurrentContent()),
+        //     editorState
+        // })
     }
 
     handleProjectInfoChange = (event) => {
@@ -263,12 +263,13 @@ class QCEntryModal extends React.Component {
     }
 
     componentDidMount = () => {
+        console.log(this.state.notes)
         // this populates the notes section from saved raw JSON from previous session of the notes.
-        if (this.state.notes !== "") {
-            this.setState({
-                editorState: EditorState.createWithContent(convertFromRaw(this.state.notes))
-            })
-        }
+        // if (this.state.notes !== "") {
+        //     this.setState({
+        //         editorState: EditorState.createWithContent(convertFromRaw(this.state.notes))
+        //     })
+        // }
     }
 
     render() {

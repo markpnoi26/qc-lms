@@ -2,7 +2,7 @@ import React from 'react'
 import {API} from 'aws-amplify'
 import {connect} from 'react-redux'
 import {Button, Form, InputGroup, FormControl, Row, Col, Container, Badge} from 'react-bootstrap'
-import {EditorState} from 'draft-js'
+// import {EditorState} from 'draft-js'
 import {v4 as uuidv4} from 'uuid'
 import TestSelection from './testSelection'
 import moment from 'moment'
@@ -49,7 +49,7 @@ class QCRecordForm extends React.Component {
             dateIn: moment().format("L"),
             dateOut: "",
             nbPage: "",
-            notes: EditorState.createEmpty(),
+            notes: "",
             currLotNum: ""
         }
     }
