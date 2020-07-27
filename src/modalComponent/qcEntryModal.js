@@ -29,7 +29,7 @@ class QCEntryModal extends React.Component {
             notes,
             nbPage,
             currLotNum: "",
-            editorState: EditorState.createEmpty()
+            editorState: null
         }
     }
 
@@ -64,7 +64,7 @@ class QCEntryModal extends React.Component {
                 ...this.props.file,
                 lotNums: [...this.props.file.lotNums],
                 tests: {...this.props.file.tests},
-                editorState: EditorState.createWithContent(convertFromRaw(this.props.file.notes))
+                editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(this.state.notes)))
             }, () => {
                 // closes the modal and resets the state
                 this.setState({
@@ -84,12 +84,19 @@ class QCEntryModal extends React.Component {
         // this will ultimately update the db
         // on submit, update db, update state, 
         if (event.target.value === "yes") {
-            const bodyPreSend = {...this.state, tests:{...this.state.tests}}
+            const bodyPreSend = {
+                ...this.state, 
+                tests: {...this.state.tests}, 
+                lotNums: [...this.state.lotNums],
+                notes: JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()))
+            }
             delete bodyPreSend.confirmUpdateOpen
             delete bodyPreSend.confirmDeleteOpen
             delete bodyPreSend.confirmCloseModalOpen
             delete bodyPreSend.changeDetected
             delete bodyPreSend.savedChanges
+            delete bodyPreSend.editorState
+            delete bodyPreSend.currLotNum
 
             const params = {
                 headers:{},
@@ -198,12 +205,10 @@ class QCEntryModal extends React.Component {
     }
 
     handleNoteBookInfoChange = (editorState) => {
-        // console.log(convertToRaw(editorState.getCurrentContent()))
-        // this.setState({
-        //     changeDetected: true,
-        //     notes: convertToRaw(editorState.getCurrentContent()),
-        //     editorState
-        // })
+        this.setState({
+            changeDetected: true,
+            editorState
+        })
     }
 
     handleProjectInfoChange = (event) => {
@@ -263,13 +268,16 @@ class QCEntryModal extends React.Component {
     }
 
     componentDidMount = () => {
-        console.log(this.state.notes)
-        // this populates the notes section from saved raw JSON from previous session of the notes.
-        // if (this.state.notes !== "") {
-        //     this.setState({
-        //         editorState: EditorState.createWithContent(convertFromRaw(this.state.notes))
-        //     })
-        // }
+        if (this.state.notes === "") {
+            this.setState({
+                editorState: EditorState.createEmpty()
+            })
+        } else {
+            // recreate editor state from stringified version
+            this.setState({
+                editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(this.state.notes)))
+            })
+        }
     }
 
     render() {
