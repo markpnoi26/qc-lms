@@ -63,7 +63,8 @@ class QCEntryModal extends React.Component {
                 savedChanges: false,
                 ...this.props.file,
                 lotNums: [...this.props.file.lotNums],
-                tests: {...this.props.file.tests}
+                tests: {...this.props.file.tests},
+                editorState: EditorState.createWithContent(convertFromRaw(this.props.file.notes))
             }, () => {
                 // closes the modal and resets the state
                 this.setState({
@@ -126,15 +127,6 @@ class QCEntryModal extends React.Component {
             })
         }
         
-    }
-
-    componentDidMount = () => {
-        // this populates the notes section from saved raw JSON from previous session of the notes.
-        if (this.state.notes !== "") {
-            this.setState({
-                editorState: EditorState.createWithContent(convertFromRaw(this.state.notes))
-            })
-        }
     }
 
     onClickDelete = (event) => {
@@ -206,6 +198,7 @@ class QCEntryModal extends React.Component {
     }
 
     handleNoteBookInfoChange = (editorState) => {
+        // console.log(convertToRaw(editorState.getCurrentContent()))
         this.setState({
             changeDetected: true,
             notes: convertToRaw(editorState.getCurrentContent()),
@@ -269,6 +262,14 @@ class QCEntryModal extends React.Component {
         })
     }
 
+    componentDidMount = () => {
+        // this populates the notes section from saved raw JSON from previous session of the notes.
+        if (this.state.notes !== "") {
+            this.setState({
+                editorState: EditorState.createWithContent(convertFromRaw(this.state.notes))
+            })
+        }
+    }
 
     render() {
         // spread operator to keep code DRY
