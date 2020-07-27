@@ -1,9 +1,9 @@
 import React from 'react'
-import {Modal, Button, Row, Col, Container, Accordion} from 'react-bootstrap'
+import {Modal, Button, Row, Col, Container, Accordion, Toast} from 'react-bootstrap'
 import {PencilSquare} from 'react-bootstrap-icons'
 import {connect} from 'react-redux'
 import {API} from 'aws-amplify'
-import {EditorState, Editor} from 'draft-js'
+import {EditorState, Editor,convertFromRaw, convertToRaw} from 'draft-js'
 import TestSelection from '../components/testSelection'
 import EditLayoutForm from '../components/editLayoutForm'
 import 'draft-js/dist/Draft.css'
@@ -128,6 +128,15 @@ class QCEntryModal extends React.Component {
         
     }
 
+    componentDidMount = () => {
+        // this populates the notes section from saved raw JSON from previous session of the notes.
+        if (this.state.notes !== "") {
+            this.setState({
+                editorState: EditorState.createWithContent(convertFromRaw(this.state.notes))
+            })
+        }
+    }
+
     onClickDelete = (event) => {
         // if the user clicks yes, 
         // delete the file, update the state, and close the modal completely.
@@ -199,6 +208,7 @@ class QCEntryModal extends React.Component {
     handleNoteBookInfoChange = (editorState) => {
         this.setState({
             changeDetected: true,
+            notes: convertToRaw(editorState.getCurrentContent()),
             editorState
         })
     }
@@ -262,7 +272,7 @@ class QCEntryModal extends React.Component {
 
     render() {
         // spread operator to keep code DRY
-        let {num, projectType, title, tests, lotNums, dateIn, dateOut, requester, analyst, notes, nbPage, currLotNum} = this.state
+        let {num, projectType, title, tests, lotNums, dateIn, dateOut, requester, analyst, nbPage, currLotNum} = this.state
         // below prevents certain props related to the parent to stay as parent props only.
         const { currentQCFiles, fetchStatus, updateQCFiles, currentlyFetching, fetchSuccess, fetchFail, setCurrentAvailableQCFile, currentYear, ...rest} = this.props
         return(
@@ -344,11 +354,19 @@ class QCEntryModal extends React.Component {
                                />
                             </Col>
                             <Col>
-                                <p>Notes: {notes}</p>
-                                <Editor 
-                                    editorState={this.state.editorState} 
-                                    onChange={this.handleNoteBookInfoChange}
-                                />
+                                <Toast>
+                                    <Toast.Header closeButton={false}>
+                                        <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
+                                        <strong className="mr-auto">Notes:</strong>
+                                    </Toast.Header>
+                                    <Toast.Body>
+                                        <Editor
+                                            editorState={this.state.editorState}
+                                            onChange={this.handleNoteBookInfoChange}
+                                        />
+
+                                    </Toast.Body>
+                                </Toast> 
                             </Col>
                         </Row>
                     </Container>
