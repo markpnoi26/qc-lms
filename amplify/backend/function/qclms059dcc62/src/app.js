@@ -60,9 +60,21 @@ const convertUrlType = (param, type) => {
 
 app.get(path, function(req, res) {
   console.log("lambda function called get index")
-  console.log(req)
+  const currentYear = req.query.currentYear
+  const xxFile = currentYear.substring(2,4)
+  const yyyStart = "000", yyyEnd = "999"
+  const range = [xxFile+yyyStart, xxFile+yyyEnd]
+
   let queryParams = {
-    TableName: tableName
+    TableName: tableName,
+    FilterExpression: "#num between :start_num and :end_num",
+    ExpressionAttributeNames: {
+        "#num": "num",
+    },
+    ExpressionAttributeValues: {
+         ":start_num": range[0],
+         ":end_num": range[1]
+    }
   }
 
   dynamodb.scan(queryParams, (err, data) => {
