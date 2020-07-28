@@ -36,7 +36,9 @@ class QCRecordWindow extends React.Component {
         const params ={
             headers:{},
             response: true,
-            queryStringParameters: {}
+            queryStringParameters: {
+                testkey: "testValue Received"
+            }
         }
 
         API.get("qcfilesAPI", "/qcfiles", params)

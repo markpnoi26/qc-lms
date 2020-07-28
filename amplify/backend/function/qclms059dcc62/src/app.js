@@ -60,6 +60,7 @@ const convertUrlType = (param, type) => {
 
 app.get(path, function(req, res) {
   console.log("lambda function called get index")
+  console.log(req)
   let queryParams = {
     TableName: tableName
   }
