@@ -1,5 +1,5 @@
 import React from "react";
-import {Nav, Navbar,Button} from "react-bootstrap";
+import {Nav, Navbar,NavDropdown, Button} from "react-bootstrap";
 import {Link} from 'react-router-dom'
 import { withRouter } from "react-router";
 import {Auth} from 'aws-amplify';
@@ -40,7 +40,13 @@ const Top = props => {
                 </Nav.Item> */}
             </Nav>
             <Nav className="mr-sm-2">
-            
+                <NavDropdown title={`Select Year:`} id="collapsible-nav-dropdown" onChange>
+                    <NavDropdown.Item href="#action/3.1">2020</NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.2">2019</NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.3">2018</NavDropdown.Item>
+                    {/* <NavDropdown.Divider /> */}
+                    <NavDropdown.Item href="#action/3.4">2017</NavDropdown.Item>
+                </NavDropdown>
                 <Button onClick={signOut} variant="outline-danger" >SignOut</Button>
             </Nav>
             
