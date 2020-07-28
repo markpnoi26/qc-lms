@@ -32,12 +32,14 @@ class QCRecordWindow extends React.Component {
     // }
 
     componentDidMount = () => {
+        
+        this.props.getCurrentYear()
 
         const params ={
             headers:{},
             response: true,
             queryStringParameters: {
-                testkey: "testValue Received"
+                currentYear: this.props.currentYear
             }
         }
 
@@ -118,7 +120,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         setCurrentAvailableQCFile: (number) => dispatch({type: "SET_AVAILABLE_QC_FILE", payload: number}),
-        setCurrentQCFiles: (qcFiles) => dispatch({type: "SET_CURRENT_QC_FILES", payload: qcFiles})
+        setCurrentQCFiles: (qcFiles) => dispatch({type: "SET_CURRENT_QC_FILES", payload: qcFiles}),
+        getCurrentYear: () => dispatch({type: "GET_CURRENT_YEAR"})
     }
 }
 
