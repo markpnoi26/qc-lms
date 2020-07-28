@@ -5,6 +5,8 @@ export default function currentYear(state="", action) {
             currDate = new Date()
             currYear = currDate.getUTCFullYear()
             return JSON.stringify(currYear)
+        case "UPDATE_YEAR":
+            return action.payload
         default:
             currDate = new Date()
             currYear = currDate.getUTCFullYear()
