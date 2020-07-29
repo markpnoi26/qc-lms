@@ -1,4 +1,5 @@
 import React from 'react'
+import StabilityForm from '../components/stabilityForm'
 import {Table} from 'react-bootstrap'
 
 export default class StabilityWindow extends React.Component {
@@ -10,10 +11,15 @@ export default class StabilityWindow extends React.Component {
                 <Table bordered striped variant="dark" >
                     <thead>
                         <tr style={{ textAlign: "center" }} >
-                            <th>Protocol Number</th>
-                            <th>Project Title</th>
-                            <th>lot #</th>
+                            <th>Protocol</th>
+                            <th>Title</th>
+                            <th>Lot #</th>
+                            <th>Spec #</th>
+                            <th>STPs</th>
                             <th>Condition</th>
+                            <th>Packaging</th>
+                            <th>Amount/Time Point</th>
+                            <th>Amount Unit</th>
                             <th>Date Started</th>
                             <th>Action</th>
                         </tr>
@@ -21,6 +27,7 @@ export default class StabilityWindow extends React.Component {
                     <tbody >
                         <tr style={{ textAlign: "center" }}>
                         </tr>
+                        <StabilityForm />
                     </tbody>
                 </Table>
             </div>
