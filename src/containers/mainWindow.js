@@ -15,8 +15,8 @@ export default class MainWindow extends React.Component {
         return (
             <Container fluid>
                 <Switch>
-                    <Route path="/home" component={HomeWindow} />
-                    <Route exact path="/" component={QCRecordWindow} />
+                    <Route exact path="/" component={HomeWindow} />
+                    <Route path="/records" component={QCRecordWindow} />
                     <Route path="/retain" component={RetainWindow} />
                     <Route path="/stability" component={StabilityWindow} />
                     <Route component={NotValid} />
