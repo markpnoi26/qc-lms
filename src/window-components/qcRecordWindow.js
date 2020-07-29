@@ -43,13 +43,15 @@ class QCRecordWindow extends React.Component {
             }
         }
 
+        this.props.currentlyFetching()
         API.get("qcfilesAPI", "/qcfiles", params)
             .then(response => {
+                this.props.fetchSuccess()
                 this.props.setCurrentQCFiles(response.data)
             })
             .then(() => {
                 // set the next available qc file
-            
+                
                 const currentQCFiles = this.props.currentQCFiles
                 const start = this.props.currentYear.substring(2,4) + "001"
                 
@@ -65,6 +67,7 @@ class QCRecordWindow extends React.Component {
                 this.props.setCurrentAvailableQCFile(JSON.stringify(startQCFile))
             })
             .catch(error => {
+                this.props.fetchFail()
                 console.log(error)
             })
     }
@@ -121,7 +124,10 @@ const mapDispatchToProps = dispatch => {
     return {
         setCurrentAvailableQCFile: (number) => dispatch({type: "SET_AVAILABLE_QC_FILE", payload: number}),
         setCurrentQCFiles: (qcFiles) => dispatch({type: "SET_CURRENT_QC_FILES", payload: qcFiles}),
-        getCurrentYear: () => dispatch({type: "GET_CURRENT_YEAR"})
+        getCurrentYear: () => dispatch({type: "GET_CURRENT_YEAR"}),
+        currentlyFetching: () => dispatch({type: "CURRENTLY_FETCHING"}),
+        fetchSuccess: () => dispatch({type: "SUCCESS_FETCHING"}),
+        fetchFail: () => dispatch({type: "FAILED_FETCHING"}),
     }
 }
 
