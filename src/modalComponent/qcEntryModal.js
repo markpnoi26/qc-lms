@@ -292,6 +292,7 @@ class QCEntryModal extends React.Component {
                 aria-labelledby="contained-modal-title-vcenter"
                 backdrop={'static'}
                 centered
+                hidden={this.props.fetchStatus}
             >
                 <Modal.Header >
                     <Container fluid>
