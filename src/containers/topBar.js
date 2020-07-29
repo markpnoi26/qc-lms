@@ -2,7 +2,6 @@ import React from "react";
 import {Nav, Navbar,NavDropdown, Button} from "react-bootstrap";
 import {Link} from 'react-router-dom'
 import {withRouter} from "react-router";
-import {compose} from 'redux'
 import {connect} from 'react-redux'
 import {Auth, API} from 'aws-amplify';
 
@@ -28,9 +27,10 @@ class TopBar extends React.Component {
                 currentYear: eventKey.year
             }
         }
-
+        this.props.currentlyFetching()
         API.get("qcfilesAPI", "/qcfiles", params)
             .then(response => {
+                this.props.fetchSuccess()
                 this.props.setCurrentQCFiles(response.data)
             })
             .then(() => {
@@ -51,6 +51,7 @@ class TopBar extends React.Component {
                 this.props.setCurrentAvailableQCFile(JSON.stringify(startQCFile))
             })
             .catch(error => {
+                this.props.fetchFail()
                 console.log(error)
             })
     }
@@ -109,7 +110,10 @@ const mapDispatchToProps = dispatch => {
     return {
         updateCurrentYear: (year) => dispatch({type: "UPDATE_YEAR", payload: year}),
         setCurrentAvailableQCFile: (number) => dispatch({type: "SET_AVAILABLE_QC_FILE", payload: number}),
-        setCurrentQCFiles: (qcFiles) => dispatch({type: "SET_CURRENT_QC_FILES", payload: qcFiles})
+        setCurrentQCFiles: (qcFiles) => dispatch({type: "SET_CURRENT_QC_FILES", payload: qcFiles}),
+        currentlyFetching: () => dispatch({type: "CURRENTLY_FETCHING"}),
+        fetchSuccess: () => dispatch({type: "SUCCESS_FETCHING"}),
+        fetchFail: () => dispatch({type: "FAILED_FETCHING"}),
     }
 }
 
