@@ -3,7 +3,7 @@
 This project was built out of necessity to maintain optimal operation in our laboraroty. Since the COVID-19 pandemic, majority of our science heads are staying home. This application solves several issues in the lab: 
 
 1. Since we no longer can keep multiple scientists in the lab at one time, it has become an issue of organization. The app allows each scientist to easily assign and reassign particular tests depending on who is in the lab. 
-2. Each scientist can now have access to all the hard copy information typically only available while inside the lab. This makes it easier to do reporting, updating files and updating notes for an experiment.
+2. Each scientist can now have access to all the hard copy information typically only available inside the lab. This makes it easier to do reporting, updating files and notes for an experiment.
 3. Since the information is now stored in the cloud, we can now have access to this information, even when the company VPN is down. This does not solve all our issues, but it makes it easier to be organized when not all our tools are working correctly.
 4. Our lab now also have SAFE access to electronic information on data that was exclusively hand written. We can now see all past data, and cross reference files with ease.
 
