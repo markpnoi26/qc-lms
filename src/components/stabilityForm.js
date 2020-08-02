@@ -6,7 +6,16 @@ export default class StabilityForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-
+            protocolNum: "",
+            products: [],
+            lotNums: [],
+            specs: [],
+            condition: "",
+            packaging: "",
+            dateStarted: "",
+            amountPerSTP: [],
+            stpNUm: "",
+            amount: ""
         }
     }
 
