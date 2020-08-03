@@ -45,6 +45,25 @@
 					}
 				}
 			]
+		},
+		"stabilityFunction": {
+			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda",
+			"dependsOn": [
+				{
+					"category": "storage",
+					"resourceName": "stabilityProtocol",
+					"attributes": [
+						"Name",
+						"Arn"
+					],
+					"attributeEnvMap": {
+						"Name": "TABLE_NAME",
+						"Arn": "TABLE_ARN"
+					}
+				}
+			]
 		}
 	},
 	"api": {
@@ -75,6 +94,20 @@
 					]
 				}
 			]
+		},
+		"stabilityAPI": {
+			"service": "API Gateway",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "stabilityFunction",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			]
 		}
 	},
 	"storage": {
@@ -83,6 +116,10 @@
 			"providerPlugin": "awscloudformation"
 		},
 		"retains": {
+			"service": "DynamoDB",
+			"providerPlugin": "awscloudformation"
+		},
+		"stabilityProtocol": {
 			"service": "DynamoDB",
 			"providerPlugin": "awscloudformation"
 		}

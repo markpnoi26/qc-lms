@@ -1,0 +1,41 @@
+{
+    "paths": [
+        {
+            "name": "/stability",
+            "lambdaFunction": "stabilityFunction",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ]
+            }
+        }
+    ],
+    "resourceName": "stabilityAPI",
+    "apiName": "stabilityAPI",
+    "functionArns": [
+        {
+            "lambdaFunction": "stabilityFunction"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 0,
+        "authRoleName": "amplify-qclms-qclms-234129-authRole",
+        "unAuthRoleName": "amplify-qclms-qclms-234129-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "stabilityFunction",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
