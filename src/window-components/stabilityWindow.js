@@ -1,6 +1,7 @@
 import React from 'react'
 import StabilityForm from '../components/stabilityForm'
 import {Table} from 'react-bootstrap'
+import {API} from 'aws-amplify'
 
 
 /**
@@ -16,6 +17,22 @@ import {Table} from 'react-bootstrap'
 
 export default class StabilityWindow extends React.Component {
 
+    componentDidMount = () => {
+
+        const params ={
+            headers:{},
+            response: true,
+            queryStringParameters: {}
+        }
+
+        API.get("stabilityAPI", "/stability", params)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 
     render() {
         return (
