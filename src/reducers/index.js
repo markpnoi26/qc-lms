@@ -4,13 +4,13 @@ import currentQCFiles from './currentQCFiles'
 import fetchStatus from './fetchStatus'
 import currentAvailableQCFile from './currentAvailableQCFile'
 import currentAvailableStabilityProtocol from './currentAvailableStabilityProtocol'
-import currentStabilityProtocol from './currentStabilityProtocol'
+import currentStabilityProtocols from './currentStabilityProtocols'
 
 
 export default combineReducers({
     currentYear,
     currentQCFiles,
-    currentStabilityProtocol,
+    currentStabilityProtocols,
     currentAvailableQCFile,
     currentAvailableStabilityProtocol,
     fetchStatus
