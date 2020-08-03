@@ -31,6 +31,16 @@ export default class StabilityWindow extends React.Component {
             })
             .catch(error => {
                 console.log(error)
+                console.log({error})
+            })
+
+        API.get("retainAPI", "/retain", params)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+                console.log({error})
             })
     }
 
