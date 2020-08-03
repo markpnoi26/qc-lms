@@ -1,4 +1,8 @@
 import React from 'react'
+import {API} from 'aws-amplify'
+import {connect} from 'react-redux'
+import {v4 as uuidv4} from 'uuid'
+import moment from 'moment'
 // import {Button, Form, InputGroup, FormControl, Row, Col, Container, Badge} from 'react-bootstrap'
 
 
@@ -23,7 +27,7 @@ export default class StabilityForm extends React.Component {
         return (
             <tr style={{ textAlign: "center" }} >
                 <th>Protocol</th>
-                <th>Title</th>
+                <th>Products</th>
                 <th>Lot #</th>
                 <th>Spec #</th>
                 <th>STPs</th>
