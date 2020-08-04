@@ -1,5 +1,6 @@
 import React from 'react'
 import StabilityForm from '../components/stabilityForm'
+import StabilityEntry from '../components/stabilityEntry'
 import {Table} from 'react-bootstrap'
 import {API} from 'aws-amplify'
 
@@ -19,29 +20,29 @@ export default class StabilityWindow extends React.Component {
 
     componentDidMount = () => {
 
-        const params ={
-            headers:{},
-            response: true,
-            queryStringParameters: {}
-        }
+        // const params ={
+        //     headers:{},
+        //     response: true,
+        //     queryStringParameters: {}
+        // }
 
-        API.get("stabilityAPI", "/stability", params)
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-                console.log({error})
-            })
+        // API.get("stabilityAPI", "/stability", params)
+        //     .then(response => {
+        //         console.log(response)
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //         console.log({error})
+        //     })
 
-        API.get("retainAPI", "/retain", params)
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-                console.log({error})
-            })
+        // API.get("retainAPI", "/retain", params)
+        //     .then(response => {
+        //         console.log(response)
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //         console.log({error})
+        //     })
     }
 
     render() {
@@ -65,8 +66,11 @@ export default class StabilityWindow extends React.Component {
                     </thead>
                     <tbody >
                         <tr style={{ textAlign: "center" }}>
+                            <StabilityEntry />
                         </tr>
-                        <StabilityForm />
+                        <tr style={{ textAlign: "center" }}>
+                            <StabilityForm />
+                        </tr>
                     </tbody>
                 </Table>
             </div>
