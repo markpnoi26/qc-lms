@@ -15,11 +15,12 @@ class StabilityForm extends React.Component {
             lotNums: [],
             specs: [],
             condition: "",
+            conditionTimePts: 0,
             packaging: "",
             dateStarted: moment().format("L"),
             amountUnit: "g",
             amountPerSTP: [],
-            amoutnPerTimePt: 0,
+            amountPerTimePt: 0,
             stp: "",
             amount: 0,
             currProduct: "",
@@ -106,16 +107,19 @@ class StabilityForm extends React.Component {
         this.setState({
             amountPerSTP: newAmountPerSTP,
             stp: "",
-            amount: 0
+            amount: 0,
+            amountPerTimePt: parseInt(this.state.amountPerTimePt, 10) + parseInt(currAmount, 10)
         })
     }
 
     handleDeleteSTP = (event) => {
         const idxOfTarget = event.target.parentNode.attributes.value.value
         const newSTPCollection = this.state.amountPerSTP
+        const amountToTakeOut = newSTPCollection[idxOfTarget].amount 
         newSTPCollection.splice(idxOfTarget, 1)
         this.setState({
-            amountPerSTP: newSTPCollection
+            amountPerSTP: newSTPCollection,
+            amountPerTimePt: parseInt(this.state.amountPerTimePt) - parseInt(amountToTakeOut, 10)
         })
     }
 
@@ -244,9 +248,18 @@ class StabilityForm extends React.Component {
                             as="select"
                             size="sm"
                             value={this.state.condition} 
-                            onChange={(event) => this.setState({
-                                condition: event.target.value
-                            })}>
+                            onChange={(event) => {
+                                let conditionTimePoint = 0
+                                if (event.target.value === "40/75") {
+                                    conditionTimePoint = 5
+                                } else if (event.target.value === "25/60") {
+                                    conditionTimePoint = 10
+                                }
+                                this.setState({
+                                    condition: event.target.value,
+                                    conditionTimePts: conditionTimePoint
+                                })
+                            }}>
                             <option value="">Select Condition</option>
                             <option value="40/75">40oC/75%RH</option>
                             <option value="25/60">25oC/60%RH</option>
@@ -257,7 +270,7 @@ class StabilityForm extends React.Component {
                     <InputGroup >
                         <Form.Control
                             as="textarea"
-                            row="4"
+                            row="6"
                             size="sm"
                             value={this.state.packaging}
                             placeholder="packaging description"
@@ -329,7 +342,7 @@ class StabilityForm extends React.Component {
                         </Form.Control>
                     </Form>
                 </td>
-                <td>Amount/Time Point</td>
+                <td>{this.state.amountPerTimePt}</td>
                 <td>{moment().format("L")}</td>
                 <td style={{textAlign:"center"}}>
                     <Button size="sm" variant="primary" onClick={this.handleSubmitNewProtocol}> Add </Button>
