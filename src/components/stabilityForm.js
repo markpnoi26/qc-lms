@@ -19,6 +19,7 @@ class StabilityForm extends React.Component {
             dateStarted: moment().format("L"),
             amountUnit: "g",
             amountPerSTP: [],
+            amoutnPerTimePt: 0,
             stp: "",
             amount: 0,
             currProduct: "",
@@ -94,6 +95,30 @@ class StabilityForm extends React.Component {
             specs: newSpecsCollection
         })
     }
+
+    handleAddNewSTP = (event) => {
+        if (this.state.stp === "") return
+
+        const currSTP = this.state.stp
+        const currAmount = this.state.amount
+        const newAmountPerSTP = this.state.amountPerSTP
+        newAmountPerSTP.push({stp: currSTP, amount: currAmount})
+        this.setState({
+            amountPerSTP: newAmountPerSTP,
+            stp: "",
+            amount: 0
+        })
+    }
+
+    handleDeleteSTP = (event) => {
+        const idxOfTarget = event.target.parentNode.attributes.value.value
+        const newSTPCollection = this.state.amountPerSTP
+        newSTPCollection.splice(idxOfTarget, 1)
+        this.setState({
+            amountPerSTP: newSTPCollection
+        })
+    }
+
 
     handleSubmitNewProtocol = () => {
         console.log("Submit the new protocol")
@@ -245,7 +270,51 @@ class StabilityForm extends React.Component {
                         </Form.Control>
                     </InputGroup>
                 </td>
-                <td>Amount/STP</td>
+                <td>
+                    <InputGroup >
+                        <FormControl
+                            type="text"
+                            size="sm"
+                            value={this.state.stp} 
+                            placeholder="STP" 
+                            onChange={(event) => {
+                                this.setState({
+                                    stp: event.target.value
+                                })
+                            }}
+                        />
+                         <FormControl
+                            type="number"
+                            size="sm"
+                            value={this.state.amount} 
+                            placeholder="Amount" 
+                            onChange={(event) => {
+                                this.setState({
+                                    amount: event.target.value
+                                })
+                            }}
+                        />
+                        <InputGroup.Append>
+                        <Button size="sm" variant="outline-primary" onClick={this.handleAddNewSTP} >+</Button>
+                        </InputGroup.Append>
+                    </InputGroup>
+                    <Container>
+                        {this.state.amountPerSTP.map((item, idx) => (
+                            <Row key={uuidv4()} >
+                                <Col>
+                                    STP-{item.stp} 
+                                </Col>
+                                <Col>
+                                    {item.amount} 
+                                </Col>
+                                <Col value={idx} >
+                                    <Badge pill value={idx} variant="danger" style={{ cursor: "pointer" }} onClick={this.handleDeleteSTP}>X</Badge>
+                                </Col>
+                            </Row>
+                        ))
+                        }
+                    </Container>
+                </td>
                 <td>
                     <Form>
                         <Form.Control 
