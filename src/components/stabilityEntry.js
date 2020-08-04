@@ -9,9 +9,19 @@ export default class StabilityEntry extends React.Component {
 
     render() {
         return(
-            <div>
-                I am a stability retain
-            </div>
+            <>
+                <td>Protocol</td>
+                <td>Products</td>
+                <td>Lot #</td>
+                <td>Spec #</td>
+                <td>STPs</td>
+                <td>Condition</td>
+                <td>Packaging</td>
+                <td>Amount/Time Point</td>
+                <td>Amount Unit</td>
+                <td>Date Started</td>
+                <td>Action</td>
+            </>
         )
     }
 }
