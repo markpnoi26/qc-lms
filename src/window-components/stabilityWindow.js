@@ -2,7 +2,7 @@ import React from 'react'
 import StabilityForm from '../components/stabilityForm'
 import StabilityEntry from '../components/stabilityEntry'
 import {Table} from 'react-bootstrap'
-import {API} from 'aws-amplify'
+// import {API} from 'aws-amplify'
 
 
 /**
@@ -55,11 +55,11 @@ export default class StabilityWindow extends React.Component {
                             <th>Products</th>
                             <th>Lot #</th>
                             <th>Spec #</th>
-                            <th>STPs</th>
                             <th>Condition</th>
                             <th>Packaging</th>
-                            <th>Amount/Time Point</th>
+                            <th>Amount/STP</th>
                             <th>Amount Unit</th>
+                            <th>Amount/Time Point</th>
                             <th>Date Started</th>
                             <th>Pull Schedule</th>
                         </tr>
