@@ -1,48 +1,33 @@
 import React from 'react'
 import StabilityForm from '../../components/form-components/stabilityForm'
 import StabilityEntry from '../../components/entry-components/stabilityEntry'
+import {connect} from 'react-redux'
 import {Table} from 'react-bootstrap'
-// import {API} from 'aws-amplify'
+import {API} from 'aws-amplify'
 
 
-/**
- * Stability protocol Window:
- * Protocol Number:
- * Products:
- * Spec:
- * 
- * Pull Schedule:
- * 
- */
-
-
-export default class StabilityWindow extends React.Component {
+class StabilityWindow extends React.Component {
 
     componentDidMount = () => {
 
-        // const params ={
-        //     headers:{},
-        //     response: true,
-        //     queryStringParameters: {}
-        // }
+        this.props.getCurrentYear()
+        const params ={
+            headers:{},
+            response: true,
+            queryStringParameters: {}
+        }
 
-        // API.get("stabilityAPI", "/stability", params)
-        //     .then(response => {
-        //         console.log(response)
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //         console.log({error})
-        //     })
-
-        // API.get("retainAPI", "/retain", params)
-        //     .then(response => {
-        //         console.log(response)
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //         console.log({error})
-        //     })
+        this.props.currentlyFetching()
+        API.get("stabilityAPI", "/stability", params)
+            .then(response => {
+                this.props.fetchSuccess()
+                console.log(response)
+            })
+            .catch(error => {
+                this.props.fetchFail()
+                console.log(error)
+                console.log({error})
+            })
     }
 
     render() {
@@ -77,3 +62,24 @@ export default class StabilityWindow extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        fetchStatus: state.fetchStatus,
+        currentStabilityProtocols: state.currentStabilityProtocols,
+        currentYear: state.currentYear
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setCurrentAvailableStabilityProtocol: (protocol) => dispatch({ type: "SET_AVAILABLE_STABILITY_PROTOCOL", payload: protocol }),
+        setCurrentStabilityProtocols: (protocols) => dispatch({ type: "SET_CURRENT_STABILITY_PROTOCOL", payload: protocols }),
+        getCurrentYear: () => dispatch({ type: "GET_CURRENT_YEAR" }),
+        currentlyFetching: () => dispatch({ type: "CURRENTLY_FETCHING" }),
+        fetchSuccess: () => dispatch({ type: "SUCCESS_FETCHING" }),
+        fetchFail: () => dispatch({ type: "FAILED_FETCHING" }),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StabilityWindow)
