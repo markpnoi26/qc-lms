@@ -81,7 +81,7 @@ class StabilityForm extends React.Component {
         const newSpecCollection = this.state.specs
         newSpecCollection.push(currSpec)
         this.setState({
-            spec: newSpecCollection,
+            specs: newSpecCollection,
             currSpec: ""
         })
     }
