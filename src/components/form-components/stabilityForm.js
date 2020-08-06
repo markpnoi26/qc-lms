@@ -1,5 +1,5 @@
 import React from 'react'
-// import {API} from 'aws-amplify'
+import {API} from 'aws-amplify'
 import {connect} from 'react-redux'
 import {v4 as uuidv4} from 'uuid'
 import {Button, Form, InputGroup, FormControl, Row, Col, Container, Badge} from 'react-bootstrap'
@@ -9,7 +9,7 @@ class StabilityForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            protocolNum: "",
+            stabilityProtocolNum: "",
             products: [],
             lotNums: [],
             specs: [],
@@ -125,6 +125,80 @@ class StabilityForm extends React.Component {
 
     handleSubmitNewProtocol = () => {
         console.log("Submit the new protocol")
+
+        const bodyPreSend = {
+            ...this.state, 
+            products: [...this.state.products],
+            lotNums: [...this.state.lotNums],
+            specs: [...this.state.specs],
+            amountPerSTP: [...this.state.amountPerSTP]
+        }
+
+        delete bodyPreSend.currProduct
+        delete bodyPreSend.currLotNum
+        delete bodyPreSend.currSpec
+
+        if (bodyPreSend.stabilityProtocolNum === "") return alert("Please make sure protocol exists.")
+        if (bodyPreSend.dateStarted === "") return alert("Please make sure you add a start date")
+
+        const params = {
+            headers: {},
+            response: true,
+            queryStringParameters: {},
+            body: bodyPreSend
+        }
+
+        API.post("stabilityAPI", "/stability", params)
+            .then(response => {
+                this.props.fetchSuccess()
+                const data = JSON.parse(response.config.data)
+                console.log(data)
+                return data
+            })
+            // .then((data) => {
+            //     this.props.addQCFile(data)
+            //     this.props.fetchSuccess()
+            // })
+            // .then(() => {
+            //     const currentQCFiles = this.props.currentQCFiles
+            //     const start = this.props.currentYear.substring(2, 4) + "001"
+
+            //     let startQCFile = parseInt(start, 10)
+            //     for (let i = 0; i < currentQCFiles.length; i++) {
+            //         const stringedFileNum = JSON.stringify(startQCFile)
+            //         if (currentQCFiles[i].num !== stringedFileNum) {
+            //             this.props.setCurrentAvailableQCFile(stringedFileNum)
+            //             return stringedFileNum
+            //         }
+            //         startQCFile++
+            //     }
+            //     this.props.setCurrentAvailableQCFile(JSON.stringify(startQCFile))
+            // })
+            .catch(error => {
+                // continue to log error just in case
+                // console.log(error)
+                console.log({error})
+                this.props.fetchFail()
+            })
+
+        this.setState({
+            stabilityProtocolNum: "",
+            products: [],
+            lotNums: [],
+            specs: [],
+            condition: "",
+            conditionTimePts: 0,
+            packaging: "",
+            dateStarted: "",
+            amountUnit: "g",
+            amountPerSTP: [],
+            amountPerTimePt: 0,
+            stp: "",
+            amount: 0,
+            currProduct: "",
+            currLotNum: "",
+            currSpec: ""
+        })
     }
 
     render() {
@@ -135,11 +209,11 @@ class StabilityForm extends React.Component {
                         <FormControl
                             type="text"
                             size="sm"
-                            value={this.state.protocolNum}
+                            value={this.state.stabilityProtocolNum}
                             placeholder="SP-YY-XX"
                             onChange={(event) => {
                                 this.setState({
-                                    protocolNum: event.target.value
+                                    stabilityProtocolNum: event.target.value
                                 })
                             }}>
 
