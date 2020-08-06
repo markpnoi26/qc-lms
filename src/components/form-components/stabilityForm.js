@@ -3,6 +3,9 @@ import {API} from 'aws-amplify'
 import {connect} from 'react-redux'
 import {v4 as uuidv4} from 'uuid'
 import {Button, Form, InputGroup, FormControl, Row, Col, Container, Badge} from 'react-bootstrap'
+import moment from 'moment'
+import DatePicker from 'react-date-picker'
+import '../styles/date-picker.css'
 
 
 class StabilityForm extends React.Component {
@@ -16,7 +19,7 @@ class StabilityForm extends React.Component {
             condition: "",
             conditionTimePts: 0,
             packaging: "",
-            dateStarted: "",
+            dateStarted: moment().format("L"),
             amountUnit: "g",
             amountPerSTP: [],
             amountPerTimePt: 0,
@@ -24,7 +27,8 @@ class StabilityForm extends React.Component {
             amount: 0,
             currProduct: "",
             currLotNum: "",
-            currSpec: ""
+            currSpec: "",
+            currDate: new Date()
         }
     }
 
@@ -137,6 +141,7 @@ class StabilityForm extends React.Component {
         delete bodyPreSend.currProduct
         delete bodyPreSend.currLotNum
         delete bodyPreSend.currSpec
+        delete bodyPreSend.currDate
 
         if (bodyPreSend.stabilityProtocolNum === "") return alert("Please make sure protocol exists.")
         if (bodyPreSend.dateStarted === "") return alert("Please make sure you add a start date")
@@ -197,7 +202,8 @@ class StabilityForm extends React.Component {
             amount: 0,
             currProduct: "",
             currLotNum: "",
-            currSpec: ""
+            currSpec: "",
+            currDate: new Date()
         })
     }
 
@@ -417,20 +423,17 @@ class StabilityForm extends React.Component {
                 </td>
                 <td>{this.state.amountPerTimePt}</td>
                 <td>
-                    <InputGroup >
-                        <FormControl
-                            type="text"
-                            size="sm"
-                            value={this.state.dateStarted}
-                            placeholder="MM/DD/YYYY"
-                            onChange={(event) => {
-                                this.setState({
-                                    dateStarted: event.target.value
-                                })
-                            }}>
-
-                        </FormControl>
-                    </InputGroup>
+                    <DatePicker 
+                        value={this.state.currDate}
+                        className="date-picker"
+                        onChange={(value) => {
+                            const date = moment(value).format("L")
+                            this.setState({
+                                dateStarted: date,
+                                currDate: value
+                            })
+                        }}
+                    />
                 </td>
                 <td style={{textAlign:"center"}}>
                     <Button size="sm" variant="primary" onClick={this.handleSubmitNewProtocol}> Add </Button>
