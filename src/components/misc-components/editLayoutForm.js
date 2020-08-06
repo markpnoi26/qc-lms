@@ -1,11 +1,22 @@
 import React from 'react'
 import {Form, Row, Col, Container, InputGroup, FormControl, Button, Badge} from 'react-bootstrap'
 import {v4 as uuidv4} from 'uuid'
+import DatePicker from 'react-date-picker'
+import moment from 'moment'
+import '../styles/date-picker.css'
+
 
 export default class EditLayoutForm extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state={
+            currDateIn: moment(props.dateIn, "MM/DD/YYYY").toDate(),
+            currDateOut: props.dateOut !== "" ? moment(props.dateOut, "MM/DD/YYYY").toDate(): null
+        }
+    }
 
     render() {
-        let { projectType, title, lotNums, dateIn, dateOut, requester, analyst, nbPage, currLotNum, handleProjectInfoChange, handleProjectTextChange, handleAddNewLot, handleDeleteLot} = this.props
+        let { projectType, title, lotNums, requester, analyst, nbPage, currLotNum, handleProjectInfoChange, handleProjectTextChange, handleAddNewLot, handleDeleteLot, handleDateInChange, handleDateOutChange} = this.props
         return(
             <Container>
                 <Row>
@@ -152,15 +163,16 @@ export default class EditLayoutForm extends React.Component {
                                     <strong> Date In:  </strong>
                                 </Row>
                                 <Row>
-                                    <Form.Control 
-                                        type="text"
-                                        size="sm"
-                                        placeholder="Date In" 
-                                        value={dateIn} 
-                                        label="dateIn"
-                                        onChange={handleProjectTextChange}
-                                    >
-                                    </Form.Control>
+                                    <DatePicker 
+                                        value={this.state.currDateIn}
+                                        onChange={(value) => {
+                                            const date = moment(value).format("L")
+                                            handleDateInChange(date)
+                                            this.setState({
+                                                currDateIn: value
+                                            })
+                                        }}
+                                    />
                                 </Row>
                             </Container>
                         </Form>
@@ -172,15 +184,20 @@ export default class EditLayoutForm extends React.Component {
                                     <strong> Date Out:  </strong>
                                 </Row>
                                 <Row>
-                                    <Form.Control 
-                                        type="text"
-                                        size="sm"
-                                        placeholder="Date Out" 
-                                        value={dateOut} 
-                                        label="dateOut"
-                                        onChange={handleProjectTextChange}
-                                    >
-                                    </Form.Control>
+                                    <DatePicker 
+                                        value={this.state.currDateOut}
+                                        onChange={(value) => {
+                                            const date = moment(value).format("L")
+                                            if (date === "Invalid date") {
+                                                handleDateOutChange("")
+                                            } else {
+                                                handleDateOutChange(date)
+                                            }
+                                            this.setState({
+                                                currDateOut: value
+                                            })
+                                        }}
+                                    />
                                 </Row>
                             </Container>
                         </Form>
