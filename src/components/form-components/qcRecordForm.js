@@ -4,8 +4,10 @@ import {connect} from 'react-redux'
 import {Button, Form, InputGroup, FormControl, Row, Col, Container, Badge} from 'react-bootstrap'
 import {EditorState, convertToRaw} from 'draft-js'
 import {v4 as uuidv4} from 'uuid'
+import DatePicker from 'react-date-picker'
 import TestSelection from '../misc-components/testSelection'
 import moment from 'moment'
+import '../styles/date-picker.css'
 
 class QCRecordForm extends React.Component {
     constructor(props) {
@@ -50,7 +52,8 @@ class QCRecordForm extends React.Component {
             dateOut: "",
             nbPage: "",
             notes: JSON.stringify(convertToRaw(EditorState.createEmpty().getCurrentContent())),
-            currLotNum: ""
+            currLotNum: "",
+            currDateIn: new Date()
         }
     }
 
@@ -269,7 +272,24 @@ class QCRecordForm extends React.Component {
                     {this.state.lotNums.length}
                 </td>
                 <td>
-                    {moment().format("L")}
+                    <DatePicker 
+                        value={this.state.currDateIn}
+                        className="date-picker"
+                        onChange={(value) => {
+                            const date = moment(value).format("L")
+                            if (date === "Invalid date") {
+                                this.setState({
+                                    dateIn: moment().format("L"),
+                                    currDateIn: value
+                                })
+                            } else {
+                                this.setState({
+                                    dateIn: moment(value).format("L"),
+                                    currDateIn: value
+                                })
+                            }
+                        }}
+                    />
                 </td>
                 <td>
                     N/A
