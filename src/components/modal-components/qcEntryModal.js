@@ -242,6 +242,22 @@ class QCEntryModal extends React.Component {
         })
     }
 
+    handleDateInChange = (date) => {
+        this.setState({
+            ...this.state,
+            changeDetected: true,
+            dateIn: date
+        })
+    }
+
+    handleDateOutChange = (date) => {
+        this.setState({
+            ...this.state,
+            changeDetected: true,
+            dateOut: date
+        })
+    }
+
     handleAddNewLot = (event) => {
         if (this.state.currLotNum === "") return
         const currLot = this.state.currLotNum
@@ -346,6 +362,8 @@ class QCEntryModal extends React.Component {
                                     handleProjectTextChange={this.handleProjectTextChange}
                                     handleAddNewLot={this.handleAddNewLot}
                                     handleDeleteLot={this.handleDeleteLot}
+                                    handleDateInChange={this.handleDateInChange}
+                                    handleDateOutChange={this.handleDateOutChange}
                                 />
                             </Accordion.Collapse>
                         </Accordion>
