@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {Button, Form, InputGroup, FormControl, Row, Col, Container, Badge} from 'react-bootstrap'
 import {EditorState, convertToRaw} from 'draft-js'
 import {v4 as uuidv4} from 'uuid'
-import TestSelection from './testSelection'
+import TestSelection from '../misc-components/testSelection'
 import moment from 'moment'
 
 class QCRecordForm extends React.Component {

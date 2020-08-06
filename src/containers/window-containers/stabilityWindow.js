@@ -1,6 +1,6 @@
 import React from 'react'
-import StabilityForm from '../components/stabilityForm'
-import StabilityEntry from '../components/stabilityEntry'
+import StabilityForm from '../../components/form-components/stabilityForm'
+import StabilityEntry from '../../components/entry-components/stabilityEntry'
 import {Table} from 'react-bootstrap'
 // import {API} from 'aws-amplify'
 

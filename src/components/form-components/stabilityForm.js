@@ -2,7 +2,6 @@ import React from 'react'
 // import {API} from 'aws-amplify'
 import {connect} from 'react-redux'
 import {v4 as uuidv4} from 'uuid'
-import moment from 'moment'
 import {Button, Form, InputGroup, FormControl, Row, Col, Container, Badge} from 'react-bootstrap'
 
 
@@ -17,7 +16,7 @@ class StabilityForm extends React.Component {
             condition: "",
             conditionTimePts: 0,
             packaging: "",
-            dateStarted: moment().format("L"),
+            dateStarted: "",
             amountUnit: "g",
             amountPerSTP: [],
             amountPerTimePt: 0,
@@ -137,7 +136,7 @@ class StabilityForm extends React.Component {
                             type="text"
                             size="sm"
                             value={this.state.protocolNum}
-                            placeholder="Assign Protocol"
+                            placeholder="SP-YY-XX"
                             onChange={(event) => {
                                 this.setState({
                                     protocolNum: event.target.value
@@ -343,7 +342,22 @@ class StabilityForm extends React.Component {
                     </Form>
                 </td>
                 <td>{this.state.amountPerTimePt}</td>
-                <td>{moment().format("L")}</td>
+                <td>
+                    <InputGroup >
+                        <FormControl
+                            type="text"
+                            size="sm"
+                            value={this.state.dateStarted}
+                            placeholder="MM/DD/YYYY"
+                            onChange={(event) => {
+                                this.setState({
+                                    dateStarted: event.target.value
+                                })
+                            }}>
+
+                        </FormControl>
+                    </InputGroup>
+                </td>
                 <td style={{textAlign:"center"}}>
                     <Button size="sm" variant="primary" onClick={this.handleSubmitNewProtocol}> Add </Button>
                 </td>

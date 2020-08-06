@@ -4,8 +4,8 @@ import {connect} from 'react-redux'
 import {Table} from 'react-bootstrap'
 
 
-import QCRecordForm from '../components/qcRecordForm'
-import QCRecordEntry from '../components/qcRecordEntry'
+import QCRecordForm from '../../components/form-components/qcRecordForm'
+import QCRecordEntry from '../../components/entry-components/qcRecordEntry'
 
 class QCRecordWindow extends React.Component {
 

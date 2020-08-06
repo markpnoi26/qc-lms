@@ -2,11 +2,11 @@ import React from 'react'
 import {Route, Switch} from 'react-router-dom'
 import {Container} from 'react-bootstrap'
 
-import HomeWindow from '../window-components/homeWindow'
-import QCRecordWindow from '../window-components/qcRecordWindow'
-import RetainWindow from '../window-components/retainWindow'
-import StabilityWindow from '../window-components/stabilityWindow'
-import NotValid from '../window-components/notValid'
+import HomeWindow from './window-containers/homeWindow'
+import QCRecordWindow from './window-containers/qcRecordWindow'
+import RetainWindow from './window-containers/retainWindow'
+import StabilityWindow from './window-containers/stabilityWindow'
+import NotValid from './window-containers/notValid'
 
 export default class MainWindow extends React.Component {
 

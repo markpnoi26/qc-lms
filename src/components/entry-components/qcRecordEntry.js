@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button, Badge} from 'react-bootstrap'
-import QCEntryModal from '../modalComponent/qcEntryModal'
+import QCEntryModal from '../modal-components/qcEntryModal'
 
 
 export default class QcRecordEntry extends React.Component {

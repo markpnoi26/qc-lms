@@ -4,8 +4,8 @@ import {PencilSquare} from 'react-bootstrap-icons'
 import {connect} from 'react-redux'
 import {API} from 'aws-amplify'
 import {EditorState, Editor,convertFromRaw, convertToRaw} from 'draft-js'
-import TestSelection from '../components/testSelection'
-import EditLayoutForm from '../components/editLayoutForm'
+import TestSelection from '../misc-components/testSelection'
+import EditLayoutForm from '../misc-components/editLayoutForm'
 import 'draft-js/dist/Draft.css'
 
 class QCEntryModal extends React.Component {
