@@ -167,7 +167,11 @@ export default class EditLayoutForm extends React.Component {
                                         value={this.state.currDateIn}
                                         onChange={(value) => {
                                             const date = moment(value).format("L")
-                                            handleDateInChange(date)
+                                            if (date === "Invalid date") {
+                                                handleDateInChange("")
+                                            } else {
+                                                handleDateInChange(date)
+                                            }
                                             this.setState({
                                                 currDateIn: value
                                             })
