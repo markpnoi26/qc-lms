@@ -33,6 +33,7 @@ class QCRecordWindow extends React.Component {
 
     componentDidMount = () => {
         
+        this.props.setCurrentActiveWindow("qcfiles")
         this.props.getCurrentYear()
 
         const params ={
@@ -124,6 +125,7 @@ const mapDispatchToProps = dispatch => {
     return {
         setCurrentAvailableQCFile: (number) => dispatch({type: "SET_AVAILABLE_QC_FILE", payload: number}),
         setCurrentQCFiles: (qcFiles) => dispatch({type: "SET_CURRENT_QC_FILES", payload: qcFiles}),
+        setCurrentActiveWindow: (window) => dispatch({type: "SET_CURRENT_ACTIVE_WINDOW", payload: window}),
         getCurrentYear: () => dispatch({type: "GET_CURRENT_YEAR"}),
         currentlyFetching: () => dispatch({type: "CURRENTLY_FETCHING"}),
         fetchSuccess: () => dispatch({type: "SUCCESS_FETCHING"}),
