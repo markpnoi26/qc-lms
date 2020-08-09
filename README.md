@@ -7,6 +7,11 @@ This project was built out of necessity to maintain optimal operation in our lab
 3. Since the information is now stored in the cloud, we can now have access to this information, even when the company VPN is down. This does not solve all our issues, but it makes it easier to be organized when not all our tools are working correctly.
 4. Our lab now also have SAFE access to electronic information on data that was exclusively hand written. We can now see all past data, and cross reference files with ease.
 
+## Demo
+
+Currently, a demo is under construction, and the application backend contains private files. 
+
+
 ## License
 
 MIT License
