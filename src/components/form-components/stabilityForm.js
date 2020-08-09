@@ -157,28 +157,29 @@ class StabilityForm extends React.Component {
             .then(response => {
                 this.props.fetchSuccess()
                 const data = JSON.parse(response.config.data)
-                console.log(data)
                 return data
             })
-            // .then((data) => {
-            //     this.props.addQCFile(data)
-            //     this.props.fetchSuccess()
-            // })
-            // .then(() => {
-            //     const currentQCFiles = this.props.currentQCFiles
-            //     const start = this.props.currentYear.substring(2, 4) + "001"
+            .then((data) => {
+                this.props.addStabilityProtocol(data)
+            })
+            .then(() => {
+                const currentStabilityProtocols = this.props.currentStabilityProtocols
+                const year = this.props.currentYear.substring(2, 4)
+                let start = 1, stringedNum, stabilityProtocolNum 
 
-            //     let startQCFile = parseInt(start, 10)
-            //     for (let i = 0; i < currentQCFiles.length; i++) {
-            //         const stringedFileNum = JSON.stringify(startQCFile)
-            //         if (currentQCFiles[i].num !== stringedFileNum) {
-            //             this.props.setCurrentAvailableQCFile(stringedFileNum)
-            //             return stringedFileNum
-            //         }
-            //         startQCFile++
-            //     }
-            //     this.props.setCurrentAvailableQCFile(JSON.stringify(startQCFile))
-            // })
+                for (let i = 0; i < currentStabilityProtocols.length; i++) {
+                    stringedNum = start <= 9 ? `0${start}` : `${start}`
+                    stabilityProtocolNum = `SP-${year}-${stringedNum}`
+                    if (currentStabilityProtocols[i].stabilityProtocolNum !== stabilityProtocolNum) {
+                        this.props.setCurrentAvailableStabilityProtocol(stabilityProtocolNum)
+                        return stabilityProtocolNum
+                    }
+                    start++
+                }
+                stringedNum = start <= 9 ? `0${start}` : `${start}`
+                stabilityProtocolNum = `SP-${year}-${stringedNum}`
+                this.props.setCurrentAvailableStabilityProtocol(JSON.stringify(stabilityProtocolNum))
+            })
             .catch(error => {
                 // continue to log error just in case
                 // console.log(error)
@@ -211,20 +212,7 @@ class StabilityForm extends React.Component {
         return (
             <>
                 <td>
-                    <InputGroup >
-                        <FormControl
-                            type="text"
-                            size="sm"
-                            value={this.state.stabilityProtocolNum}
-                            placeholder="SP-YY-XX"
-                            onChange={(event) => {
-                                this.setState({
-                                    stabilityProtocolNum: event.target.value
-                                })
-                            }}>
-
-                        </FormControl>
-                    </InputGroup>
+                    {this.props.currentAvailableStabilityProtocol}
                 </td>
                 <td>
                     <InputGroup >
@@ -448,12 +436,16 @@ class StabilityForm extends React.Component {
 const mapStateToProps = state => {
     return {
         currentYear: state.currentYear,
-        fetchStatus: state.fetchStatus
+        fetchStatus: state.fetchStatus,
+        currentStabilityProtocols: state.currentStabilityProtocols,
+        currentAvailableStabilityProtocol: state.currentAvailableStabilityProtocol
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
+        addStabilityProtocol: (protocol) => dispatch({ type: "ADD_NEW_STABILITY_PROTOCOL", payload: protocol}),
+        setCurrentAvailableStabilityProtocol: (protocolNum) => dispatch({ type: "SET_AVAILABLE_STABILITY_PROTOCOL", payload: protocolNum }),
         currentlyFetching: () => dispatch({type: "CURRENTLY_FETCHING"}),
         fetchSuccess: () => dispatch({type: "SUCCESS_FETCHING"}),
         fetchFail: () => dispatch({type: "FAILED_FETCHING"})
