@@ -12,11 +12,11 @@ class StabilityForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            stabilityProtocolNum: "",
+            stabilityProtocolNum: this.props.currentAvailableStabilityProtocol,
             products: [],
             lotNums: [],
             specs: [],
-            condition: "",
+            condition: "25/60",
             conditionTimePts: 0,
             packaging: "",
             dateStarted: moment().format("L"),
@@ -128,14 +128,27 @@ class StabilityForm extends React.Component {
 
 
     handleSubmitNewProtocol = () => {
-        console.log("Submit the new protocol")
+        const months = {
+            "40/75": [0, 1, 3, 6],
+            "25/60": [0, 3, 6, 9, 12, 18, 24, 36, 48, 60]
+        }
+
+        const datePoints = months[this.state.condition]
+        const dates = []
+
+        for (let i=0; i<datePoints.length; i++) {
+            const dateStarted = new Date(this.state.dateStarted)
+            const currDateToBeAdded = new Date(dateStarted.setMonth(dateStarted.getMonth() + datePoints[i]))
+            dates.push(moment(currDateToBeAdded).format("L"))
+        }
 
         const bodyPreSend = {
             ...this.state, 
             products: [...this.state.products],
             lotNums: [...this.state.lotNums],
             specs: [...this.state.specs],
-            amountPerSTP: [...this.state.amountPerSTP]
+            amountPerSTP: [...this.state.amountPerSTP],
+            pullDates: dates
         }
 
         delete bodyPreSend.currProduct
@@ -144,7 +157,8 @@ class StabilityForm extends React.Component {
         delete bodyPreSend.currDate
 
         if (bodyPreSend.stabilityProtocolNum === "") return alert("Please make sure protocol exists.")
-        if (bodyPreSend.dateStarted === "") return alert("Please make sure you add a start date")
+        if (bodyPreSend.dateStarted === "") return alert("Please make sure you add a start date.")
+        if (bodyPreSend.condition === "") return alert("Please make sure there is a condition indicated.")
 
         const params = {
             headers: {},
@@ -178,7 +192,7 @@ class StabilityForm extends React.Component {
                 }
                 stringedNum = start <= 9 ? `0${start}` : `${start}`
                 stabilityProtocolNum = `SP-${year}-${stringedNum}`
-                this.props.setCurrentAvailableStabilityProtocol(JSON.stringify(stabilityProtocolNum))
+                this.props.setCurrentAvailableStabilityProtocol(stabilityProtocolNum)
             })
             .catch(error => {
                 // continue to log error just in case
@@ -188,7 +202,7 @@ class StabilityForm extends React.Component {
             })
 
         this.setState({
-            stabilityProtocolNum: "",
+            stabilityProtocolNum: this.props.currentAvailableStabilityProtocol,
             products: [],
             lotNums: [],
             specs: [],
@@ -206,6 +220,13 @@ class StabilityForm extends React.Component {
             currSpec: "",
             currDate: new Date()
         })
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.currentAvailableStabilityProtocol !== prevState.stabilityProtocolNum) {
+            return { stabilityProtocolNum: nextProps.currentAvailableStabilityProtocol };
+        }
+        return null;
     }
 
     render() {
@@ -327,9 +348,8 @@ class StabilityForm extends React.Component {
                                     conditionTimePts: conditionTimePoint
                                 })
                             }}>
-                            <option value="">Select Condition</option>
-                            <option value="40/75">40oC/75%RH</option>
                             <option value="25/60">25oC/60%RH</option>
+                            <option value="40/75">40oC/75%RH</option>
                         </Form.Control>
                     </Form>
                 </td>
