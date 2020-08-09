@@ -5,6 +5,7 @@ import fetchStatus from './fetchStatus'
 import currentAvailableQCFile from './currentAvailableQCFile'
 import currentAvailableStabilityProtocol from './currentAvailableStabilityProtocol'
 import currentStabilityProtocols from './currentStabilityProtocols'
+import currentActiveWindow from './currentActiveWindow'
 
 
 export default combineReducers({
@@ -13,5 +14,6 @@ export default combineReducers({
     currentStabilityProtocols,
     currentAvailableQCFile,
     currentAvailableStabilityProtocol,
+    currentActiveWindow,
     fetchStatus
 })
