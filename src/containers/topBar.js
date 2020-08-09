@@ -17,11 +17,23 @@ async function signOut() {
 class TopBar extends React.Component {
 
     onYearChange = (eventKey) => {
-        console.log(eventKey.year)
+
         this.props.updateCurrentYear(eventKey.year)
 
-        const params ={
-            headers:{},
+        switch(this.props.currentActiveWindow) {
+            case "qcfiles":
+                return this.qcFilesAPICall(eventKey)
+            case "stability":
+                return this.stabilityProtocolsAPICall(eventKey)
+            default:
+                console.log("No API calls needed.")
+        }
+    }
+
+    qcFilesAPICall = (eventKey) => {
+
+        const params = {
+            headers: {},
             response: true,
             queryStringParameters: {
                 currentYear: eventKey.year
@@ -35,12 +47,12 @@ class TopBar extends React.Component {
             })
             .then(() => {
                 // set the next available qc file
-            
+
                 const currentQCFiles = this.props.currentQCFiles
-                const start = eventKey.year.substring(2,4) + "001"
-                
+                const start = eventKey.year.substring(2, 4) + "001"
+
                 let startQCFile = parseInt(start, 10)
-                for (let i = 0; i<currentQCFiles.length; i++) {
+                for (let i = 0; i < currentQCFiles.length; i++) {
                     const stringedFileNum = JSON.stringify(startQCFile)
                     if (currentQCFiles[i].num !== stringedFileNum) {
                         this.props.setCurrentAvailableQCFile(stringedFileNum)
@@ -54,6 +66,10 @@ class TopBar extends React.Component {
                 this.props.fetchFail()
                 console.log(error)
             })
+    }
+
+    stabilityProtocolsAPICall = (eventKey) => {
+        console.log("calling Stability API...", eventKey.year)
     }
 
     render () {
@@ -102,6 +118,8 @@ const mapStateToProps = state => {
     return {
         fetchStatus: state.fetchStatus,
         currentQCFiles: state.currentQCFiles,
+        currentStabilityProtocols: state.currentStabilityProtocols,
+        currentActiveWindow: state.currentActiveWindow,
         currentYear: state.currentYear
     }
 }
@@ -111,6 +129,7 @@ const mapDispatchToProps = dispatch => {
         updateCurrentYear: (year) => dispatch({type: "UPDATE_YEAR", payload: year}),
         setCurrentAvailableQCFile: (number) => dispatch({type: "SET_AVAILABLE_QC_FILE", payload: number}),
         setCurrentQCFiles: (qcFiles) => dispatch({type: "SET_CURRENT_QC_FILES", payload: qcFiles}),
+        setCurrentStabilityProtocols: (protocols) => dispatch({ type: "SET_CURRENT_STABILITY_PROTOCOLS", payload: protocols}),
         currentlyFetching: () => dispatch({type: "CURRENTLY_FETCHING"}),
         fetchSuccess: () => dispatch({type: "SUCCESS_FETCHING"}),
         fetchFail: () => dispatch({type: "FAILED_FETCHING"}),
