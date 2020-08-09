@@ -139,7 +139,7 @@ class QCRecordForm extends React.Component {
             })
 
         this.setState({
-            num: this.props.nextQCFile,
+            num: this.props.currentAvailableQCFile,
             projectType: "",
             title: "",
             requester: "",
