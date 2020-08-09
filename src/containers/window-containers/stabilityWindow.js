@@ -9,8 +9,9 @@ import {API} from 'aws-amplify'
 class StabilityWindow extends React.Component {
 
     componentDidMount = () => {
-
+        this.props.setCurrentActiveWindow("stability")
         this.props.getCurrentYear()
+
         const params ={
             headers:{},
             response: true,
@@ -21,11 +22,28 @@ class StabilityWindow extends React.Component {
         API.get("stabilityAPI", "/stability", params)
             .then(response => {
                 this.props.fetchSuccess()
-                console.log(response)
+                this.props.setCurrentStabilityProtocols(response.data)
+            })
+            .then(() => {
+                const currentStabilityProtocols = this.props.currentStabilityProtocols
+                const year = this.props.currentYear.substring(2, 4)
+                let start = 1, stringedNum, stabilityProtocolNum
+
+                for (let i = 0; i < currentStabilityProtocols.length; i++) {
+                    stringedNum = start <= 9 ? `0${start}` : `${start}`
+                    stabilityProtocolNum = `SP-${year}-${stringedNum}`
+                    if (currentStabilityProtocols[i].stabilityProtocolNum !== stabilityProtocolNum) {
+                        this.props.setCurrentAvailableStabilityProtocol(stabilityProtocolNum)
+                        return stabilityProtocolNum
+                    }
+                    start++
+                }
+                stringedNum = start <= 9 ? `0${start}` : `${start}`
+                stabilityProtocolNum = `SP-${year}-${stringedNum}`
+                this.props.setCurrentAvailableStabilityProtocol(stabilityProtocolNum)
             })
             .catch(error => {
                 this.props.fetchFail()
-                console.log(error)
                 console.log({error})
             })
     }
@@ -74,7 +92,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         setCurrentAvailableStabilityProtocol: (protocol) => dispatch({ type: "SET_AVAILABLE_STABILITY_PROTOCOL", payload: protocol }),
-        setCurrentStabilityProtocols: (protocols) => dispatch({ type: "SET_CURRENT_STABILITY_PROTOCOL", payload: protocols }),
+        setCurrentStabilityProtocols: (protocols) => dispatch({ type: "SET_CURRENT_STABILITY_PROTOCOLS", payload: protocols }),
+        setCurrentActiveWindow: (window) => dispatch({type: "SET_CURRENT_ACTIVE_WINDOW", payload: window}),
         getCurrentYear: () => dispatch({ type: "GET_CURRENT_YEAR" }),
         currentlyFetching: () => dispatch({ type: "CURRENTLY_FETCHING" }),
         fetchSuccess: () => dispatch({ type: "SUCCESS_FETCHING" }),
