@@ -68,9 +68,13 @@ class StabilityWindow extends React.Component {
                         </tr>
                     </thead>
                     <tbody >
-                        <tr style={{ textAlign: "center" }}>
-                            <StabilityEntry />
-                        </tr>
+                        {this.props.currentStabilityProtocols.map(protocol => {
+                            return (
+                                <tr key={protocol.stabilityProtocolNum} style={{ textAlign: "center" }}>
+                                    <StabilityEntry protocol={protocol} />
+                                </tr>
+                            )
+                        })}
                         <tr style={{ textAlign: "center" }}>
                             <StabilityForm />
                         </tr>
