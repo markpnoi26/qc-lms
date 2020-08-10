@@ -415,6 +415,7 @@ class StabilityForm extends React.Component {
                         }
                     </Container>
                 </td>
+                <td>{this.state.amountPerTimePt}</td>
                 <td>
                     <Form>
                         <Form.Control 
@@ -429,7 +430,6 @@ class StabilityForm extends React.Component {
                         </Form.Control>
                     </Form>
                 </td>
-                <td>{this.state.amountPerTimePt}</td>
                 <td>
                     <DatePicker 
                         value={this.state.currDate}
