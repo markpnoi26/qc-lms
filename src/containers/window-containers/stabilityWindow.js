@@ -61,10 +61,10 @@ class StabilityWindow extends React.Component {
                             <th>Condition</th>
                             <th>Packaging</th>
                             <th>Amount/STP</th>
-                            <th>Amount Unit</th>
                             <th>Amount/Time Point</th>
+                            <th>Unit</th>
                             <th>Date Started</th>
-                            <th>Pull Schedule</th>
+                            <th>Protocol & Schedule</th>
                         </tr>
                     </thead>
                     <tbody >
