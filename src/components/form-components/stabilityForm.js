@@ -3,6 +3,7 @@ import {API} from 'aws-amplify'
 import {connect} from 'react-redux'
 import {v4 as uuidv4} from 'uuid'
 import {Button, Form, InputGroup, FormControl, Row, Col, Container, Badge} from 'react-bootstrap'
+import {EditorState, convertToRaw} from 'draft-js'
 import moment from 'moment'
 import DatePicker from 'react-date-picker'
 import '../styles/date-picker.css'
@@ -28,7 +29,8 @@ class StabilityForm extends React.Component {
             currProduct: "",
             currLotNum: "",
             currSpec: "",
-            currDate: new Date()
+            currDate: new Date(),
+            notes: JSON.stringify(convertToRaw(EditorState.createEmpty().getCurrentContent()))
         }
     }
 
@@ -218,7 +220,8 @@ class StabilityForm extends React.Component {
             currProduct: "",
             currLotNum: "",
             currSpec: "",
-            currDate: new Date()
+            currDate: new Date(),
+            notes: JSON.stringify(convertToRaw(EditorState.createEmpty().getCurrentContent()))
         })
     }
 
