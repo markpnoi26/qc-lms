@@ -4,8 +4,27 @@ import {Modal, Button, Row, Col, Toast} from 'react-bootstrap'
 export default class StabilityEntryModal extends React.Component {
     constructor(props) {
         super(props)
+        let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, pullDates, notes } = this.props.protocol
+        super(props)
         this.state = {
-
+            confirmUpdateOpen: false,
+            confirmDeleteOpen: false,
+            confirmCloseModalOpen: false,
+            changeDetected: false,
+            stabilityProtocolNum,
+            products,
+            lotNums,
+            specs,
+            condition,
+            packaging,
+            amountUnit,
+            amountPerTimePt,
+            dateStarted,
+            amountPerSTP,
+            pullDates,
+            notes,
+            currLotNum: "",
+            editorState: null
         }
     }
 
