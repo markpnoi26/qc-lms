@@ -1,8 +1,9 @@
 import React from 'react'
-import {Row, Col, Container, Button} from 'react-bootstrap'
+import {Container, Button, Table} from 'react-bootstrap'
 import {v4 as uuidv4} from 'uuid'
 
 import StabilityEntryModal from '../modal-components/stabilityEntryModal'
+import StabilityBadgeComponent from '../misc-components/stabilityBadgeComponent'
 
 export default class StabilityEntry extends React.Component {
     constructor(props) {
@@ -26,57 +27,51 @@ export default class StabilityEntry extends React.Component {
                 <td>
                     <Container fluid>
                         {products.map((prod) => (
-                            <Row
-                                key={uuidv4()}>
-                                {prod}
-                            </Row>
-                        )
+                                <StabilityBadgeComponent key={uuidv4()} item={prod} />
+                            )
                         )}
                     </Container>
                 </td>
                 <td>
                     <Container fluid>
                         {lotNums.map((lot) => (
-                            <Row
-                                key={uuidv4()}>
-                                {lot}
-                            </Row>
-                        )
+                                <StabilityBadgeComponent key={uuidv4()} item={lot} />
+                            )
                         )}
                     </Container>
                 </td>
                 <td>
                     <Container fluid>
                         {specs.map((spec) => (
-                            <Row
-                                key={uuidv4()}>
-                                {spec}
-                            </Row>
-                        )
+                                <StabilityBadgeComponent key={uuidv4()} item={spec} />
+                            )
                         )}
                     </Container>
                 </td>
                 <td>{condition}</td>
                 <td>{packaging}</td>
                 <td>
-                    <Container fluid>
-                        {amountPerSTP.map((item) => (
-                            <Row
-                                key={uuidv4()}>
-                                <Col>
-                                    STP-{item.stp}
-                                </Col>
-                                <Col>
-                                    {item.amount}{amountUnit}
-                                </Col>
-                                
-                            </Row>
-                        )
-                        )}
-                    </Container>
+                    <Table bordered striped variant="dark" >
+                        <tbody>
+                            {amountPerSTP.map((item) => (
+                                <tr
+                                    key={uuidv4()}>
+                                    <td>
+                                        STP-{item.stp}
+                                    </td>
+                                    <td>
+                                        {item.amount}{amountUnit}
+                                    </td>
+                                    
+                                </tr>
+                            )
+                            )}
+                        </tbody>
+                        
+                    </Table>
                 </td>
-                <td>{amountUnit}</td>
                 <td>{amountPerTimePt}</td>
+                <td>{amountUnit}</td>
                 <td>{dateStarted}</td>
                 <td style={{ textAlign: "center" }}>
                     <Button
