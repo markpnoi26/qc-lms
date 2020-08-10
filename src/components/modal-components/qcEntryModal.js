@@ -304,7 +304,7 @@ class QCEntryModal extends React.Component {
         return(
             <Modal
                 {...rest}
-                size="lg"
+                size="xl"
                 aria-labelledby="contained-modal-title-vcenter"
                 backdrop={'static'}
                 centered
