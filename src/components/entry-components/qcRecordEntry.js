@@ -1,6 +1,7 @@
 import React from 'react'
 import {Button, Badge} from 'react-bootstrap'
 import QCEntryModal from '../modal-components/qcEntryModal'
+import {v4 as uuidv4} from 'uuid'
 
 
 export default class QcRecordEntry extends React.Component {
@@ -37,31 +38,31 @@ export default class QcRecordEntry extends React.Component {
                                 if (tests[test]) {
                                     switch(test) {
                                         case "colorAndAppearance":
-                                            return <span key={test}><Badge pill variant="info"> C&A </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> C&A </Badge> </span>
                                         case 'lod':
-                                            return <span key={test}><Badge pill variant="info"> LOD </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> LOD </Badge> </span>
                                         case 'ash':
-                                            return <span key={test}><Badge pill variant="info"> Ash </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> Ash </Badge> </span>
                                         case 'particleSize':
-                                            return <span key={test}><Badge pill variant="info"> Particle Size </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> Particle Size </Badge> </span>
                                         case 'solids':
-                                            return <span key={test}><Badge pill variant="info"> Solids </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> Solids </Badge> </span>
                                         case 'odor':
-                                            return <span key={test}><Badge pill variant="info"> Odor </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> Odor </Badge> </span>
                                         case 'meltingPoint':
-                                            return <span key={test}><Badge pill variant="info"> Melting Point </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> Melting Point </Badge> </span>
                                         case 'ftir':
-                                            return <span key={test}><Badge pill variant="info"> FTIR </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> FTIR </Badge> </span>
                                         case 'nmr':
-                                            return <span key={test}><Badge pill variant="info"> NMR </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> NMR </Badge> </span>
                                         case 'uvVis':
-                                            return <span key={test}><Badge pill variant="info"> UV-Vis </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> UV-Vis </Badge> </span>
                                         default :
                                             return null
                                     }
 
                                 }
-                                return <React.Fragment key={idx}></React.Fragment>
+                                return <React.Fragment key={uuidv4()}></React.Fragment>
                             })}
                         </h6>
                     </div>
@@ -71,19 +72,19 @@ export default class QcRecordEntry extends React.Component {
                                 if (tests[test]) {
                                     switch(test) {
                                         case "hplc":
-                                            return <span key={test}><Badge pill variant="info"> HPLC </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> HPLC </Badge> </span>
                                         case "gcms":
-                                            return <span key={test}><Badge pill variant="info"> GC/MS </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> GC/MS </Badge> </span>
                                         case "hptlc":
-                                            return <span key={test}><Badge pill variant="info"> HPTLC </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> HPTLC </Badge> </span>
                                         case "sec":
-                                            return <span key={test}><Badge pill variant="info"> SEC </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> SEC </Badge> </span>
                                         default :
                                             return null
                                     }
 
                                 }
-                                return <React.Fragment key={idx}></React.Fragment>
+                                return <React.Fragment key={uuidv4()}></React.Fragment>
                             })}
                         </h6>
                     </div>
@@ -93,21 +94,21 @@ export default class QcRecordEntry extends React.Component {
                                 if (tests[test]) {
                                     switch(test) {
                                         case "totalPlateCount":
-                                            return <span key={test}><Badge pill variant="info"> TPC </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> TPC </Badge> </span>
                                         case "coliform":
-                                            return <span key={test}><Badge pill variant="info"> Coliform </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> Coliform </Badge> </span>
                                         case "yeastAndMold":
-                                            return <span key={test}><Badge pill variant="info"> Y&M </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> Y&M </Badge> </span>
                                         case "eColi":
-                                            return <span key={test}><Badge pill variant="info"> E.Coli </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> E.Coli </Badge> </span>
                                         case "salmonella":
-                                            return <span key={test}><Badge pill variant="info"> Salmonella </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> Salmonella </Badge> </span>
                                         default :
                                             return null
                                     }
 
                                 }
-                                return <React.Fragment key={idx}></React.Fragment>
+                                return <React.Fragment key={uuidv4()}></React.Fragment>
                             })}
                         </h6>
                     </div>
@@ -117,21 +118,21 @@ export default class QcRecordEntry extends React.Component {
                                 if (tests[test]) {
                                     switch(test) {
                                         case "arsenic":
-                                            return <span key={test}><Badge pill variant="info"> As (HM) </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> As (HM) </Badge> </span>
                                         case "lead":
-                                            return <span key={test}><Badge pill variant="info"> Pb (HM)</Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> Pb (HM)</Badge> </span>
                                         case "mercury":
-                                            return <span key={test}><Badge pill variant="info"> Hg (HM) </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> Hg (HM) </Badge> </span>
                                         case "cadmium":
-                                            return <span key={test}><Badge pill variant="info"> Cd (HM) </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> Cd (HM) </Badge> </span>
                                         case 'retain':
-                                            return <span key={test}><Badge pill variant="info"> Retain </Badge> </span>
+                                            return <span key={uuidv4()}><Badge pill variant="info"> Retain </Badge> </span>
                                         default :
                                             return null
                                     }
 
                                 }
-                                return <React.Fragment key={idx}></React.Fragment>
+                                return <React.Fragment key={uuidv4()}></React.Fragment>
                             })}
                         </h6>
                     </div>
@@ -140,7 +141,7 @@ export default class QcRecordEntry extends React.Component {
                     <ol>
                         {lotNums.map((lot, idx) => (
                             <li 
-                                key={idx}> 
+                                key={uuidv4()}> 
                                 {lot} 
                             </li> 
                             )
