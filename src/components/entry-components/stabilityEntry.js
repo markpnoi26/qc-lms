@@ -83,7 +83,7 @@ export default class StabilityEntry extends React.Component {
                 </td>
 
                 <StabilityEntryModal 
-                    file={this.props.protocol}
+                    protocol={this.props.protocol}
                     show={this.state.modalShow}
                     onHide={() => this.setModalShow()}
                 />
