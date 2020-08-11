@@ -7,6 +7,7 @@ import {EditorState, Editor,convertFromRaw, convertToRaw} from 'draft-js'
 import TestSelection from '../misc-components/testSelection'
 import EditLayoutForm from '../misc-components/editLayoutForm'
 import 'draft-js/dist/Draft.css'
+import '../styles/toast-width.css'
 
 class QCEntryModal extends React.Component {
     constructor(props) {
@@ -383,7 +384,7 @@ class QCEntryModal extends React.Component {
                                />
                             </Col>
                             <Col>
-                                <Toast>
+                                <Toast className="toast-top-full-width">
                                     <Toast.Header closeButton={false}>
                                         <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
                                         <strong className="mr-auto">Notes:</strong>
