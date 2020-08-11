@@ -1,11 +1,14 @@
 import React from 'react'
-import {Modal, Button, Row, Col, Toast} from 'react-bootstrap'
+import {Modal, Button, Row, Col, Toast, Container} from 'react-bootstrap'
+import '../styles/toast-width.css'
+// import { PencilSquare } from 'react-bootstrap-icons'
+
+import PullSchedule from '../misc-components/pullSchedule'
 
 export default class StabilityEntryModal extends React.Component {
     constructor(props) {
         super(props)
         let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, pullDates, notes } = this.props.protocol
-        super(props)
         this.state = {
             confirmUpdateOpen: false,
             confirmDeleteOpen: false,
@@ -29,27 +32,109 @@ export default class StabilityEntryModal extends React.Component {
     }
 
     render() {
+        let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, pullDates } = this.state
+        
+        const { currentQCFiles, fetchStatus, updateQCFiles, currentlyFetching, fetchSuccess, fetchFail, setCurrentAvailableQCFile, currentYear, ...rest} = this.props
         return (
             <Modal
-                {...this.props}
-                size="lg"
+                {...rest}
+                size="xl"
                 aria-labelledby="contained-modal-title-vcenter"
                 backdrop={'static'}
                 centered
                 hidden={this.props.fetchStatus}    
             >
-                <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
-                        Protocol 
-                    </Modal.Title>
+                <Modal.Header >
+                    <Container fluid>
+                        <Row>
+                            <Modal.Title id="contained-modal-title-vcenter">
+                                {stabilityProtocolNum}
+                            </Modal.Title>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <strong> Condition: </strong> {condition}
+                            </Col>
+                            <Col>
+                                <strong> Packaging: </strong> {packaging}
+                            </Col>
+                            <Col>
+                                <strong> Date Started: </strong> {dateStarted}
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <strong> Lot:  </strong> {lotNums.join(", ")}
+                            </Col>
+                            <Col>
+                                <strong> Products: </strong> {products.join(", ")}
+                            </Col>
+                            <Col>
+                                <strong> Specs: </strong> {specs.join(", ")}
+                            </Col>
+                            <Col>
+                                <strong> STPs: </strong> {amountPerSTP.join(", ")}
+                            </Col>
+                        </Row>
+                        {/* <Accordion>
+                            <Accordion.Toggle
+                                size={12}
+                                as={PencilSquare}
+                                variant="link"
+                                eventKey="0"
+                                style={{ cursor: "pointer" }}>
+                            </Accordion.Toggle>
+                            <Accordion.Collapse eventKey="0">
+                                <div> Edit Under Construction. </div>
+                                <EditLayoutForm
+                                    projectType={projectType}
+                                    lotNums={lotNums}
+                                    title={title}
+                                    requester={requester}
+                                    analyst={analyst}
+                                    nbPage={nbPage}
+                                    dateIn={dateIn}
+                                    dateOut={dateOut}
+                                    currLotNum={currLotNum}
+                                    handleProjectInfoChange={this.handleProjectInfoChange}
+                                    handleProjectTextChange={this.handleProjectTextChange}
+                                    handleAddNewLot={this.handleAddNewLot}
+                                    handleDeleteLot={this.handleDeleteLot}
+                                    handleDateInChange={this.handleDateInChange}
+                                    handleDateOutChange={this.handleDateOutChange}
+                                />
+                            </Accordion.Collapse>
+                        </Accordion> */}
+                    </Container>
                 </Modal.Header>
                 <Modal.Body>    
-                    <h4>Centered Modal</h4>
-                    <p>
-                        Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-                        dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-                        consectetur ac, vestibulum at eros.
-                    </p>
+                    <Container fluid>
+                        <Row>
+                            <Col>
+                                <PullSchedule 
+                                    pullDates={pullDates}
+                                    amountPerTimePt={amountPerTimePt}
+                                    condition={condition}
+                                    amountUnit={amountUnit}/>
+                            </Col>
+                            <Col>
+                                <Toast className="toast-top-full-width">
+                                    <Toast.Header closeButton={false}>
+                                        <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
+                                        <strong className="mr-auto">Notes:</strong>
+                                    </Toast.Header>
+                                    <Toast.Body>
+                                        {/* <Editor
+                                            editorState={this.state.editorState}
+                                            onChange={this.handleNoteBookInfoChange}
+                                            placeholder="Add notes here..."
+                                        /> */}
+
+                                    </Toast.Body>
+                                </Toast>
+                            </Col>
+                        </Row>
+                    </Container>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={this.props.onHide}>Close</Button>
