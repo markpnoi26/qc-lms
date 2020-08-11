@@ -9,7 +9,7 @@ This project was built out of necessity to maintain optimal operation in our lab
 
 ## Demo
 
-Currently, a demo is under construction, and the application backend contains private files. 
+Currently, a demo is under construction, and the application backend contains private information. 
 
 
 ## License
