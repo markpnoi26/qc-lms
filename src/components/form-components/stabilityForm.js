@@ -135,13 +135,14 @@ class StabilityForm extends React.Component {
             "25/60": [0, 3, 6, 9, 12, 18, 24, 36, 48, 60]
         }
 
+        // this is to add pull dates before submitting the entry item.
         const datePoints = months[this.state.condition]
-        const dates = []
+        const dates = {}
 
         for (let i=0; i<datePoints.length; i++) {
             const dateStarted = new Date(this.state.dateStarted)
             const currDateToBeAdded = new Date(dateStarted.setMonth(dateStarted.getMonth() + datePoints[i]))
-            dates.push(moment(currDateToBeAdded).format("L"))
+            dates[(moment(currDateToBeAdded).format("L"))] = i===0? true:false
         }
 
         const bodyPreSend = {
