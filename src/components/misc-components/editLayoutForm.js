@@ -10,7 +10,7 @@ export default class EditLayoutForm extends React.Component {
     constructor(props) {
         super(props)
         this.state={
-            currDateIn: moment(props.dateIn, "MM/DD/YYYY").toDate(),
+            currDateIn: props.dateIn !== "" ? moment(props.dateIn, "MM/DD/YYYY").toDate(): null,
             currDateOut: props.dateOut !== "" ? moment(props.dateOut, "MM/DD/YYYY").toDate(): null
         }
     }
