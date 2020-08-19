@@ -20,10 +20,10 @@ export default class StabilityEntry extends React.Component {
     }
 
     render() {
-        let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP } = this.props.protocol
+        let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, year } = this.props.protocol
         return(
             <>
-                <td>{stabilityProtocolNum}</td>
+                <td>SP-{year.substring(2,4)}-{stabilityProtocolNum.substring(2,4)}</td>
                 <td>
                     <Container fluid>
                         {products.map((prod) => (
