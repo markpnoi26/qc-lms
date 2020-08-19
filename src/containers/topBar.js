@@ -69,7 +69,40 @@ class TopBar extends React.Component {
     }
 
     stabilityProtocolsAPICall = (eventKey) => {
-        console.log("calling Stability API...", eventKey.year)
+        const params = {
+            headers: {},
+            response: true,
+            queryStringParameters: {
+                currentYear: eventKey.year
+            }
+        }
+        this.props.currentlyFetching()
+        API.get("stabilityAPI", "/stability", params)
+            .then(response => {
+                this.props.fetchSuccess()
+                this.props.setCurrentStabilityProtocols(response.data)
+            })
+            .then(() => {
+                const currentStabilityProtocols = this.props.currentStabilityProtocols
+                let start = 1, stringedNum, stabilityProtocolNum
+
+                for (let i = 0; i < currentStabilityProtocols.length; i++) {
+                    stringedNum = start <= 9 ? `0${start}` : `${start}`
+                    stabilityProtocolNum = `${this.props.currentYear.substring(2, 4)}${stringedNum}`
+                    if (currentStabilityProtocols[i].stabilityProtocolNum !== stabilityProtocolNum) {
+                        this.props.setCurrentAvailableStabilityProtocol(stabilityProtocolNum)
+                        return stabilityProtocolNum
+                    }
+                    start++
+                }
+                stringedNum = start <= 9 ? `0${start}` : `${start}`
+                stabilityProtocolNum = `${this.props.currentYear.substring(2, 4)}${stringedNum}`
+                this.props.setCurrentAvailableStabilityProtocol(stabilityProtocolNum)
+            })
+            .catch(error => {
+                this.props.fetchFail()
+                console.log({ error })
+            })
     }
 
     render () {
@@ -130,6 +163,7 @@ const mapDispatchToProps = dispatch => {
         setCurrentAvailableQCFile: (number) => dispatch({type: "SET_AVAILABLE_QC_FILE", payload: number}),
         setCurrentQCFiles: (qcFiles) => dispatch({type: "SET_CURRENT_QC_FILES", payload: qcFiles}),
         setCurrentStabilityProtocols: (protocols) => dispatch({ type: "SET_CURRENT_STABILITY_PROTOCOLS", payload: protocols}),
+        setCurrentAvailableStabilityProtocol: (protocolNum) => dispatch({ type: "SET_AVAILABLE_STABILITY_PROTOCOL", payload: protocolNum }),
         currentlyFetching: () => dispatch({type: "CURRENTLY_FETCHING"}),
         fetchSuccess: () => dispatch({type: "SUCCESS_FETCHING"}),
         fetchFail: () => dispatch({type: "FAILED_FETCHING"}),
