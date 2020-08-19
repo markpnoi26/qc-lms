@@ -8,7 +8,7 @@ import PullSchedule from '../misc-components/pullSchedule'
 export default class StabilityEntryModal extends React.Component {
     constructor(props) {
         super(props)
-        let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, pullDates, notes } = this.props.protocol
+        let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, pullDates, notes, year } = this.props.protocol
         this.state = {
             confirmUpdateOpen: false,
             confirmDeleteOpen: false,
@@ -26,15 +26,16 @@ export default class StabilityEntryModal extends React.Component {
             amountPerSTP,
             pullDates,
             notes,
+            year,
             currLotNum: "",
             editorState: null
         }
     }
 
     render() {
-        let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, pullDates } = this.state
+        let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, pullDates, year } = this.state
         
-        const { currentQCFiles, fetchStatus, updateQCFiles, currentlyFetching, fetchSuccess, fetchFail, setCurrentAvailableQCFile, currentYear, ...rest} = this.props
+        const { currentQCFiles, fetchStatus, updateQCFiles, currentlyFetching, fetchSuccess, fetchFail, setCurrentAvailableQCFile, ...rest} = this.props
         return (
             <Modal
                 {...rest}
@@ -48,7 +49,7 @@ export default class StabilityEntryModal extends React.Component {
                     <Container fluid>
                         <Row>
                             <Modal.Title id="contained-modal-title-vcenter">
-                                {stabilityProtocolNum}
+                                SP-{year.substring(2,4)}-{stabilityProtocolNum}
                             </Modal.Title>
                         </Row>
                         <Row>
