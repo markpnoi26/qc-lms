@@ -151,7 +151,8 @@ class StabilityForm extends React.Component {
             lotNums: [...this.state.lotNums],
             specs: [...this.state.specs],
             amountPerSTP: [...this.state.amountPerSTP],
-            pullDates: dates
+            pullDates: dates,
+            year: this.props.currentYear
         }
 
         delete bodyPreSend.currProduct
@@ -181,12 +182,11 @@ class StabilityForm extends React.Component {
             })
             .then(() => {
                 const currentStabilityProtocols = this.props.currentStabilityProtocols
-                const year = this.props.currentYear.substring(2, 4)
                 let start = 1, stringedNum, stabilityProtocolNum 
 
                 for (let i = 0; i < currentStabilityProtocols.length; i++) {
                     stringedNum = start <= 9 ? `0${start}` : `${start}`
-                    stabilityProtocolNum = `SP-${year}-${stringedNum}`
+                    stabilityProtocolNum = `${this.props.currentYear.substring(2, 4)}${stringedNum}`
                     if (currentStabilityProtocols[i].stabilityProtocolNum !== stabilityProtocolNum) {
                         this.props.setCurrentAvailableStabilityProtocol(stabilityProtocolNum)
                         return stabilityProtocolNum
@@ -194,12 +194,10 @@ class StabilityForm extends React.Component {
                     start++
                 }
                 stringedNum = start <= 9 ? `0${start}` : `${start}`
-                stabilityProtocolNum = `SP-${year}-${stringedNum}`
+                stabilityProtocolNum = `${this.props.currentYear.substring(2, 4)}${stringedNum}`
                 this.props.setCurrentAvailableStabilityProtocol(stabilityProtocolNum)
             })
             .catch(error => {
-                // continue to log error just in case
-                // console.log(error)
                 console.log({error})
                 this.props.fetchFail()
             })
@@ -209,7 +207,7 @@ class StabilityForm extends React.Component {
             products: [],
             lotNums: [],
             specs: [],
-            condition: "",
+            condition: "25/60",
             conditionTimePts: 0,
             packaging: "",
             dateStarted: "",
@@ -237,7 +235,7 @@ class StabilityForm extends React.Component {
         return (
             <>
                 <td>
-                    {this.props.currentAvailableStabilityProtocol}
+                    SP-{this.props.currentYear.substring(2, 4)}-{this.props.currentAvailableStabilityProtocol.substring(2,4)}
                 </td>
                 <td>
                     <InputGroup >
