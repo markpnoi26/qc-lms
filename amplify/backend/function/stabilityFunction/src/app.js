@@ -60,8 +60,18 @@ const convertUrlType = (param, type) => {
 
 app.get(path, function(req, res) {
   console.log("Stablity Get Called!")
+
+  const currentYear = req.query.currentYear
+
   let queryParams = {
-    TableName: tableName
+    TableName: tableName,
+    FilterExpression: "#year = :yyyy",
+    ExpressionAttributeNames: {
+      "#year": "year",
+    },
+    ExpressionAttributeValues: {
+      ":yyyy": currentYear
+    }
   }
 
   dynamodb.scan(queryParams, (err, data) => {

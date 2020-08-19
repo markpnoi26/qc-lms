@@ -76,7 +76,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-qclms-qclms-234129-deployment",
-					"S3Key": "amplify-builds/stabilityFunction-4d316f4c565668306f77-build.zip"
+					"S3Key": "amplify-builds/stabilityFunction-59776f776a546e437154-build.zip"
 				}
 			}
 		},
