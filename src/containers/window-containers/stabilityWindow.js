@@ -15,7 +15,9 @@ class StabilityWindow extends React.Component {
         const params ={
             headers:{},
             response: true,
-            queryStringParameters: {}
+            queryStringParameters: {
+                currentYear: this.props.currentYear
+            }
         }
 
         this.props.currentlyFetching()
@@ -26,12 +28,11 @@ class StabilityWindow extends React.Component {
             })
             .then(() => {
                 const currentStabilityProtocols = this.props.currentStabilityProtocols
-                const year = this.props.currentYear.substring(2, 4)
                 let start = 1, stringedNum, stabilityProtocolNum
 
                 for (let i = 0; i < currentStabilityProtocols.length; i++) {
                     stringedNum = start <= 9 ? `0${start}` : `${start}`
-                    stabilityProtocolNum = `SP-${year}-${stringedNum}`
+                    stabilityProtocolNum = `${this.props.currentYear.substring(2, 4)}${stringedNum}`
                     if (currentStabilityProtocols[i].stabilityProtocolNum !== stabilityProtocolNum) {
                         this.props.setCurrentAvailableStabilityProtocol(stabilityProtocolNum)
                         return stabilityProtocolNum
@@ -39,7 +40,7 @@ class StabilityWindow extends React.Component {
                     start++
                 }
                 stringedNum = start <= 9 ? `0${start}` : `${start}`
-                stabilityProtocolNum = `SP-${year}-${stringedNum}`
+                stabilityProtocolNum = `${this.props.currentYear.substring(2, 4)}${stringedNum}`
                 this.props.setCurrentAvailableStabilityProtocol(stabilityProtocolNum)
             })
             .catch(error => {
