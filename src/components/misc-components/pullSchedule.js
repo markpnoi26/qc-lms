@@ -9,10 +9,8 @@ export default function PullSchedule(props) {
         return key
     })
 
-    sortedDates.sort(function (a, b) {
-        a = a.split('/').reverse().join('');
-        b = b.split('/').reverse().join('');
-        return a > b ? 1 : a < b ? -1 : 0;
+    sortedDates.sort((a, b) => {
+        return new Date(a) - new Date(b)
     })
 
     return (
@@ -30,7 +28,7 @@ export default function PullSchedule(props) {
                         <tr key={uuidv4()} >
                             <td>{date}</td>
                             <td>{props.amountPerTimePt}{props.amountUnit}</td>
-                            <td><Form.Check checked={props.pullDates[date]}></Form.Check></td>
+                            <td><Form.Check checked={props.pullDates[date]} onChange={() => props.handlePullDateChange(date)}></Form.Check></td>
                         </tr>
                         
                     )
