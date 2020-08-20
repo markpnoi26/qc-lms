@@ -156,7 +156,9 @@ app.post(path, function(req, res) {
 ***************************************/
 
 app.delete(path + hashKeyPath, function(req, res) {
-  var params = {};
+  var params = {
+    [partitionKeyName]: req.params[partitionKeyName]
+  };
 
   let removeItemParams = {
     TableName: tableName,
