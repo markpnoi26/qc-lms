@@ -60,7 +60,7 @@ class QCRecordWindow extends React.Component {
     render() {
         return (
             <div>
-                <Table bordered striped variant="dark" >
+                <Table bordered striped variant="dark" size="sm" responsive="md">
                     <thead>
                         <tr style={{textAlign: "center"}} >
                             <th>QC Number</th>
