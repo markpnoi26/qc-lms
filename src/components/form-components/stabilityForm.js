@@ -350,8 +350,8 @@ class StabilityForm extends React.Component {
                                     conditionTimePts: conditionTimePoint
                                 })
                             }}>
-                            <option value="25/60">25oC/60%RH</option>
-                            <option value="40/75">40oC/75%RH</option>
+                            <option value="25/60">25°C/60%RH</option>
+                            <option value="40/75">40°C/75%RH</option>
                         </Form.Control>
                     </Form>
                 </td>
