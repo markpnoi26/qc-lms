@@ -257,7 +257,7 @@ class StabilityEntryModal extends React.Component {
                         </Row>
                         <Row>
                             <Col>
-                                <strong> Condition: </strong> {condition}
+                                <strong> Condition: </strong> {condition} (°C/%RH)
                             </Col>
                             <Col>
                                 <strong> Packaging: </strong> {packaging}
@@ -276,39 +276,7 @@ class StabilityEntryModal extends React.Component {
                             <Col>
                                 <strong> Specs: </strong> {specs.join(", ")}
                             </Col>
-                            <Col>
-                                <strong> STPs: </strong> {amountPerSTP.join(", ")}
-                            </Col>
                         </Row>
-                        {/* <Accordion>
-                            <Accordion.Toggle
-                                size={12}
-                                as={PencilSquare}
-                                variant="link"
-                                eventKey="0"
-                                style={{ cursor: "pointer" }}>
-                            </Accordion.Toggle>
-                            <Accordion.Collapse eventKey="0">
-                                <div> Edit Under Construction. </div>
-                                <EditLayoutForm
-                                    projectType={projectType}
-                                    lotNums={lotNums}
-                                    title={title}
-                                    requester={requester}
-                                    analyst={analyst}
-                                    nbPage={nbPage}
-                                    dateIn={dateIn}
-                                    dateOut={dateOut}
-                                    currLotNum={currLotNum}
-                                    handleProjectInfoChange={this.handleProjectInfoChange}
-                                    handleProjectTextChange={this.handleProjectTextChange}
-                                    handleAddNewLot={this.handleAddNewLot}
-                                    handleDeleteLot={this.handleDeleteLot}
-                                    handleDateInChange={this.handleDateInChange}
-                                    handleDateOutChange={this.handleDateOutChange}
-                                />
-                            </Accordion.Collapse>
-                        </Accordion> */}
                     </Container>
                 </Modal.Header>
                 <Modal.Body>    
@@ -318,6 +286,7 @@ class StabilityEntryModal extends React.Component {
                                 <PullSchedule 
                                     pullDates={pullDates}
                                     amountPerTimePt={amountPerTimePt}
+                                    amountPerSTP={amountPerSTP}
                                     condition={condition}
                                     amountUnit={amountUnit}
                                     handlePullDateChange={this.handlePullDateChange}/>
