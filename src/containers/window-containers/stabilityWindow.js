@@ -54,12 +54,12 @@ class StabilityWindow extends React.Component {
             <div>
                 <Table bordered striped variant="dark" >
                     <thead>
-                        <tr style={{ textAlign: "center" }} >
+                        <tr style={{ textAlign: "center", fontSize: "12px"}} >
                             <th>Protocol</th>
                             <th>Products</th>
                             <th>Lot #</th>
                             <th>Spec #</th>
-                            <th>Condition</th>
+                            <th>Condition (°C/%RH)</th>
                             <th>Packaging</th>
                             <th>Amount/STP</th>
                             <th>Amount/Time Point</th>
