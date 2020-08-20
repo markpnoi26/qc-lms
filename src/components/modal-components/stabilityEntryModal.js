@@ -117,6 +117,65 @@ class StabilityEntryModal extends React.Component {
         
     }
 
+    onClickDelete = (event) => {
+        // if the user clicks yes, 
+        // delete the file, update the state, and close the modal completely.
+        if (event.target.value === "yes") {
+            // delete the file in db
+            // update the state of the application to delete the file in the state
+            const params = {
+                headers:{},
+                response: true,
+                queryStringParameters: {},
+                body: {}
+            }
+
+            this.props.currentlyFetching()
+            API.del("stabilityAPI", `/stability/${this.state.stabilityProtocolNum}`, params)
+                .then(response => {
+                    this.props.fetchSuccess()
+                    let targetURL = response.data.url
+                    let stabilityProtocolNum = targetURL.split("/")[2]
+                    return stabilityProtocolNum
+                })
+                .then(num => {
+                    const remainingStabilityProtocols = this.props.currentStabilityProtocols.filter(protocol => protocol.stabilityProtocolNum !== num)
+                    this.props.updateStabilityProtocols(remainingStabilityProtocols)
+
+                    let start = 1, stringedNum, stabilityProtocolNum
+
+                    for (let i = 0; i < remainingStabilityProtocols.length; i++) {
+                        stringedNum = start <= 9 ? `0${start}` : `${start}`
+                        stabilityProtocolNum = `${this.props.currentYear.substring(2, 4)}${stringedNum}`
+                        if (remainingStabilityProtocols[i].stabilityProtocolNum !== stabilityProtocolNum) {
+                            this.props.setCurrentAvailableStabilityProtocol(stabilityProtocolNum)
+                            return stabilityProtocolNum
+                        }
+                        start++
+                    }
+                    stringedNum = start <= 9 ? `0${start}` : `${start}`
+                    stabilityProtocolNum = `${this.props.currentYear.substring(2, 4)}${stringedNum}`
+                    this.props.setCurrentAvailableStabilityProtocol(stabilityProtocolNum)
+                })
+                .catch(error => {
+                    this.props.fetchFail()
+                    console.log(error)
+                })
+            this.setState({
+                confirmCloseModalOpen: this.state.confirmCloseModalOpen,
+                changeDetected: false
+            }, () => {
+                this.props.onHide()
+            })
+        } else {
+            this.setState({
+                confirmDeleteOpen: !this.state.confirmDeleteOpen
+            })
+        }
+    
+    }
+
+
 
     onClickCloseModal = (event) => {
         // confirms whether to save to db or discard state changes...
@@ -179,7 +238,7 @@ class StabilityEntryModal extends React.Component {
     render() {
         let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, pullDates, year } = this.state
         
-        const { currentQCFiles, fetchStatus, updateQCFiles, currentlyFetching, fetchSuccess, fetchFail, setCurrentAvailableQCFile, ...rest} = this.props
+        const { currentStabilityProtocols, fetchStatus, updateStabilityProtocols, currentlyFetching, fetchSuccess, fetchFail, setCurrentAvailableStabilityProtocol, currentYear, ...rest} = this.props
         return (
             <Modal
                 {...rest}
@@ -322,7 +381,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        updateStabilityProtocol: (protocol) => dispatch({ type: "UPDATE_STABILITY_PROTOCOL", payload: protocol}),
+        updateStabilityProtocols: (protocol) => dispatch({ type: "UPDATE_STABILITY_PROTOCOLS", payload: protocol}),
         setCurrentAvailableStabilityProtocol: (protocolNum) => dispatch({ type: "SET_AVAILABLE_STABILITY_PROTOCOL", payload: protocolNum }),
         currentlyFetching: () => dispatch({type: "CURRENTLY_FETCHING"}),
         fetchSuccess: () => dispatch({type: "SUCCESS_FETCHING"}),
