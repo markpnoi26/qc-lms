@@ -15,22 +15,6 @@ class QCRecordWindow extends React.Component {
         }
     }
 
-    // handleGetOneItem = () => {
-    //     const params = {
-    //         headers:{},
-    //         response: true,
-    //         queryStringParameters: {},
-    //     }
-
-    //     API.get("qcfilesAPI", "/qcfiles/20002", params)
-    //         .then(response => {
-    //             console.log(response)
-    //         })
-    //         .catch(error => {
-    //             console.log(error)
-    //         })
-    // }
-
     componentDidMount = () => {
         
         this.props.setCurrentActiveWindow("qcfiles")
