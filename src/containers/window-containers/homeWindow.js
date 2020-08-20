@@ -1,5 +1,9 @@
 import React from 'react'
+import {Container, Row, Col} from 'react-bootstrap'
 import {connect} from 'react-redux'
+import QCRecentDateIn from '../home-containers/qcRecentDateIn'
+import QCRecentDateOut from '../home-containers/qcRecentDateOut'
+import StabilityUpcoming from '../home-containers/stabilityUpcoming'
 
 class HomeWindow extends React.Component {
 
@@ -9,9 +13,13 @@ class HomeWindow extends React.Component {
 
     render() {
         return (
-            <div>
-                The Home Window is Under Construction
-            </div>
+            <Container>
+                <Row>
+                    <Col><QCRecentDateIn/></Col>
+                    <Col><QCRecentDateOut/></Col>
+                    <Col><StabilityUpcoming/></Col>
+                </Row>
+            </Container>
         )
     }
 }
