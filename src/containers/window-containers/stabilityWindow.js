@@ -96,7 +96,8 @@ const mapStateToProps = state => {
     return {
         fetchStatus: state.fetchStatus,
         currentStabilityProtocols: state.currentStabilityProtocols,
-        currentYear: state.currentYear
+        currentYear: state.currentYear,
+        searchBar: state.searchBar
     }
 }
 
