@@ -1,5 +1,5 @@
 import React from "react";
-import {Nav, Navbar,NavDropdown, Button} from "react-bootstrap";
+import {Nav, Navbar, NavDropdown, Button, Form, FormControl} from "react-bootstrap";
 import {Link} from 'react-router-dom'
 import {withRouter} from "react-router";
 import {connect} from 'react-redux'
@@ -129,6 +129,9 @@ class TopBar extends React.Component {
                         <Nav.Link as={Link} to="/stability" >Stability</Nav.Link>
                     </Nav.Item>
                 </Nav>
+                <Form inline>
+                    <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={(event) => this.props.searchBar(event.target.value)}/>
+                </Form>
                 <Nav className="mr-sm-2" >
                     <NavDropdown title={`Select Year: ${this.props.currentYear}`} id="collapsible-nav-dropdown" >
                         <NavDropdown.Item onSelect={() => this.onYearChange({year: "2020"})}>2020</NavDropdown.Item>
@@ -159,6 +162,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        searchBar: (text) => dispatch({type: "SET_SEARCH", payload: text.toLowerCase()}),
         updateCurrentYear: (year) => dispatch({type: "UPDATE_YEAR", payload: year}),
         setCurrentAvailableQCFile: (number) => dispatch({type: "SET_AVAILABLE_QC_FILE", payload: number}),
         setCurrentQCFiles: (qcFiles) => dispatch({type: "SET_CURRENT_QC_FILES", payload: qcFiles}),
