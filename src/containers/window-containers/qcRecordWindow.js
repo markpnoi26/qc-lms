@@ -83,6 +83,8 @@ class QCRecordWindow extends React.Component {
                             if (file.requester.toLowerCase().includes(this.props.searchBar)) return file
                             if (file.analyst.toLowerCase().includes(this.props.searchBar)) return file
                             if (file.lotNums.find(lot => lot.toLowerCase().includes(this.props.searchBar))) return file
+                            if (file.dateIn.includes(this.props.searchBar)) return file
+                            if (file.dateOut.includes(this.props.searchBar)) return file
                             return null
                         }).map(file => {
                             return (
