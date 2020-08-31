@@ -69,7 +69,13 @@ class StabilityWindow extends React.Component {
                         </tr>
                     </thead>
                     <tbody >
-                        {this.props.currentStabilityProtocols.map(protocol => {
+                        {this.props.currentStabilityProtocols.filter(protocol => {
+                            if (protocol.stabilityProtocolNum.toLowerCase().includes(this.props.searchBar)) return protocol
+                            if (protocol.condition.toLowerCase().includes(this.props.searchBar)) return protocol
+                            if (protocol.lotNums.find(lot => lot.toLowerCase().includes(this.props.searchBar))) return protocol
+                            if (protocol.products.find(product => product.toLowerCase().includes(this.props.searchBar))) return protocol
+                            return null
+                        }).map(protocol => {
                             return (
                                 <tr key={protocol.stabilityProtocolNum} style={{ textAlign: "center" }}>
                                     <StabilityEntry protocol={protocol} />
