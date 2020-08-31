@@ -63,12 +63,12 @@ class QCRecordWindow extends React.Component {
                 <Table bordered striped variant="dark" size="sm" responsive="md">
                     <thead>
                         <tr style={{textAlign: "center"}} >
-                            <th>QC Number</th>
+                            <th>QC</th>
                             <th>Project Type</th>
                             <th>Project Title</th>
                             <th>Tests</th>
-                            <th>lot #</th>
-                            <th>Sample #</th>
+                            <th>Lots</th>
+                            <th>Count</th>
                             <th>Date In</th>
                             <th>Date Out</th>
                             <th>Requester</th>
