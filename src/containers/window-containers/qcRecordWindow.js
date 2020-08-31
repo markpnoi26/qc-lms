@@ -77,7 +77,14 @@ class QCRecordWindow extends React.Component {
                         </tr>
                     </thead>
                     <tbody >
-                        {this.props.currentQCFiles.map(file => {
+                        {this.props.currentQCFiles.filter(file => {
+                            if (file.num.toLowerCase().includes(this.props.searchBar)) return file
+                            if (file.title.toLowerCase().includes(this.props.searchBar)) return file
+                            if (file.requester.toLowerCase().includes(this.props.searchBar)) return file
+                            if (file.analyst.toLowerCase().includes(this.props.searchBar)) return file
+                            if (file.lotNums.find(lot => lot.toLowerCase().includes(this.props.searchBar))) return file
+                            return null
+                        }).map(file => {
                             return (
                                 <tr key={file.num} style={{textAlign: "center"}}>
                                     <QCRecordEntry file={file} />
@@ -101,7 +108,8 @@ const mapStateToProps = state => {
     return {
         fetchStatus: state.fetchStatus,
         currentQCFiles: state.currentQCFiles,
-        currentYear: state.currentYear
+        currentYear: state.currentYear,
+        searchBar: state.searchBar
     }
 }
 
