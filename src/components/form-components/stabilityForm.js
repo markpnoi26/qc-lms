@@ -26,6 +26,7 @@ class StabilityForm extends React.Component {
             amountPerTimePt: 0,
             stp: "",
             amount: 0,
+            terminated: false,
             currProduct: "",
             currLotNum: "",
             currSpec: "",
