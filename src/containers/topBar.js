@@ -116,9 +116,9 @@ class TopBar extends React.Component {
                     fill
                     className="mr-auto"
                 >
-                    <Nav.Item>
+                    {/* <Nav.Item>
                         <Nav.Link as={Link} to="/">Home</Nav.Link>
-                    </Nav.Item>
+                    </Nav.Item> */}
                     <Nav.Item>
                         <Nav.Link as={Link} to="/records">QC Records</Nav.Link>
                     </Nav.Item>
@@ -130,7 +130,7 @@ class TopBar extends React.Component {
                     </Nav.Item>
                 </Nav>
                 <Form inline>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={(event) => this.props.searchBar(event.target.value)}/>
+                    <FormControl type="text" placeholder="Lot, QC, Protocol, etc.." className="mr-sm-2" onChange={(event) => this.props.searchBar(event.target.value)}/>
                 </Form>
                 <Nav className="mr-sm-2" >
                     <NavDropdown title={`Select Year: ${this.props.currentYear}`} id="collapsible-nav-dropdown" >
