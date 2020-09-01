@@ -6,7 +6,7 @@ import moment from 'moment'
 import '../styles/date-picker.css'
 
 
-export default class EditLayoutForm extends React.Component {
+export default class EditQCForm extends React.Component {
     constructor(props) {
         super(props)
         this.state={
