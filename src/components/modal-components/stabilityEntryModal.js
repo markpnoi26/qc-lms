@@ -222,6 +222,100 @@ class StabilityEntryModal extends React.Component {
         })
     }
 
+    handleNewProduct = (event) => {
+        if (this.state.currProduct === "") return
+
+        const currProduct = this.state.currProduct
+        const newProductCollection = this.state.products
+        newProductCollection.push(currProduct)
+        this.setState({
+            products: newProductCollection,
+            currProduct: ""
+        })
+    }
+
+    handleDeleteProduct = (event) => {
+        const product = event.target.parentNode.attributes.value.value
+        const idxOfTarget = this.state.products.indexOf(product)
+        const newLotCollection = this.state.products
+        newLotCollection.splice(idxOfTarget, 1)
+        this.setState({
+            products: newLotCollection
+        })
+    }
+
+    handleAddNewLot = (event) => {
+
+        if (this.state.currLotNum === "") return
+
+        const currLot = this.state.currLotNum
+        const newLotCollection = this.state.lotNums
+        newLotCollection.push(currLot)
+        this.setState({
+            lotNums: newLotCollection,
+            currLotNum: ""
+        })
+    }
+
+    handleDeleteLot = (event) => {
+        const lotValue = event.target.parentNode.attributes.value.value
+        const idxOfTarget = this.state.lotNums.indexOf(lotValue)
+        const newLotCollection = this.state.lotNums
+        newLotCollection.splice(idxOfTarget, 1)
+        this.setState({
+            lotNums: newLotCollection
+        })
+    }
+
+    handleAddNewSpec = (event) => {
+
+        if (this.state.currSpec === "") return
+
+        const currSpec = this.state.currSpec
+        const newSpecCollection = this.state.specs
+        newSpecCollection.push(currSpec)
+        this.setState({
+            specs: newSpecCollection,
+            currSpec: ""
+        })
+    }
+
+    handleDeleteSpec = (event) => {
+        const specValue = event.target.parentNode.attributes.value.value
+        const idxOfTarget = this.state.specs.indexOf(specValue)
+        const newSpecsCollection = this.state.specs
+        newSpecsCollection.splice(idxOfTarget, 1)
+        this.setState({
+            specs: newSpecsCollection
+        })
+    }
+
+    handleAddNewSTP = (event) => {
+        if (this.state.stp === "") return
+
+        const currSTP = this.state.stp
+        const currAmount = this.state.amount
+        const newAmountPerSTP = this.state.amountPerSTP
+        newAmountPerSTP.push({ stp: currSTP, amount: currAmount })
+        this.setState({
+            amountPerSTP: newAmountPerSTP,
+            stp: "",
+            amount: 0,
+            amountPerTimePt: parseInt(this.state.amountPerTimePt, 10) + parseInt(currAmount, 10)
+        })
+    }
+
+    handleDeleteSTP = (event) => {
+        const idxOfTarget = event.target.parentNode.attributes.value.value
+        const newSTPCollection = this.state.amountPerSTP
+        const amountToTakeOut = newSTPCollection[idxOfTarget].amount
+        newSTPCollection.splice(idxOfTarget, 1)
+        this.setState({
+            amountPerSTP: newSTPCollection,
+            amountPerTimePt: parseInt(this.state.amountPerTimePt) - parseInt(amountToTakeOut, 10)
+        })
+    }
+
     componentDidMount = () => {
         if (this.state.notes === "") {
             this.setState({
