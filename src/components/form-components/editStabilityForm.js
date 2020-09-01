@@ -24,7 +24,7 @@ export default class EditStabilityForm extends React.Component {
                         <Form>
                             <Container>
                                 <Row>
-                                    <strong> QC Title:  </strong>
+                                    <strong> Protocol Number:  </strong>
                                 </Row>
                                 <Row>
 
