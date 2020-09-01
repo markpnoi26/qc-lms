@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import {API} from 'aws-amplify'
 import {EditorState, Editor,convertFromRaw, convertToRaw} from 'draft-js'
 import TestSelection from '../misc-components/testSelection'
-import EditLayoutForm from '../misc-components/editLayoutForm'
+import EditQCForm from '../form-components/editQCForm'
 import 'draft-js/dist/Draft.css'
 import '../styles/toast-width.css'
 
@@ -349,7 +349,7 @@ class QCEntryModal extends React.Component {
                                 style={{ cursor: "pointer" }}>
                             </Accordion.Toggle>
                             <Accordion.Collapse eventKey="0">
-                                <EditLayoutForm
+                                <EditQCForm
                                     projectType={projectType}
                                     lotNums={lotNums}
                                     title={title}
