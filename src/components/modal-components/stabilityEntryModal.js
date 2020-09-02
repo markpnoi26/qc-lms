@@ -1,11 +1,12 @@
 import React from 'react'
-import {Modal, Button, Row, Col, Toast, Container} from 'react-bootstrap'
+import {Modal, Button, Row, Col, Toast, Container, Accordion} from 'react-bootstrap'
 import '../styles/toast-width.css'
 import {EditorState, Editor,convertFromRaw, convertToRaw} from 'draft-js'
 import {API} from 'aws-amplify'
 import {connect} from 'react-redux'
-// import { PencilSquare } from 'react-bootstrap-icons'
+import { PencilSquare } from 'react-bootstrap-icons'
 
+import EditStabilityForm from '../form-components/editStabilityForm'
 import PullSchedule from '../misc-components/pullSchedule'
 
 class StabilityEntryModal extends React.Component {
@@ -30,7 +31,9 @@ class StabilityEntryModal extends React.Component {
             pullDates,
             notes,
             year,
+            currProduct: "",
             currLotNum: "",
+            currSpec: "",
             editorState: null
         }
     }
@@ -229,6 +232,8 @@ class StabilityEntryModal extends React.Component {
         const newProductCollection = this.state.products
         newProductCollection.push(currProduct)
         this.setState({
+            ...this.state,
+            changeDetected: true,
             products: newProductCollection,
             currProduct: ""
         })
@@ -240,6 +245,8 @@ class StabilityEntryModal extends React.Component {
         const newLotCollection = this.state.products
         newLotCollection.splice(idxOfTarget, 1)
         this.setState({
+            ...this.state,
+            changeDetected: true,
             products: newLotCollection
         })
     }
@@ -252,6 +259,8 @@ class StabilityEntryModal extends React.Component {
         const newLotCollection = this.state.lotNums
         newLotCollection.push(currLot)
         this.setState({
+            ...this.state,
+            changeDetected: true,
             lotNums: newLotCollection,
             currLotNum: ""
         })
@@ -263,6 +272,8 @@ class StabilityEntryModal extends React.Component {
         const newLotCollection = this.state.lotNums
         newLotCollection.splice(idxOfTarget, 1)
         this.setState({
+            ...this.state,
+            changeDetected: true,
             lotNums: newLotCollection
         })
     }
@@ -275,6 +286,8 @@ class StabilityEntryModal extends React.Component {
         const newSpecCollection = this.state.specs
         newSpecCollection.push(currSpec)
         this.setState({
+            ...this.state,
+            changeDetected: true,
             specs: newSpecCollection,
             currSpec: ""
         })
@@ -286,6 +299,8 @@ class StabilityEntryModal extends React.Component {
         const newSpecsCollection = this.state.specs
         newSpecsCollection.splice(idxOfTarget, 1)
         this.setState({
+            ...this.state,
+            changeDetected: true,
             specs: newSpecsCollection
         })
     }
@@ -298,6 +313,8 @@ class StabilityEntryModal extends React.Component {
         const newAmountPerSTP = this.state.amountPerSTP
         newAmountPerSTP.push({ stp: currSTP, amount: currAmount })
         this.setState({
+            ...this.state,
+            changeDetected: true,
             amountPerSTP: newAmountPerSTP,
             stp: "",
             amount: 0,
@@ -311,6 +328,8 @@ class StabilityEntryModal extends React.Component {
         const amountToTakeOut = newSTPCollection[idxOfTarget].amount
         newSTPCollection.splice(idxOfTarget, 1)
         this.setState({
+            ...this.state,
+            changeDetected: true,
             amountPerSTP: newSTPCollection,
             amountPerTimePt: parseInt(this.state.amountPerTimePt) - parseInt(amountToTakeOut, 10)
         })
@@ -330,7 +349,7 @@ class StabilityEntryModal extends React.Component {
     }
 
     render() {
-        let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, pullDates, year } = this.state
+        let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, pullDates, year, currLotNum, currProduct, currSpec} = this.state
         
         const { currentStabilityProtocols, fetchStatus, updateStabilityProtocols, currentlyFetching, fetchSuccess, fetchFail, setCurrentAvailableStabilityProtocol, currentYear, ...rest} = this.props
         return (
@@ -371,6 +390,40 @@ class StabilityEntryModal extends React.Component {
                                 <strong> Specs: </strong> {specs.join(", ")}
                             </Col>
                         </Row>
+                        <Accordion>
+                            <Accordion.Toggle
+                                size={12}
+                                as={PencilSquare}
+                                variant="link"
+                                eventKey="0"
+                                style={{ cursor: "pointer" }}>
+                            </Accordion.Toggle>
+                            <Accordion.Collapse eventKey="0">
+                                <EditStabilityForm
+                                    products={products}
+                                    lotNums={lotNums}
+                                    specs={specs}
+                                    condition={condition}
+                                    packaging={packaging}
+                                    amountUnit={amountUnit}
+                                    amountPerTimePt={amountPerTimePt}
+                                    dateStarted={dateStarted}
+                                    amountPerSTP={amountPerSTP}
+                                    currLotNum={currLotNum}
+                                    currProduct={currProduct}
+                                    currSpec={currSpec}
+                                    
+                                    handleNewProduct={this.handleNewProduct}
+                                    handleDeleteProduct={this.handleDeleteProduct}
+                                    handleAddNewLot={this.handleAddNewLot}
+                                    handleDeleteLot={this.handleDeleteLot}
+                                    handleAddNewSpec={this.handleAddNewSpec}
+                                    handleDeleteSpec={this.handleDeleteSpec}
+                                    handleAddNewSTP={this.handleAddNewSTP}
+                                    handleDeleteSTP={this.handleDeleteSTP}
+                                />
+                            </Accordion.Collapse>
+                        </Accordion>
                     </Container>
                 </Modal.Header>
                 <Modal.Body>    
