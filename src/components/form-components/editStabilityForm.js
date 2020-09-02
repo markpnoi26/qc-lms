@@ -10,16 +10,15 @@ export default class EditStabilityForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            currDateIn: props.dateIn !== "" ? moment(props.dateIn, "MM/DD/YYYY").toDate() : null,
-            currDateOut: props.dateOut !== "" ? moment(props.dateOut, "MM/DD/YYYY").toDate() : null
+            
         }
     }
 
     render() {
-        let { projectType, title, lotNums, requester, analyst, nbPage, currLotNum, handleProjectInfoChange, handleProjectTextChange, handleAddNewLot, handleDeleteLot, handleDateInChange, handleDateOutChange } = this.props
+        let { products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, currLotNum, currProduct, currSpec, handleNewProduct, handleDeleteProduct, handleAddNewLot, handleDeleteLot, handleAddNewSpec, handleDeleteSpec, handleAddNewSTP, handleDeleteSTP } = this.props
         return (
             <Container>
-                <Row>
+                {/* <Row>
                     <Col>
                         <Form>
                             <Container>
@@ -206,7 +205,7 @@ export default class EditStabilityForm extends React.Component {
                             </Container>
                         </Form>
                     </Col>
-                </Row>
+                </Row> */}
             </Container>
 
         )
