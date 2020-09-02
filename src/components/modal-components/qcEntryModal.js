@@ -340,7 +340,7 @@ class QCEntryModal extends React.Component {
                                 <strong> Note Book Pages: </strong> {nbPage}
                             </Col>
                         </Row>
-                        <Accordion>
+                        {/* <Accordion>
                             <Accordion.Toggle
                                 size={12}
                                 as={PencilSquare}
@@ -367,7 +367,7 @@ class QCEntryModal extends React.Component {
                                     handleDateOutChange={this.handleDateOutChange}
                                 />
                             </Accordion.Collapse>
-                        </Accordion>
+                        </Accordion> */}
                     </Container>
                 </Modal.Header>
                 <Modal.Body>
