@@ -335,6 +335,20 @@ class StabilityEntryModal extends React.Component {
         })
     }
 
+    handleConditionChange = (event) => {
+        let conditionTimePoint = 0
+        if (event.target.value === "40/75") {
+            conditionTimePoint = 5
+        } else if (event.target.value === "25/60") {
+            conditionTimePoint = 10
+        }
+        this.setState({
+            changeDetected: true,
+            condition: event.target.value,
+            conditionTimePts: conditionTimePoint
+        })
+    }
+
     componentDidMount = () => {
         if (this.state.notes === "") {
             this.setState({
@@ -400,6 +414,7 @@ class StabilityEntryModal extends React.Component {
                             </Accordion.Toggle>
                             <Accordion.Collapse eventKey="0">
                                 <EditStabilityForm
+                                    stabilityProtocolNum={stabilityProtocolNum}
                                     products={products}
                                     lotNums={lotNums}
                                     specs={specs}
@@ -409,10 +424,12 @@ class StabilityEntryModal extends React.Component {
                                     amountPerTimePt={amountPerTimePt}
                                     dateStarted={dateStarted}
                                     amountPerSTP={amountPerSTP}
+
                                     currLotNum={currLotNum}
                                     currProduct={currProduct}
                                     currSpec={currSpec}
                                     
+                                    handleConditionChange={this.handleConditionChange}
                                     handleNewProduct={this.handleNewProduct}
                                     handleDeleteProduct={this.handleDeleteProduct}
                                     handleAddNewLot={this.handleAddNewLot}
