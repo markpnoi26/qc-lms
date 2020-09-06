@@ -376,6 +376,13 @@ class StabilityEntryModal extends React.Component {
         })
     }
 
+    handlePackagingChange = (event) => {
+        this.setState({
+            changeDetected: true,
+            packaging: event.target.value
+        })
+    }
+
     componentDidMount = () => {
         if (this.state.notes === "") {
             this.setState({
@@ -457,6 +464,7 @@ class StabilityEntryModal extends React.Component {
                                     currSpec={currSpec}
                                     
                                     handleConditionChange={this.handleConditionChange}
+                                    handlePackagingChange={this.handlePackagingChange}
                                     handleNewProduct={this.handleNewProduct}
                                     handleDeleteProduct={this.handleDeleteProduct}
                                     handleAddNewLot={this.handleAddNewLot}
