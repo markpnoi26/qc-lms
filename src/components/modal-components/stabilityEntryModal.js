@@ -6,6 +6,7 @@ import {API} from 'aws-amplify'
 import {connect} from 'react-redux'
 import { PencilSquare } from 'react-bootstrap-icons'
 
+import moment from 'moment'
 import EditStabilityForm from '../form-components/editStabilityForm'
 import PullSchedule from '../misc-components/pullSchedule'
 
@@ -34,7 +35,8 @@ class StabilityEntryModal extends React.Component {
             currProduct: "",
             currLotNum: "",
             currSpec: "",
-            editorState: null
+            editorState: null,
+            conditionChanged: false
         }
     }
 
@@ -65,13 +67,32 @@ class StabilityEntryModal extends React.Component {
         // this will ultimately update the db
         // on submit, update db, update state, 
         if (event.target.value === "yes") {
+            const months = {
+                "40/75": [0, 1, 3, 6],
+                "25/60": [0, 3, 6, 9, 12, 18, 24, 36, 48, 60]
+            }
+    
+            // this is to add pull dates before submitting the entry item.
+            const datePoints = months[this.state.condition]
+            let dates = {}
+    
+            for (let i=0; i<datePoints.length; i++) {
+                const dateStarted = new Date(this.state.dateStarted)
+                const currDateToBeAdded = new Date(dateStarted.setMonth(dateStarted.getMonth() + datePoints[i]))
+                dates[(moment(currDateToBeAdded).format("L"))] = i===0? true:false
+            }
+
+            if (!this.state.conditionChanged) {
+                dates = this.state.pullDates
+            }
+            
             const bodyPreSend = {
                 ...this.state, 
                 lotNums: [...this.state.lotNums],
                 products: [...this.state.products],
                 specs: [this.state.specs],
                 amountPerSTP: [...this.state.amountPerSTP],
-                pullDates: {...this.state.pullDates},
+                pullDates: dates,
                 notes: JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()))
             }
             delete bodyPreSend.confirmUpdateOpen
@@ -81,6 +102,9 @@ class StabilityEntryModal extends React.Component {
             delete bodyPreSend.savedChanges
             delete bodyPreSend.editorState
             delete bodyPreSend.currLotNum
+            delete bodyPreSend.currProduct
+            delete bodyPreSend.currSpec
+            delete bodyPreSend.currDate
 
             const params = {
                 headers:{},
@@ -101,7 +125,7 @@ class StabilityEntryModal extends React.Component {
                     const remainingStabilityProtocols = this.props.currentStabilityProtocols.filter(protocol => protocol.stabilityProtocolNum !== targetNum)
                     remainingStabilityProtocols.push(data)
                     remainingStabilityProtocols.sort((a, b) => a.stabilityProtocolNum - b.stabilityProtocolNum)
-                    this.props.updateQCFiles(remainingStabilityProtocols)
+                    this.props.updateStabilityProtocols(remainingStabilityProtocols)
                 })
                 .catch(error => {
                     this.props.fetchFail()
@@ -110,7 +134,8 @@ class StabilityEntryModal extends React.Component {
 
             this.setState({
                 confirmUpdateOpen: !this.state.confirmUpdateOpen,
-                changeDetected: false
+                changeDetected: false,
+                conditionChanged: false
             })
         } else {
             this.setState({
@@ -344,6 +369,7 @@ class StabilityEntryModal extends React.Component {
         }
         this.setState({
             changeDetected: true,
+            conditionChanged: true,
             condition: event.target.value,
             conditionTimePts: conditionTimePoint
         })
@@ -360,6 +386,13 @@ class StabilityEntryModal extends React.Component {
                 editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(this.state.notes)))
             })
         }
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState){
+        if (nextProps.protocol.pullDates !== prevState.pullDates){
+            return {pullDates : nextProps.protocol.pullDates};
+        }
+        return null;
     }
 
     render() {
