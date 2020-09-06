@@ -134,6 +134,7 @@ class StabilityEntryModal extends React.Component {
 
             this.setState({
                 confirmUpdateOpen: !this.state.confirmUpdateOpen,
+                pullDates: dates,
                 changeDetected: false,
                 conditionChanged: false
             })
@@ -386,13 +387,6 @@ class StabilityEntryModal extends React.Component {
                 editorState: EditorState.createWithContent(convertFromRaw(JSON.parse(this.state.notes)))
             })
         }
-    }
-
-    static getDerivedStateFromProps(nextProps, prevState){
-        if (nextProps.protocol.pullDates !== prevState.pullDates){
-            return {pullDates : nextProps.protocol.pullDates};
-        }
-        return null;
     }
 
     render() {
