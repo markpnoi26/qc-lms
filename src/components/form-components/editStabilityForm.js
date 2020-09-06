@@ -15,7 +15,7 @@ export default class EditStabilityForm extends React.Component {
     }
 
     render() {
-        let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, currLotNum, currProduct, currSpec, handleNewProduct, handleDeleteProduct, handleAddNewLot, handleDeleteLot, handleAddNewSpec, handleDeleteSpec, handleAddNewSTP, handleDeleteSTP, handleConditionChange } = this.props
+        let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, currLotNum, currProduct, currSpec, handleNewProduct, handleDeleteProduct, handleAddNewLot, handleDeleteLot, handleAddNewSpec, handleDeleteSpec, handleAddNewSTP, handleDeleteSTP, handleConditionChange, handlePackagingChange } = this.props
         return (
             <Container>
                 <Row>
@@ -33,6 +33,29 @@ export default class EditStabilityForm extends React.Component {
                                 <option value="40/75">40°C/75%RH</option>
                             </Form.Control>
                         </Form>
+                    </Col>
+                    <Col>
+                        <strong>Packaging: </strong>
+                        <InputGroup >
+                            <Form.Control
+                                as="textarea"
+                                row="6"
+                                size="sm"
+                                value={packaging}
+                                placeholder="packaging description"
+                                onChange={(event) => {
+                                    handlePackagingChange(event)
+                                }}>
+                            </Form.Control>
+                        </InputGroup>
+                    </Col>
+                    <Col>
+                        <strong>Date Started: </strong>
+                        <br></br>
+                        <DatePicker 
+                            value={dateStarted}
+                            // onChange={}
+                        />
                     </Col>
                 </Row>
                 {/* <Row>
