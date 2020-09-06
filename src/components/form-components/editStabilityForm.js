@@ -15,9 +15,26 @@ export default class EditStabilityForm extends React.Component {
     }
 
     render() {
-        let { products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, currLotNum, currProduct, currSpec, handleNewProduct, handleDeleteProduct, handleAddNewLot, handleDeleteLot, handleAddNewSpec, handleDeleteSpec, handleAddNewSTP, handleDeleteSTP } = this.props
+        let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, currLotNum, currProduct, currSpec, handleNewProduct, handleDeleteProduct, handleAddNewLot, handleDeleteLot, handleAddNewSpec, handleDeleteSpec, handleAddNewSTP, handleDeleteSTP, handleConditionChange } = this.props
         return (
             <Container>
+                <Row>
+                    <Col>
+                        <strong>Condition: </strong>
+                        <Form>
+                            <Form.Control 
+                                as="select"
+                                size="sm"
+                                value={this.state.condition} 
+                                onChange={(event) => {
+                                    handleConditionChange(event)
+                                }}>
+                                <option value="25/60">25°C/60%RH</option>
+                                <option value="40/75">40°C/75%RH</option>
+                            </Form.Control>
+                        </Form>
+                    </Col>
+                </Row>
                 {/* <Row>
                     <Col>
                         <Form>
