@@ -25,7 +25,7 @@ export default class EditStabilityForm extends React.Component {
                             <Form.Control 
                                 as="select"
                                 size="sm"
-                                value={this.state.condition} 
+                                value={condition} 
                                 onChange={(event) => {
                                     handleConditionChange(event)
                                 }}>
