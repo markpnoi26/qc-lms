@@ -105,7 +105,10 @@ class TopBar extends React.Component {
             })
     }
 
+
     render () {
+        let searchTimer
+
         return (
             <Navbar 
                 expand="lg"
@@ -130,7 +133,16 @@ class TopBar extends React.Component {
                     </Nav.Item>
                 </Nav>
                 <Form inline>
-                    <FormControl type="text" placeholder="Lot, QC, Protocol, etc.." className="mr-sm-2" onChange={(event) => this.props.searchBar(event.target.value)}/>
+                    <FormControl 
+                        type="text" 
+                        placeholder="Lot, QC, Protocol, etc.." 
+                        className="mr-sm-2" 
+                        onChange={
+                            (event) => {
+                                clearTimeout(searchTimer)
+                                searchTimer = setTimeout((value) => {this.props.searchBar(value)}, 500, event.target.value)
+                            }
+                        }/>
                 </Form>
                 <Nav className="mr-sm-2" >
                     <NavDropdown title={`Select Year: ${this.props.currentYear}`} id="collapsible-nav-dropdown" >
