@@ -33,7 +33,7 @@ class StabilityEntryModal extends React.Component {
             notes,
             year,
             stp: "",
-            ammount: "",
+            amount: "",
             currProduct: "",
             currLotNum: "",
             currSpec: "",
