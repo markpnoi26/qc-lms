@@ -171,7 +171,7 @@ export default class EditStabilityForm extends React.Component {
                                             size="sm"
                                             value={currSpec}
                                             label="currSpec"
-                                            placeholder="Add Another Lot"
+                                            placeholder="Add Another Spec"
                                             onChange={handleProjectTextChange}
                                         />
                                         <InputGroup.Append>
@@ -208,11 +208,7 @@ export default class EditStabilityForm extends React.Component {
                                 value={stp} 
                                 label="stp"
                                 placeholder="STP" 
-                                onChange={(event) => {
-                                    this.setState({
-                                        stp: event.target.value
-                                    })
-                                }}
+                                onChange={handleProjectTextChange}
                             />
                             <FormControl
                                 type="number"
@@ -220,11 +216,7 @@ export default class EditStabilityForm extends React.Component {
                                 value={amount} 
                                 label="amount"
                                 placeholder="Amount" 
-                                onChange={(event) => {
-                                    this.setState({
-                                        amount: event.target.value
-                                    })
-                                }}
+                                onChange={handleProjectTextChange}
                             />
                             <InputGroup.Append>
                                 <Button size="sm" variant="outline-primary" onClick={handleAddNewSTP} >+</Button>
