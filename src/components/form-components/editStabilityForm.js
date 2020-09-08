@@ -15,7 +15,7 @@ export default class EditStabilityForm extends React.Component {
     }
 
     render() {
-        let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, currLotNum, currProduct, currSpec, handleNewProduct, handleDeleteProduct, handleAddNewLot, handleDeleteLot, handleAddNewSpec, handleDeleteSpec, handleAddNewSTP, handleDeleteSTP, handleConditionChange, handlePackagingChange, handleProjectTextChange } = this.props
+        let { products, lotNums, specs, condition, packaging, amountUnit, amountPerSTP, currLotNum, currProduct, currSpec, stp, amount, handleNewProduct, handleDeleteProduct, handleAddNewLot, handleDeleteLot, handleAddNewSpec, handleDeleteSpec, handleAddNewSTP, handleDeleteSTP, handleConditionChange, handlePackagingChange, handleProjectTextChange, handleDateStartedChange } = this.props
         return (
             <Container>
                 <Row>
@@ -50,11 +50,35 @@ export default class EditStabilityForm extends React.Component {
                         </InputGroup>
                     </Col>
                     <Col>
+                        <strong>Unit: </strong>
+                        <Form>
+                            <Form.Control 
+                                as="select"
+                                size="sm"
+                                value={amountUnit} 
+                                label="amountUnit"
+                                onChange={(event) => handleProjectTextChange(event)}>
+                                <option value="g">g</option>
+                                <option value="mL">mL</option>
+                            </Form.Control>
+                        </Form>
+                    </Col>
+                    <Col>
                         <strong>Date Started: </strong>
                         <br></br>
                         <DatePicker 
                             value={this.state.dateStarted}
-                            // onChange={}
+                            onChange={(value) => {
+                                const date = moment(value).format("L")
+                                if (date === "Invalid date") {
+                                    handleDateStartedChange("")
+                                } else {
+                                    handleDateStartedChange(date)
+                                }
+                                this.setState({
+                                    dateStarted: value
+                                })
+                            }}
                         />
                     </Col>
                 </Row>
@@ -170,6 +194,60 @@ export default class EditStabilityForm extends React.Component {
                                 }
                             </Container>
                         </Form>
+                    </Col>
+                    <Col>
+                        <Container>
+                            <Row>
+                                <strong> STP:  </strong>
+                            </Row>
+                            <Row>
+                            <InputGroup >
+                            <FormControl
+                                type="text"
+                                size="sm"
+                                value={stp} 
+                                label="stp"
+                                placeholder="STP" 
+                                onChange={(event) => {
+                                    this.setState({
+                                        stp: event.target.value
+                                    })
+                                }}
+                            />
+                            <FormControl
+                                type="number"
+                                size="sm"
+                                value={amount} 
+                                label="amount"
+                                placeholder="Amount" 
+                                onChange={(event) => {
+                                    this.setState({
+                                        amount: event.target.value
+                                    })
+                                }}
+                            />
+                            <InputGroup.Append>
+                                <Button size="sm" variant="outline-primary" onClick={handleAddNewSTP} >+</Button>
+                            </InputGroup.Append>
+                        </InputGroup>
+                        <Container>
+                            {amountPerSTP.map((item, idx) => (
+                                <Row key={uuidv4()} >
+                                    <Col>
+                                        STP-{item.stp} 
+                                    </Col>
+                                    <Col>
+                                        {item.amount}{amountUnit}
+                                    </Col>
+                                    <Col value={idx} >
+                                        <Badge pill value={idx} variant="danger" style={{ cursor: "pointer" }} onClick={handleDeleteSTP}>X</Badge>
+                                    </Col>
+                                </Row>
+                            ))
+                            }
+                        </Container>
+                            </Row>
+                        </Container>
                     </Col>
                 </Row>
             </Container>
