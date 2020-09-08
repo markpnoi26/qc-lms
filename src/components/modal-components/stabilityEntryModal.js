@@ -32,6 +32,8 @@ class StabilityEntryModal extends React.Component {
             pullDates,
             notes,
             year,
+            stp: "",
+            ammount: "",
             currProduct: "",
             currLotNum: "",
             currSpec: "",
@@ -393,6 +395,15 @@ class StabilityEntryModal extends React.Component {
         })
     }
 
+    handleDateStartedChange = (date) => {
+        this.setState({
+            ...this.state,
+            conditionChanged: true,
+            changeDetected: true,
+            dateStarted: date
+        })
+    }
+
     componentDidMount = () => {
         if (this.state.notes === "") {
             this.setState({
@@ -407,7 +418,7 @@ class StabilityEntryModal extends React.Component {
     }
 
     render() {
-        let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, pullDates, year, currLotNum, currProduct, currSpec} = this.state
+        let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, pullDates, year, currLotNum, currProduct, currSpec, stp, amount} = this.state
         
         const { currentStabilityProtocols, fetchStatus, updateStabilityProtocols, currentlyFetching, fetchSuccess, fetchFail, setCurrentAvailableStabilityProtocol, currentYear, ...rest} = this.props
         return (
@@ -467,12 +478,15 @@ class StabilityEntryModal extends React.Component {
                                     amountUnit={amountUnit}
                                     amountPerTimePt={amountPerTimePt}
                                     dateStarted={dateStarted}
+                                    stp={stp}
+                                    amount={amount}
                                     amountPerSTP={amountPerSTP}
 
                                     currLotNum={currLotNum}
                                     currProduct={currProduct}
                                     currSpec={currSpec}
                                     
+                                    handleDateStartedChange={this.handleDateStartedChange}
                                     handleProjectTextChange={this.handleProjectTextChange}
                                     handleConditionChange={this.handleConditionChange}
                                     handlePackagingChange={this.handlePackagingChange}
