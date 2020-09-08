@@ -15,7 +15,7 @@ export default class EditStabilityForm extends React.Component {
     }
 
     render() {
-        let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, currLotNum, currProduct, currSpec, handleNewProduct, handleDeleteProduct, handleAddNewLot, handleDeleteLot, handleAddNewSpec, handleDeleteSpec, handleAddNewSTP, handleDeleteSTP, handleConditionChange, handlePackagingChange } = this.props
+        let { stabilityProtocolNum, products, lotNums, specs, condition, packaging, amountUnit, amountPerTimePt, dateStarted, amountPerSTP, currLotNum, currProduct, currSpec, handleNewProduct, handleDeleteProduct, handleAddNewLot, handleDeleteLot, handleAddNewSpec, handleDeleteSpec, handleAddNewSTP, handleDeleteSTP, handleConditionChange, handlePackagingChange, handleProjectTextChange } = this.props
         return (
             <Container>
                 <Row>
@@ -58,106 +58,45 @@ export default class EditStabilityForm extends React.Component {
                         />
                     </Col>
                 </Row>
-                {/* <Row>
+                    
+                <Row>
                     <Col>
                         <Form>
                             <Container>
                                 <Row>
-                                    <strong> Protocol Number:  </strong>
+                                    <strong> Products:  </strong>
                                 </Row>
                                 <Row>
-
-                                    <Form.Control
-                                        type="text"
-                                        size="sm"
-                                        placeholder="Title"
-                                        label="title"
-                                        value={title}
-                                        onChange={handleProjectTextChange}
-                                    >
-                                    </Form.Control>
-
+                                    <InputGroup >
+                                        <FormControl
+                                            type="text"
+                                            size="sm"
+                                            value={currProduct}
+                                            label="currProduct"
+                                            placeholder="Add Another Product"
+                                            onChange={handleProjectTextChange}
+                                        />
+                                        <InputGroup.Append>
+                                            <Button size="sm" variant="outline-success" onClick={handleNewProduct} >+</Button>
+                                        </InputGroup.Append>
+                                    </InputGroup>
                                 </Row>
                             </Container>
-                        </Form>
-                    </Col>
-                    <Col>
-                        <Form>
                             <Container>
-                                <Row>
-                                    <strong> Note Book Page:  </strong>
-                                </Row>
-                                <Row>
-
-                                    <Form.Control
-                                        type="text"
-                                        size="sm"
-                                        placeholder="Notebook Pages"
-                                        value={nbPage}
-                                        label="nbPage"
-                                        onChange={handleProjectTextChange}
-                                    >
-                                    </Form.Control>
-
-                                </Row>
+                                {products.map((product) => (
+                                    <Row key={uuidv4()} >
+                                        <Col>
+                                            {product}
+                                        </Col>
+                                        <Col value={product} >
+                                            <Badge pill variant="danger" style={{ cursor: "pointer" }} onClick={handleDeleteProduct}>X</Badge>
+                                        </Col>
+                                    </Row>
+                                ))
+                                }
                             </Container>
                         </Form>
                     </Col>
-
-                </Row>
-                <Row>
-                    <Col>
-                        <Form>
-                            <strong> Project Type:  </strong>
-                            <Form.Control
-                                as="select"
-                                size="sm"
-                                label="projectType"
-                                onChange={handleProjectInfoChange}
-                                value={projectType}>
-                                <option value="">Select Project Type</option>
-                                <option value="P">(P) Project</option>
-                                <option value="S">(S) Stability</option>
-                                <option value="I">(I) Investigation</option>
-                                <option value="R">(R) Release</option>
-                                <option value="SQ">(SQ) Standard Qualification</option>
-                            </Form.Control>
-                        </Form>
-                    </Col>
-                    <Col>
-                        <Form>
-                            <strong> Requester: </strong>
-                            <Form.Control
-                                as="select"
-                                size="sm"
-                                label="requester"
-                                value={requester}
-                                onChange={handleProjectInfoChange}>
-                                <option value="">Select Requester</option>
-                                <option value="QC">QC</option>
-                                <option value="NP">NP</option>
-                                <option value="Other">Other</option>
-                            </Form.Control>
-                        </Form>
-                    </Col>
-                    <Col>
-                        <Form>
-                            <strong> Analyst: </strong>
-                            <Form.Control
-                                as="select"
-                                size="sm"
-                                label="analyst"
-                                value={analyst}
-                                onChange={handleProjectInfoChange}>
-                                <option value="">Select Analyst</option>
-                                <option value="MD">MD</option>
-                                <option value="KH">KH</option>
-                                <option value="WM">WM</option>
-                            </Form.Control>
-                        </Form>
-                    </Col>
-                </Row>
-                <Row>
                     <Col>
                         <Form>
                             <Container>
@@ -199,53 +138,40 @@ export default class EditStabilityForm extends React.Component {
                         <Form>
                             <Container>
                                 <Row>
-                                    <strong> Date In:  </strong>
+                                    <strong> Specs:  </strong>
                                 </Row>
                                 <Row>
-                                    <DatePicker
-                                        value={this.state.currDateIn}
-                                        onChange={(value) => {
-                                            const date = moment(value).format("L")
-                                            if (date === "Invalid date") {
-                                                handleDateInChange("")
-                                            } else {
-                                                handleDateInChange(date)
-                                            }
-                                            this.setState({
-                                                currDateIn: value
-                                            })
-                                        }}
-                                    />
+                                    <InputGroup >
+                                        <FormControl
+                                            type="text"
+                                            size="sm"
+                                            value={currSpec}
+                                            label="currSpec"
+                                            placeholder="Add Another Lot"
+                                            onChange={handleProjectTextChange}
+                                        />
+                                        <InputGroup.Append>
+                                            <Button size="sm" variant="outline-success" onClick={handleAddNewSpec} >+</Button>
+                                        </InputGroup.Append>
+                                    </InputGroup>
                                 </Row>
                             </Container>
-                        </Form>
-                    </Col>
-                    <Col>
-                        <Form>
                             <Container>
-                                <Row>
-                                    <strong> Date Out:  </strong>
-                                </Row>
-                                <Row>
-                                    <DatePicker
-                                        value={this.state.currDateOut}
-                                        onChange={(value) => {
-                                            const date = moment(value).format("L")
-                                            if (date === "Invalid date") {
-                                                handleDateOutChange("")
-                                            } else {
-                                                handleDateOutChange(date)
-                                            }
-                                            this.setState({
-                                                currDateOut: value
-                                            })
-                                        }}
-                                    />
-                                </Row>
+                                {specs.map((spec) => (
+                                    <Row key={uuidv4()} >
+                                        <Col>
+                                            {spec}
+                                        </Col>
+                                        <Col value={spec} >
+                                            <Badge pill variant="danger" style={{ cursor: "pointer" }} onClick={handleDeleteSpec}>X</Badge>
+                                        </Col>
+                                    </Row>
+                                ))
+                                }
                             </Container>
                         </Form>
                     </Col>
-                </Row> */}
+                </Row>
             </Container>
 
         )
