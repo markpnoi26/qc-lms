@@ -9,7 +9,18 @@ This project was built out of necessity to maintain optimal operation in our lab
 
 ## Demo
 
-Currently, a demo is under construction, and the application backend contains private information. 
+Currently, a demo is under construction, and the application backend contains private information. However below are some of the features for the app.
+
+### Adding QC files
+![](add-qc-file.gif)
+### Adding Stability Protocols
+![](add-stab-protocol.gif)
+### Searching by key word, lot, file number, etc.
+![](basic-search.gif)
+### Updating a QC file
+![](edit-qc-file.gif)
+### Updating a Stability Protocol
+![](edit-stab-protocol.gif)
 
 
 ## License
