@@ -10,7 +10,7 @@ export default class EditStabilityForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            
+            dateStarted: props.dateStarted !== "" ? moment(props.dateStarted, "MM/DD/YYYY").toDate(): null
         }
     }
 
@@ -53,7 +53,7 @@ export default class EditStabilityForm extends React.Component {
                         <strong>Date Started: </strong>
                         <br></br>
                         <DatePicker 
-                            value={dateStarted}
+                            value={this.state.dateStarted}
                             // onChange={}
                         />
                     </Col>
