@@ -383,6 +383,16 @@ class StabilityEntryModal extends React.Component {
         })
     }
 
+    handleProjectTextChange = (event) => {
+        const targetLabel = event.target.attributes.label.nodeValue
+        const targetValue = event.target.value
+        this.setState({
+            ...this.state,
+            changeDetected: true,
+            [targetLabel]: targetValue
+        })
+    }
+
     componentDidMount = () => {
         if (this.state.notes === "") {
             this.setState({
@@ -429,10 +439,10 @@ class StabilityEntryModal extends React.Component {
                         </Row>
                         <Row>
                             <Col>
-                                <strong> Lot:  </strong> {lotNums.join(", ")}
+                                <strong> Products: </strong> {products.join(", ")}
                             </Col>
                             <Col>
-                                <strong> Products: </strong> {products.join(", ")}
+                                <strong> Lot:  </strong> {lotNums.join(", ")}
                             </Col>
                             <Col>
                                 <strong> Specs: </strong> {specs.join(", ")}
@@ -463,6 +473,7 @@ class StabilityEntryModal extends React.Component {
                                     currProduct={currProduct}
                                     currSpec={currSpec}
                                     
+                                    handleProjectTextChange={this.handleProjectTextChange}
                                     handleConditionChange={this.handleConditionChange}
                                     handlePackagingChange={this.handlePackagingChange}
                                     handleNewProduct={this.handleNewProduct}
