@@ -107,6 +107,8 @@ class StabilityEntryModal extends React.Component {
             delete bodyPreSend.currProduct
             delete bodyPreSend.currSpec
             delete bodyPreSend.currDate
+            delete bodyPreSend.stp
+            delete bodyPreSend.amount
 
             const params = {
                 headers:{},
