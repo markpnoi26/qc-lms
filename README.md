@@ -12,15 +12,15 @@ This project was built out of necessity to maintain optimal operation in our lab
 Currently, a demo is under construction, and the application backend contains private and sensitive information. However, you can see below some features built into the app.
 
 #### Adding QC files
-![](add-qc-file.gif)
+![](demo/add-qc-file.gif)
 #### Adding Stability Protocols
-![](add-stab-protocol.gif)
+![](demo/add-stab-protocol.gif)
 #### Searching by key word, lot, file number, etc.
-![](basic-search.gif)
+![](demo/basic-search.gif)
 #### Updating a QC file
-![](edit-qc-file.gif)
+![](demo/edit-qc-file.gif)
 #### Updating a Stability Protocol
-![](edit-stab-protocol.gif)
+![](demo/edit-stab-protocol.gif)
 
 
 ## License
