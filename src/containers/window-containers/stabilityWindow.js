@@ -9,14 +9,17 @@ import {API} from 'aws-amplify'
 class StabilityWindow extends React.Component {
 
     componentDidMount = () => {
+
+        const currDate = new Date()
+        const currYear = currDate.getUTCFullYear()
+        
         this.props.setCurrentActiveWindow("stability")
-        this.props.getCurrentYear()
 
         const params ={
             headers:{},
             response: true,
             queryStringParameters: {
-                currentYear: this.props.currentYear
+                currentYear: this.props.currentYear || currYear
             }
         }
 
@@ -107,7 +110,7 @@ const mapDispatchToProps = dispatch => {
         setCurrentAvailableStabilityProtocol: (protocol) => dispatch({ type: "SET_AVAILABLE_STABILITY_PROTOCOL", payload: protocol }),
         setCurrentStabilityProtocols: (protocols) => dispatch({ type: "SET_CURRENT_STABILITY_PROTOCOLS", payload: protocols }),
         setCurrentActiveWindow: (window) => dispatch({type: "SET_CURRENT_ACTIVE_WINDOW", payload: window}),
-        getCurrentYear: () => dispatch({ type: "GET_CURRENT_YEAR" }),
+        setCurrentYear: () => dispatch({ type: "SET_CURRENT_YEAR" }),
         currentlyFetching: () => dispatch({ type: "CURRENTLY_FETCHING" }),
         fetchSuccess: () => dispatch({ type: "SUCCESS_FETCHING" }),
         fetchFail: () => dispatch({ type: "FAILED_FETCHING" }),
