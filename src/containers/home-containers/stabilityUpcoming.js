@@ -1,4 +1,5 @@
 import React from 'react'
+import { API } from 'aws-amplify'
 
 export default class StabilityUpcoming extends React.Component {
     constructor(props) {
@@ -6,6 +7,10 @@ export default class StabilityUpcoming extends React.Component {
         this.state = {
             currentlyFetching: false
         }
+    }
+
+    componentDidMount = () => {
+
     }
 
     render() {
