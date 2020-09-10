@@ -9,22 +9,18 @@ import QCRecordEntry from '../../components/entry-components/qcRecordEntry'
 
 class QCRecordWindow extends React.Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-        }
-    }
-
     componentDidMount = () => {
+
+        const currDate = new Date()
+        const currYear = currDate.getUTCFullYear()
         
         this.props.setCurrentActiveWindow("qcfiles")
-        this.props.getCurrentYear()
 
         const params ={
             headers:{},
             response: true,
             queryStringParameters: {
-                currentYear: this.props.currentYear
+                currentYear: this.props.currentYear || currYear
             }
         }
 
@@ -120,7 +116,7 @@ const mapDispatchToProps = dispatch => {
         setCurrentAvailableQCFile: (number) => dispatch({type: "SET_AVAILABLE_QC_FILE", payload: number}),
         setCurrentQCFiles: (qcFiles) => dispatch({type: "SET_CURRENT_QC_FILES", payload: qcFiles}),
         setCurrentActiveWindow: (window) => dispatch({type: "SET_CURRENT_ACTIVE_WINDOW", payload: window}),
-        getCurrentYear: () => dispatch({type: "GET_CURRENT_YEAR"}),
+        setCurrentYear: () => dispatch({type: "SET_CURRENT_YEAR"}),
         currentlyFetching: () => dispatch({type: "CURRENTLY_FETCHING"}),
         fetchSuccess: () => dispatch({type: "SUCCESS_FETCHING"}),
         fetchFail: () => dispatch({type: "FAILED_FETCHING"}),
