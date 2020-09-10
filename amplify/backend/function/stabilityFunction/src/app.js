@@ -62,15 +62,31 @@ app.get(path, function(req, res) {
   console.log("Stablity Get Called!")
 
   const currentYear = req.query.currentYear
+  const range = req.query.range
+  let queryParams
 
-  let queryParams = {
-    TableName: tableName,
-    FilterExpression: "#year = :yyyy",
-    ExpressionAttributeNames: {
-      "#year": "year",
-    },
-    ExpressionAttributeValues: {
-      ":yyyy": currentYear
+  if (currentYear) {
+    queryParams = {
+      TableName: tableName,
+      FilterExpression: "#year = :yyyy",
+      ExpressionAttributeNames: {
+        "#year": "year",
+      },
+      ExpressionAttributeValues: {
+        ":yyyy": currentYear
+      }
+    }
+  } else if (range) {
+    queryParams = {
+      TableName: tableName,
+      FilterExpression: "#year between :start_yyyy and :end_yyyy",
+      ExpressionAttributeNames: {
+        "#year": "year",
+      },
+      ExpressionAttributeValues: {
+        ":start_yyyy": range[0],
+        ":end_yyy": range[1]
+      }
     }
   }
 
