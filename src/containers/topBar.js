@@ -105,6 +105,9 @@ class TopBar extends React.Component {
             })
     }
 
+    componentDidMount = () => {
+        this.props.setCurrentYear()
+    }
 
     render () {
         let searchTimer
@@ -180,6 +183,7 @@ const mapDispatchToProps = dispatch => {
         setCurrentQCFiles: (qcFiles) => dispatch({type: "SET_CURRENT_QC_FILES", payload: qcFiles}),
         setCurrentStabilityProtocols: (protocols) => dispatch({ type: "SET_CURRENT_STABILITY_PROTOCOLS", payload: protocols}),
         setCurrentAvailableStabilityProtocol: (protocolNum) => dispatch({ type: "SET_AVAILABLE_STABILITY_PROTOCOL", payload: protocolNum }),
+        setCurrentYear: () => dispatch({type: "SET_CURRENT_YEAR"}),
         currentlyFetching: () => dispatch({type: "CURRENTLY_FETCHING"}),
         fetchSuccess: () => dispatch({type: "SUCCESS_FETCHING"}),
         fetchFail: () => dispatch({type: "FAILED_FETCHING"}),
