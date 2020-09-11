@@ -122,9 +122,9 @@ class TopBar extends React.Component {
                     fill
                     className="mr-auto"
                 >
-                    {/* <Nav.Item>
+                    <Nav.Item>
                         <Nav.Link as={Link} to="/">Home</Nav.Link>
-                    </Nav.Item> */}
+                    </Nav.Item>
                     <Nav.Item>
                         <Nav.Link as={Link} to="/records">QC Records</Nav.Link>
                     </Nav.Item>
@@ -149,10 +149,12 @@ class TopBar extends React.Component {
                 </Form>
                 <Nav className="mr-sm-2" >
                     <NavDropdown title={`Select Year: ${this.props.currentYear}`} id="collapsible-nav-dropdown" >
-                        <NavDropdown.Item onSelect={() => this.onYearChange({year: "2020"})}>2020</NavDropdown.Item>
-                        <NavDropdown.Item onSelect={() => this.onYearChange({year: "2019"})}>2019</NavDropdown.Item>
-                        <NavDropdown.Item onSelect={() => this.onYearChange({year: "2018"})}>2018</NavDropdown.Item>
-                        <NavDropdown.Item onSelect={() => this.onYearChange({year: "2017"})}>2017</NavDropdown.Item>
+                        <NavDropdown.Item onSelect={() => this.onYearChange({ year: "2020" })}>2020</NavDropdown.Item>
+                        <NavDropdown.Item onSelect={() => this.onYearChange({ year: "2019" })}>2019</NavDropdown.Item>
+                        <NavDropdown.Item onSelect={() => this.onYearChange({ year: "2018" })}>2018</NavDropdown.Item>
+                        <NavDropdown.Item onSelect={() => this.onYearChange({ year: "2017" })}>2017</NavDropdown.Item>
+                        <NavDropdown.Item onSelect={() => this.onYearChange({ year: "2016" })}>2016</NavDropdown.Item>
+                        <NavDropdown.Item onSelect={() => this.onYearChange({ year: "2015" })}>2015</NavDropdown.Item>
                     </NavDropdown>
                     <Button onClick={signOut} variant="outline-danger" >SignOut</Button>
                 </Nav>
