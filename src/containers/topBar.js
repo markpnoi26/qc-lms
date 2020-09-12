@@ -154,7 +154,7 @@ class TopBar extends React.Component {
                         <NavDropdown.Item onSelect={() => this.onYearChange({ year: "2018" })}>2018</NavDropdown.Item>
                         <NavDropdown.Item onSelect={() => this.onYearChange({ year: "2017" })}>2017</NavDropdown.Item>
                         <NavDropdown.Item onSelect={() => this.onYearChange({ year: "2016" })}>2016</NavDropdown.Item>
-                        <NavDropdown.Item onSelect={() => this.onYearChange({ year: "2015" })}>2015</NavDropdown.Item>
+                        <NavDropdown.Item onSelect={() => this.onYearChange({ year: "2015" })}>2017</NavDropdown.Item>
                     </NavDropdown>
                     <Button onClick={signOut} variant="outline-danger" >SignOut</Button>
                 </Nav>
