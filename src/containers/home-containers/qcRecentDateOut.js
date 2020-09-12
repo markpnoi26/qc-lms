@@ -67,7 +67,7 @@ class QCRecentDateOut extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.qcFiles.slice(0, 15).map(file => {
+                        {this.state.qcFiles.slice(0, 5).map(file => {
                             return (
                                 <tr key={uuidv4()}>
                                     <td>

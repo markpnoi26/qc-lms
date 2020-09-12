@@ -6,7 +6,7 @@ export default class StabilityUpcoming extends React.Component {
         super(props)
         this.state = {
             currentlyFetching: false,
-            stabilityProtocol: []
+            stabilityProtocols: []
         }
     }
 
@@ -28,7 +28,7 @@ export default class StabilityUpcoming extends React.Component {
         API.get("stabilityAPI", "/stability", params)
             .then(response => {
                 this.setState({ currentlyFetching: false })
-                this.setState({ stabilityProtocol: response.data})
+                this.setState({ stabilityProtocols: response.data})
             })
             .catch(error => {
                 this.setState({ currentlyFetching: false })
