@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { API } from 'aws-amplify'
 import { Table } from 'react-bootstrap'
+import { v4 as uuidv4 } from 'uuid'
 
 class QCRecentDateIn extends React.Component {
     constructor(props) {
@@ -49,11 +50,40 @@ class QCRecentDateIn extends React.Component {
 
     render() {
         return (
-            <div> 
-                <h1>QC Files In: </h1>
-                <ul>
-                    {this.state.qcFiles.slice(0,15).map(file => <li>QC{file.num} -  {file.title} - {file.dateIn}</li>)}
-                </ul>
+            <div>
+                <h4>Latest QC Files Initiated:</h4>
+                <Table variant="dark" striped>
+                    <thead>
+                        <tr>
+                            <td>
+                                File
+                            </td>
+                            <td>
+                                Title
+                            </td>
+                            <td>
+                                Date In
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.qcFiles.slice(0,15).map(file => {
+                            return (
+                                <tr key={uuidv4()}>
+                                    <td>
+                                        QC{file.num}
+                                    </td>
+                                    <td>
+                                        {file.title}
+                                    </td>
+                                    <td>
+                                        {file.dateIn}
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </Table>
             </div>
         )
     }
