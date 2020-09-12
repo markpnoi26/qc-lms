@@ -79,13 +79,12 @@ app.get(path, function(req, res) {
   } else if (range) {
     queryParams = {
       TableName: tableName,
-      FilterExpression: "#year between :start_yyyy and :end_yyyy",
+      FilterExpression: "#year >= :yyyy",
       ExpressionAttributeNames: {
         "#year": "year",
       },
       ExpressionAttributeValues: {
-        ":start_yyyy": range[0],
-        ":end_yyy": range[1]
+        ":yyyy": range
       }
     }
   }
