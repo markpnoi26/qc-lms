@@ -49,9 +49,9 @@ class QCRecentDateOut extends React.Component {
     render() {
         return (
             <div>
-                <h1>Latest QC Files Out: </h1>
+                <h1>QC Files Out: </h1>
                 <ul>
-                    {this.state.qcFiles.slice(0, 15).map(file => <li>QC{file.num} -  {file.title}</li>)}
+                    {this.state.qcFiles.slice(0, 15).map(file => <li>QC{file.num} -  {file.title} - { file.dateOut }</li>)}
                 </ul>
             </div>
         )
