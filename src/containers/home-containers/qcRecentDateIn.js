@@ -19,7 +19,7 @@ class QCRecentDateIn extends React.Component {
             headers: {},
             response: true,
             queryStringParameters: {
-                currentYear: this.props.currentYear || currYear
+                currentYear: currYear
             }
         }
 
@@ -60,8 +60,7 @@ class QCRecentDateIn extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        currentQCFiles: state.currentQCFiles,
-        currentYear: state.currentYear
+        currentQCFiles: state.currentQCFiles
     }
 }
 
