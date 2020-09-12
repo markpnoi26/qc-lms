@@ -13,7 +13,7 @@ class HomeWindow extends React.Component {
 
     render() {
         return (
-            <Container>
+            <Container fluid>
                 <Row>
                     <Col><QCRecentDateIn/></Col>
                     <Col><QCRecentDateOut/></Col>
