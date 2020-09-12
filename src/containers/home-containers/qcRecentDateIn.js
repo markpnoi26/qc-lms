@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { API } from 'aws-amplify'
+import { Table } from 'react-bootstrap'
 
 class QCRecentDateIn extends React.Component {
     constructor(props) {
@@ -49,9 +50,9 @@ class QCRecentDateIn extends React.Component {
     render() {
         return (
             <div> 
-                <h1>Latest QC Files In: </h1>
+                <h1>QC Files In: </h1>
                 <ul>
-                    {this.state.qcFiles.slice(0,15).map(file => <li>QC{file.num} -  {file.title}</li>)}
+                    {this.state.qcFiles.slice(0,15).map(file => <li>QC{file.num} -  {file.title} - {file.dateIn}</li>)}
                 </ul>
             </div>
         )
