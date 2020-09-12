@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { API } from 'aws-amplify'
+import { Table } from 'react-bootstrap'
+import { v4 as uuidv4} from 'uuid'
 
 class QCRecentDateOut extends React.Component {
     constructor(props) {
@@ -49,10 +51,39 @@ class QCRecentDateOut extends React.Component {
     render() {
         return (
             <div>
-                <h1>QC Files Out: </h1>
-                <ul>
-                    {this.state.qcFiles.slice(0, 15).map(file => <li>QC{file.num} -  {file.title} - { file.dateOut }</li>)}
-                </ul>
+                <h4>Latest QC Files Finished:</h4>
+                <Table variant="dark" striped>
+                    <thead>
+                        <tr>
+                            <td>
+                                File
+                        </td>
+                            <td>
+                                Title
+                        </td>
+                            <td>
+                                Date Out
+                        </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.qcFiles.slice(0, 15).map(file => {
+                            return (
+                                <tr key={uuidv4()}>
+                                    <td>
+                                        QC{file.num}
+                                    </td>
+                                    <td>
+                                        {file.title}
+                                    </td>
+                                    <td>
+                                        {file.dateOut}
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </Table>
             </div>
         )
     }
